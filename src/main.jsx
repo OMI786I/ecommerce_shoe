@@ -5,6 +5,8 @@ import "./index.css";
 import Root from "./Root";
 import Home from "./page/home/Home";
 import Login from "./page/login/Login";
+import Products from "./page/products/Products";
+import Accessories from "./page/accessories/Accessories";
 
 const router = createBrowserRouter([
   {
@@ -18,6 +20,14 @@ const router = createBrowserRouter([
       {
         path: "/login",
         element: <Login />,
+      },
+      {
+        path: "/products",
+        element: <Products />,
+      },
+      {
+        path: "/accessories",
+        element: <Accessories />,
       },
     ],
   },

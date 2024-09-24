@@ -1,10 +1,82 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { MdOutlineShoppingCartCheckout, MdWifiCalling } from "react-icons/md";
 import { PiBag, PiHeartStraight } from "react-icons/pi";
 import { RxDashboard } from "react-icons/rx";
 import { HiLogout } from "react-icons/hi";
 
 const Navbar = () => {
+  const navLink = (
+    <div className="flex-row  md:flex-col gap-6  ">
+      <NavLink to="/">
+        <button className="hover:border-red-500 border-transparent font-bold   hover:text-red-500  p-2  focus:border-red-500 ">
+          Home
+        </button>
+      </NavLink>
+      <div className="dropdown">
+        {/* Button to trigger dropdown */}
+        <label
+          tabIndex="0"
+          className="hover:border-red-500 border-transparent font-bold   hover:text-red-500  p-2  focus:border-red-500 m-1"
+        >
+          <NavLink to="/products">Bags and Shoes</NavLink>
+        </label>
+
+        {/* Dropdown content */}
+        <ul
+          tabIndex="0"
+          className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 z-10"
+        >
+          <li>
+            <ul className="p-2">
+              <li>
+                <a href="#submenu1">Submenu 1</a>
+              </li>
+              <li>
+                <a href="#submenu2">Submenu 2</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div className="dropdown">
+        {/* Button to trigger dropdown */}
+        <label
+          tabIndex="0"
+          className="hover:border-red-500 border-transparent font-bold   hover:text-red-500  p-2  focus:border-red-500 m-1"
+        >
+          <NavLink to="/accessories">Others and accessories</NavLink>
+        </label>
+
+        {/* Dropdown content */}
+        <ul
+          tabIndex="0"
+          className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 z-10"
+        >
+          <li>
+            <ul className="p-2">
+              <li>
+                <a href="#submenu1">Submenu 1</a>
+              </li>
+              <li>
+                <a href="#submenu2">Submenu 2</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <NavLink to="/contact">
+        <button className="hover:border-red-500 border-transparent font-bold  hover:text-red-500  p-2  focus:border-red-500 ">
+          Contact Us
+        </button>
+      </NavLink>
+      <NavLink to="/about">
+        <button className="hover:border-red-500 border-transparent font-bold  hover:text-red-500  p-2  focus:border-red-500 ">
+          About Us
+        </button>
+      </NavLink>
+    </div>
+  );
+
   return (
     <div>
       {/**cupon */}
@@ -21,7 +93,7 @@ const Navbar = () => {
         </div>
       </div>
       {/**navlink upper */}
-      <div className="flex items-center justify-evenly">
+      <div className="flex items-center justify-evenly my-4">
         <Link to={"/"}>
           <span className="text-5xl font-bold">Junno</span>
         </Link>
@@ -115,6 +187,8 @@ const Navbar = () => {
           </div>
         </div>
       </div>
+      {/**navlink lower */}
+      <div className="flex md:justify-center w-full my-4">{navLink}</div>
     </div>
   );
 };
