@@ -1,14 +1,12 @@
 import { Link } from "react-router-dom";
 import { MdWifiCalling } from "react-icons/md";
-import { useState } from "react";
-import { PiHeartStraight } from "react-icons/pi";
+import { PiBag, PiHeartStraight } from "react-icons/pi";
 
 const Navbar = () => {
-  const [hidden, setHidden] = useState(true);
-
   return (
     <div>
-      <div className="bg-black text-white flex justify-between p-2">
+      {/**cupon */}
+      <div className="bg-black text-white flex justify-between items-center p-2">
         <p>
           Join our showroom and get
           <span className="text-red-500"> 50% off</span>! Coupon code :{" "}
@@ -20,13 +18,12 @@ const Navbar = () => {
           </Link>
         </div>
       </div>
-      <div>
+      {/**navlink upper */}
+      <div className="flex items-center justify-evenly">
         <Link to={"/"}>
           <span className="text-5xl font-bold">Junno</span>
         </Link>
         <div className="w-full max-w-sm min-w-[200px] relative mt-4">
-          <label className="block mb-2 text-sm text-slate-600">Your Name</label>
-
           <div className="relative">
             <input
               type="email"
@@ -59,14 +56,27 @@ const Navbar = () => {
             <p>1234567890</p>
           </div>
         </div>
-        {/**heart icons */}
-        <div>
-          <PiHeartStraight
-            onMouseEnter={() => setHidden(false)}
-            onMouseLeave={() => setHidden(true)}
-            className="text-3xl"
-          />{" "}
-          {hidden ? null : <h1 className="text-gray-400">Hovering</h1>}
+
+        <div className="flex gap-2">
+          <div className="indicator">
+            <span className="indicator-item badge badge-secondary">0</span>
+            <div className="tooltip" data-tip="Cart">
+              <button className="">
+                <PiHeartStraight className="text-3xl" />
+              </button>
+            </div>
+          </div>
+          <div className="indicator">
+            <span className="indicator-item badge badge-secondary">0</span>
+            <div className="tooltip" data-tip="Cart">
+              <button className="">
+                <PiBag className="text-3xl" />
+              </button>
+            </div>
+          </div>
+          <div>
+            <p>$0</p>
+          </div>
         </div>
       </div>
     </div>
