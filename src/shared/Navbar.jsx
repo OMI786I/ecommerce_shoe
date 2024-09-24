@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
-import { MdWifiCalling } from "react-icons/md";
+import { MdOutlineShoppingCartCheckout, MdWifiCalling } from "react-icons/md";
 import { PiBag, PiHeartStraight } from "react-icons/pi";
+import { RxDashboard } from "react-icons/rx";
+import { HiLogout } from "react-icons/hi";
 
 const Navbar = () => {
   return (
@@ -57,7 +59,41 @@ const Navbar = () => {
           </div>
         </div>
 
-        <div className="flex gap-2">
+        <div className="flex gap-2 items-center">
+          {/**avatar */}
+          <div>
+            {" "}
+            <div className="dropdown dropdown-end  ">
+              <label tabIndex="0" className="btn btn-ghost btn-circle avatar">
+                <div className="w-16 rounded-full">
+                  <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"></img>
+                </div>
+              </label>
+
+              <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+                <li>
+                  <Link to={"/dashboard"}>
+                    <button className="flex items-center gap-2">
+                      <RxDashboard />
+                      My Account
+                    </button>
+                  </Link>
+                  <Link to={"/checkout"}>
+                    <button className="flex items-center gap-2">
+                      <MdOutlineShoppingCartCheckout />
+                      Checkout
+                    </button>
+                  </Link>
+                </li>
+                <li>
+                  <button>
+                    <HiLogout />
+                    Logout
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </div>
           <div className="indicator">
             <span className="indicator-item badge badge-secondary">0</span>
             <div className="tooltip" data-tip="Cart">
