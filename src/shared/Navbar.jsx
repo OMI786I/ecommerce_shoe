@@ -13,7 +13,7 @@ const Navbar = () => {
           Home
         </button>
       </NavLink>
-      {/** */}
+      {/** bags and shoes*/}
 
       <div className="dropdown">
         <Link to={"/products"}>
@@ -69,7 +69,27 @@ const Navbar = () => {
           </div>
         </div>
       </div>
+      {/**others and accessories */}
 
+      <div className="dropdown">
+        <Link to={"/products"}>
+          <button className="dropbtn flex items-center gap-1">
+            <span>Others and Accessories</span> <FaArrowDown />
+          </button>
+        </Link>
+        <div className="dropdown-content-accessories flex flex-row gap-10 text-xl ">
+          {" "}
+          <p className="hover:text-red-600 hover:translate-x-3 cursor-pointer transition ease-in-out delay-150 border-b    duration-300">
+            Link 1
+          </p>
+          <p className="hover:text-red-600 hover:translate-x-3 cursor-pointer transition ease-in-out delay-150 border-b    duration-300">
+            Link 2
+          </p>
+          <p className="hover:text-red-600 hover:translate-x-3 cursor-pointer transition ease-in-out delay-150 border-b   duration-300">
+            Link 3
+          </p>
+        </div>
+      </div>
       <NavLink to="/contact">
         <button className="hover:border-red-500 border-transparent font-bold  hover:text-red-500  p-2  focus:border-red-500 ">
           Contact Us
