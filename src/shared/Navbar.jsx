@@ -3,7 +3,8 @@ import { MdOutlineShoppingCartCheckout, MdWifiCalling } from "react-icons/md";
 import { PiBag, PiHeartStraight } from "react-icons/pi";
 import { RxDashboard } from "react-icons/rx";
 import { HiLogout } from "react-icons/hi";
-
+import { FaArrowDown } from "react-icons/fa";
+import "../styles/styles.css";
 const Navbar = () => {
   const navLink = (
     <div className="flex-row  md:flex-col gap-6  ">
@@ -12,58 +13,63 @@ const Navbar = () => {
           Home
         </button>
       </NavLink>
-      <div className="dropdown">
-        {/* Button to trigger dropdown */}
-        <label
-          tabIndex="0"
-          className="hover:border-red-500 border-transparent font-bold   hover:text-red-500  p-2  focus:border-red-500 m-1"
-        >
-          <NavLink to="/products">Bags and Shoes</NavLink>
-        </label>
+      {/** */}
 
-        {/* Dropdown content */}
-        <ul
-          tabIndex="0"
-          className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 z-10"
-        >
-          <li>
-            <ul className="p-2">
-              <li>
-                <a href="#submenu1">Submenu 1</a>
-              </li>
-              <li>
-                <a href="#submenu2">Submenu 2</a>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </div>
       <div className="dropdown">
-        {/* Button to trigger dropdown */}
-        <label
-          tabIndex="0"
-          className="hover:border-red-500 border-transparent font-bold   hover:text-red-500  p-2  focus:border-red-500 m-1"
-        >
-          <NavLink to="/accessories">Others and accessories</NavLink>
-        </label>
+        <Link to={"/products"}>
+          <button className="dropbtn flex items-center gap-1">
+            <span>Bags and Shoes</span> <FaArrowDown />
+          </button>
+        </Link>
 
-        {/* Dropdown content */}
-        <ul
-          tabIndex="0"
-          className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 z-10"
-        >
-          <li>
-            <ul className="p-2">
-              <li>
-                <a href="#submenu1">Submenu 1</a>
-              </li>
-              <li>
-                <a href="#submenu2">Submenu 2</a>
-              </li>
-            </ul>
-          </li>
-        </ul>
+        <div className="dropdown-content">
+          <div className="grid grid-cols-3 gap-3 justify-center">
+            <div>
+              <h1 className="font-bold hover:text-red-600 my-2 ">Shoes</h1>
+              <div>
+                <p className="hoverText cursor-pointer">Women Shoes</p>
+                <p className="hoverText cursor-pointer">Men Shoes</p>
+                <p className="hoverText cursor-pointer">Boots</p>
+                <p className="hoverText cursor-pointer">Casual Shoes</p>
+                <p className="hoverText cursor-pointer">Flip flops</p>
+              </div>
+            </div>
+            <div>
+              <h1 className="font-bold hover:text-red-600 my-2">
+                Luggage and bags
+              </h1>
+              <div>
+                <p className="hoverText cursor-pointer">Stylish Backpacks</p>
+                <p className="hoverText cursor-pointer"> Shoulder Bags</p>
+                <p className="hoverText cursor-pointer"> Crossbody Bags</p>
+                <p className="hoverText cursor-pointer">Briefcases</p>
+                <p className="hoverText cursor-pointer"> Luggage & Travel </p>
+              </div>
+            </div>
+            <div>
+              <h1 className="font-bold hover:text-red-600 my-2">
+                Other Bags & Accessories
+              </h1>
+              <div>
+                <p className="hoverText cursor-pointer">
+                  Cosmetic Bags & Cases
+                </p>
+                <p className="hoverText cursor-pointer">
+                  {" "}
+                  Wallets & Card Holders
+                </p>
+                <p className="hoverText cursor-pointer"> Luggage Covers</p>
+                <p className="hoverText cursor-pointer">Passport Covers</p>
+                <p className="hoverText cursor-pointer">
+                  {" "}
+                  Bag Parts & Accessories{" "}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
+
       <NavLink to="/contact">
         <button className="hover:border-red-500 border-transparent font-bold  hover:text-red-500  p-2  focus:border-red-500 ">
           Contact Us
