@@ -4,7 +4,9 @@ import { PiBag, PiHeartStraight } from "react-icons/pi";
 import { RxDashboard } from "react-icons/rx";
 import { HiLogout } from "react-icons/hi";
 import { FaArrowDown } from "react-icons/fa";
+import { IoIosOptions } from "react-icons/io";
 import "../styles/styles.css";
+import DrawerContent from "./DrawerContent";
 const Navbar = () => {
   const navLink = (
     <div className="flex-row  md:flex-col gap-6  ">
@@ -78,15 +80,20 @@ const Navbar = () => {
           </button>
         </Link>
         <div className="dropdown-content-accessories flex flex-row gap-10 text-xl ">
-          {" "}
-          <p className="hover:text-red-600 hover:translate-x-3 cursor-pointer transition ease-in-out delay-150 border-b    duration-300">
-            Link 1
+          <p className="hover:text-red-600 hover:translate-x-3 cursor-pointer transition ease-in-out delay-150 border-b p-1 duration-300">
+            Cosmetic Bags & Cases
           </p>
-          <p className="hover:text-red-600 hover:translate-x-3 cursor-pointer transition ease-in-out delay-150 border-b    duration-300">
-            Link 2
+          <p className="hover:text-red-600 hover:translate-x-3 cursor-pointer transition ease-in-out delay-150 border-b  p-1   duration-300">
+            Wallets & Card Holders
           </p>
-          <p className="hover:text-red-600 hover:translate-x-3 cursor-pointer transition ease-in-out delay-150 border-b   duration-300">
-            Link 3
+          <p className="hover:text-red-600 hover:translate-x-3 cursor-pointer transition ease-in-out delay-150 border-b p-1  duration-300">
+            Luggage Covers
+          </p>
+          <p className="hover:text-red-600 hover:translate-x-3 cursor-pointer transition ease-in-out delay-150 border-b  p-1  duration-300">
+            Passport Covers
+          </p>
+          <p className="hover:text-red-600 hover:translate-x-3 cursor-pointer transition ease-in-out delay-150 border-b p-1 duration-300">
+            Bag Parts & Accessories
           </p>
         </div>
       </div>
@@ -119,14 +126,36 @@ const Navbar = () => {
         </div>
       </div>
       {/**navlink upper */}
-      <div className="flex items-center justify-evenly my-4">
+      <div className="flex items-center justify-around my-4">
+        {/**drawer */}
+        <div className=" block lg:hidden">
+          <input id="my-drawer" type="checkbox" className="drawer-toggle" />
+
+          <div className="drawer-content">
+            {/* Page content here */}
+            <label htmlFor="my-drawer" className="btn btn-circle drawer-button">
+              <IoIosOptions />
+            </label>
+          </div>
+          <div className="drawer-side z-10">
+            <label
+              htmlFor="my-drawer"
+              aria-label="close sidebar"
+              className="drawer-overlay"
+            ></label>
+            <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
+              {/* Sidebar content here */}
+              <DrawerContent />
+            </ul>
+          </div>
+        </div>
         <Link to={"/"}>
-          <span className="text-5xl font-bold">Junno</span>
+          <span className="text-5xl text-center font-bold">Junno</span>
         </Link>
-        <div className="w-full max-w-sm min-w-[200px] relative mt-4">
+        <div className="w-full hidden lg:block max-w-sm min-w-[200px] relative mt-4">
           <div className="relative">
             <input
-              type="email"
+              type="text"
               className="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md pl-3 pr-10 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow"
               placeholder="Enter your text"
             />
@@ -149,7 +178,7 @@ const Navbar = () => {
             </button>
           </div>
         </div>
-        <div className=" gap-2 flex items-center">
+        <div className="hidden  gap-2 lg:flex items-center">
           <MdWifiCalling className="text-4xl" />
           <div>
             <p className="text-gray-400">Call Us:</p>
@@ -214,6 +243,32 @@ const Navbar = () => {
         </div>
       </div>
       {/**navlink lower */}
+      <div className="w-full mx-auto lg:hidden block max-w-sm min-w-[200px] relative mt-4">
+        <div className="relative">
+          <input
+            type="text"
+            className="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md pl-3 pr-10 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow"
+            placeholder="Enter your text"
+          />
+          <button
+            className="absolute right-1 top-1 rounded bg-red-600 p-1.5 border border-transparent text-center text-sm text-white transition-all shadow-sm hover:shadow focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+            type="button"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 16 16"
+              fill="currentColor"
+              className="w-4 h-4"
+            >
+              <path
+                fillRule="evenodd"
+                d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+                clipRule="evenodd"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
       <div className="flex md:justify-center w-full my-4">{navLink}</div>
     </div>
   );
