@@ -6,30 +6,65 @@ import img4 from "../assets/images/7_1.jpg";
 
 const Category = () => {
   return (
-    <div className="grid grid-cols-3 grid-rows-2 gap-4 my-3">
-      <div className="row-span-2 relative">
-        <img src={img1} className="h-full w-full object-cover" />
-        <p className=" absolute top-1/2 right-1/2 transform translate-x-1/2 -translate-y-1/2  btn btn-xs md:btn  my-2 hover:bg-red-500 text-black bg-white hover:text-white hover:border-red-500  ">
-          Shop
-        </p>
+    <div className="grid grid-cols-1 sm:grid-cols-3 sm:grid-rows-2 gap-4 my-3">
+      <div
+        className="hero row-span-2 min-h-[150px] sm:min-h-[300px] md:min-h-[500px] bg-cover bg-center"
+        style={{
+          backgroundImage: `url(${img1})`,
+        }}
+      >
+        <div className="hero-content text-neutral-content text-center">
+          <div className="max-w-md">
+            <button className="btn btn-xs md:btn my-2 hover:bg-red-500 text-black bg-white hover:text-white hover:border-red-500 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300">
+              Men's
+            </button>
+          </div>
+        </div>
       </div>
-      <div className="row-span-2 relative">
-        <img src={img2} className="h-full w-full object-cover" />
-        <p className=" absolute top-1/2 right-1/2 transform translate-x-1/2 -translate-y-1/2  btn btn-xs md:btn  my-2 hover:bg-red-500 text-black bg-white hover:text-white hover:border-red-500  ">
-          Shop
-        </p>
+
+      <div
+        className="hero row-span-2 min-h-[150px] sm:min-h-[300px] md:min-h-[500px] bg-cover bg-center"
+        style={{
+          backgroundImage: `url(${img2})`,
+        }}
+      >
+        <div className="hero-content text-neutral-content text-center">
+          <div className="max-w-md">
+            <button className="btn btn-xs md:btn my-2 hover:bg-red-500 text-black bg-white hover:text-white hover:border-red-500 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300">
+              Women's
+            </button>
+          </div>
+        </div>
       </div>
-      <div className=" relative">
-        <img src={img3} className="h-full w-full object-cover" />
-        <p className=" absolute top-1/2 right-1/2 transform translate-x-1/2 -translate-y-1/2  btn btn-xs md:btn  my-2 hover:bg-red-500 text-black bg-white hover:text-white hover:border-red-500  ">
-          Shop
-        </p>
+
+      <div
+        className="hero min-h-[100px] sm:min-h-[200px] bg-cover bg-center"
+        style={{
+          backgroundImage: `url(${img3})`,
+        }}
+      >
+        <div className="hero-content text-neutral-content text-center">
+          <div className="max-w-md">
+            <button className="btn btn-xs md:btn my-2 hover:bg-red-500 text-black bg-white hover:text-white hover:border-red-500 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300">
+              Running
+            </button>
+          </div>
+        </div>
       </div>
-      <div className=" relative">
-        <img src={img4} className="h-full w-full object-cover" />
-        <p className=" absolute top-1/2 right-1/2 transform translate-x-1/2 -translate-y-1/2  btn btn-xs md:btn  my-2 hover:bg-red-500 text-black bg-white hover:text-white hover:border-red-500  ">
-          Shop
-        </p>
+
+      <div
+        className="hero min-h-[100px] sm:min-h-[200px] bg-cover bg-center"
+        style={{
+          backgroundImage: `url(${img4})`,
+        }}
+      >
+        <div className="hero-content text-neutral-content text-center">
+          <div className="max-w-md">
+            <button className="btn btn-xs md:btn my-2 hover:bg-red-500 text-black bg-white hover:text-white hover:border-red-500 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300">
+              Accessories
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );
