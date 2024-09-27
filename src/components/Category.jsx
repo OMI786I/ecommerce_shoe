@@ -8,7 +8,7 @@ const Category = () => {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-3 sm:grid-rows-2 gap-4 my-3">
       <div
-        className="hero row-span-2 min-h-[150px] sm:min-h-[300px] md:min-h-[500px] bg-cover bg-center"
+        className="hero row-span-2 min-h-[150px] sm:min-h-[300px] md:min-h-[500px] bg-cover bg-center  hover:scale-110 duration-300"
         style={{
           backgroundImage: `url(${img1})`,
         }}
@@ -23,7 +23,7 @@ const Category = () => {
       </div>
 
       <div
-        className="hero row-span-2 min-h-[150px] sm:min-h-[300px] md:min-h-[500px] bg-cover bg-center"
+        className="hero row-span-2 min-h-[150px] sm:min-h-[300px] md:min-h-[500px] bg-cover bg-center  hover:scale-110 duration-300"
         style={{
           backgroundImage: `url(${img2})`,
         }}
@@ -38,7 +38,7 @@ const Category = () => {
       </div>
 
       <div
-        className="hero min-h-[100px] sm:min-h-[200px] bg-cover bg-center"
+        className="hero min-h-[100px] sm:min-h-[200px] bg-cover bg-center  hover:scale-110 duration-300"
         style={{
           backgroundImage: `url(${img3})`,
         }}
@@ -53,7 +53,7 @@ const Category = () => {
       </div>
 
       <div
-        className="hero min-h-[100px] sm:min-h-[200px] bg-cover bg-center"
+        className="hero min-h-[100px] sm:min-h-[200px] bg-cover bg-center  hover:scale-110 duration-300"
         style={{
           backgroundImage: `url(${img4})`,
         }}
