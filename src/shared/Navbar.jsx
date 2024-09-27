@@ -17,17 +17,15 @@ const Navbar = () => {
       </NavLink>
       {/** bags and shoes*/}
 
-      <div className="dropdown">
-        <Link to={"/products"}>
-          <button className="dropbtn flex items-center gap-1">
-            <span>Bags and Shoes</span> <FaArrowDown />
-          </button>
-        </Link>
+      <div className="dropdown dropdown-hover">
+        <button className="dropbtn flex items-center gap-1">
+          <span>Bags and Shoes</span> <FaArrowDown />
+        </button>
 
         <div className="dropdown-content">
           <div className="grid grid-cols-3 gap-3 justify-center">
             <div>
-              <h1 className="font-bold hover:text-red-600 my-2 ">Shoes</h1>
+              <h1 className="font-bold hover:text-red-600 my-2">Shoes</h1>
               <div>
                 <p className="hoverText cursor-pointer">Women Shoes</p>
                 <p className="hoverText cursor-pointer">Men Shoes</p>
@@ -42,10 +40,10 @@ const Navbar = () => {
               </h1>
               <div>
                 <p className="hoverText cursor-pointer">Stylish Backpacks</p>
-                <p className="hoverText cursor-pointer"> Shoulder Bags</p>
-                <p className="hoverText cursor-pointer"> Crossbody Bags</p>
+                <p className="hoverText cursor-pointer">Shoulder Bags</p>
+                <p className="hoverText cursor-pointer">Crossbody Bags</p>
                 <p className="hoverText cursor-pointer">Briefcases</p>
-                <p className="hoverText cursor-pointer"> Luggage & Travel </p>
+                <p className="hoverText cursor-pointer">Luggage & Travel</p>
               </div>
             </div>
             <div>
@@ -57,14 +55,12 @@ const Navbar = () => {
                   Cosmetic Bags & Cases
                 </p>
                 <p className="hoverText cursor-pointer">
-                  {" "}
                   Wallets & Card Holders
                 </p>
-                <p className="hoverText cursor-pointer"> Luggage Covers</p>
+                <p className="hoverText cursor-pointer">Luggage Covers</p>
                 <p className="hoverText cursor-pointer">Passport Covers</p>
                 <p className="hoverText cursor-pointer">
-                  {" "}
-                  Bag Parts & Accessories{" "}
+                  Bag Parts & Accessories
                 </p>
               </div>
             </div>
