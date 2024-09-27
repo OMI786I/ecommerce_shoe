@@ -66,14 +66,22 @@ const Banner = () => {
         <div
           className={`absolute inset-0 flex flex-col justify-center p-3 text-white `}
         >
-          <p className={`${currentSlide === 4 ? "fade-in" : ""}`}>
+          <p
+            className={`text-xs md:text-base ${
+              currentSlide === 4 ? "fade-in" : ""
+            }`}
+          >
             NEW ARRIVALS
           </p>
-          <p className={`text-6xl ${currentSlide === 4 ? "fade-out" : ""}`}>
+          <p
+            className={` text-xl md:text-6xl ${
+              currentSlide === 4 ? "fade-out" : ""
+            }`}
+          >
             SUMMER SALE
           </p>
           <p
-            className={`text-6xl font-bold  ${
+            className={` text-xl md:text-6xl font-bold  ${
               currentSlide === 4 ? "fade-right" : ""
             }`}
           >
@@ -90,14 +98,22 @@ const Banner = () => {
         <div
           className={`absolute inset-0 flex flex-col justify-center p-3 text-white `}
         >
-          <p className={`${currentSlide === 3 ? "fade-in" : ""}`}>
+          <p
+            className={`text-xs md:text-base  ${
+              currentSlide === 3 ? "fade-in" : ""
+            }`}
+          >
             NIKE RUNNING SHOES
           </p>
-          <p className={`text-6xl ${currentSlide === 3 ? "fade-out" : ""}`}>
+          <p
+            className={`text-xl md:text-6xl ${
+              currentSlide === 3 ? "fade-out" : ""
+            }`}
+          >
             SPORT SHOES
           </p>
           <p
-            className={`text-6xl font-bold  ${
+            className={`text-xl md:text-6xl font-bold  ${
               currentSlide === 3 ? "fade-right" : ""
             }`}
           >
