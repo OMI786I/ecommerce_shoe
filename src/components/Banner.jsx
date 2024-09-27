@@ -1,7 +1,10 @@
+import { useState } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
-const Banner = ({ deviceType }) => {
+const Banner = () => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  console.log(currentSlide);
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
@@ -17,15 +20,19 @@ const Banner = ({ deviceType }) => {
     },
   };
 
+  const handleSlideChange = (nextSlide) => {
+    setCurrentSlide(nextSlide);
+  };
+
   return (
     <Carousel
       additionalTransfrom={0}
       arrows={false}
       autoPlay
-      autoPlaySpeed={2000}
+      autoPlaySpeed={1000}
       centerMode={false}
-      className="w-full"
-      containerClass="w-full h-screen" // Full width and height
+      className="w-full my-6"
+      containerClass="w-full"
       dotListClass=""
       draggable
       focusOnSelect={false}
@@ -33,7 +40,7 @@ const Banner = ({ deviceType }) => {
       itemClass=""
       keyBoardControl
       minimumTouchDrag={80}
-      transitionDuration={1000}
+      transitionDuration={3000}
       pauseOnHover
       renderArrowsWhenDisabled={false}
       renderButtonGroupOutside={false}
@@ -47,21 +54,56 @@ const Banner = ({ deviceType }) => {
       sliderClass=""
       slidesToSlide={1}
       swipeable
+      beforeChange={handleSlideChange}
     >
-      <div className="w-full h-screen">
+      <div className="w-full relative">
         {" "}
         <img
           src="../../src/assets/images/banner_1.jpg"
           alt="Banner 1"
-          className="w-full h-full object-cover"
+          className="w-full object-cover"
         />
+        <div
+          className={`absolute inset-0 flex flex-col justify-center p-3 text-white `}
+        >
+          <p className={`${currentSlide === 4 ? "fade-in" : ""}`}>
+            NEW ARRIVALS
+          </p>
+          <p className={`text-6xl ${currentSlide === 4 ? "fade-out" : ""}`}>
+            SUMMER SALE
+          </p>
+          <p
+            className={`text-6xl font-bold  ${
+              currentSlide === 4 ? "fade-right" : ""
+            }`}
+          >
+            UP TO 70% Off
+          </p>
+        </div>
       </div>
-      <div className="w-full h-screen">
+      <div className="w-full relative">
         <img
           src="../../src/assets/images/sample-2.jpg"
           alt="Banner 2"
-          className="w-full h-full object-cover"
+          className="w-full object-cover"
         />
+        <div
+          className={`absolute inset-0 flex flex-col justify-center p-3 text-white `}
+        >
+          <p className={`${currentSlide === 3 ? "fade-in" : ""}`}>
+            NIKE RUNNING SHOES
+          </p>
+          <p className={`text-6xl ${currentSlide === 3 ? "fade-out" : ""}`}>
+            SPORT SHOES
+          </p>
+          <p
+            className={`text-6xl font-bold  ${
+              currentSlide === 3 ? "fade-right" : ""
+            }`}
+          >
+            SALE 40% OFF
+          </p>
+        </div>
       </div>
     </Carousel>
   );

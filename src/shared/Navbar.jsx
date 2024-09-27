@@ -269,7 +269,9 @@ const Navbar = () => {
           </button>
         </div>
       </div>
-      <div className="flex md:justify-center w-full my-4">{navLink}</div>
+      <div className="hidden lg:flex md:justify-center w-full my-4">
+        {navLink}
+      </div>
     </div>
   );
 };
