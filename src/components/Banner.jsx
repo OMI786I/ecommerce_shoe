@@ -87,6 +87,11 @@ const Banner = () => {
           >
             UP TO 70% Off
           </p>
+          <div>
+            <button className="btn btn-xs md:btn  my-2 hover:bg-red-500 text-black bg-white hover:text-white hover:border-red-500  transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 ">
+              SHOP NOW
+            </button>
+          </div>
         </div>
       </div>
       <div className="w-full relative">
@@ -119,6 +124,11 @@ const Banner = () => {
           >
             SALE 40% OFF
           </p>
+          <div>
+            <button className="btn btn-xs md:btn  my-2 hover:bg-red-500 text-black bg-white hover:text-white hover:border-red-500  transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 ">
+              SHOP NOW
+            </button>
+          </div>
         </div>
       </div>
     </Carousel>
