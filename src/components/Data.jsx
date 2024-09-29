@@ -4,6 +4,8 @@ import { HiHeart } from "react-icons/hi";
 import { IoCartOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import usePublicFetch from "../customHook/usePublicFetch";
+import Rating from "react-rating";
+import "font-awesome/css/font-awesome.min.css";
 
 const Data = () => {
   const [query, setQuery] = useState("men");
@@ -99,31 +101,11 @@ const Data = () => {
                       <h1 className="text-gray-500">{res.title}</h1>
                       <div>
                         <div className="rating">
-                          <input
-                            type="radio"
-                            name="rating-2"
-                            className="mask mask-star-2 bg-orange-400"
-                          />
-                          <input
-                            type="radio"
-                            name="rating-2"
-                            className="mask mask-star-2 bg-orange-400"
-                            defaultChecked
-                          />
-                          <input
-                            type="radio"
-                            name="rating-2"
-                            className="mask mask-star-2 bg-orange-400"
-                          />
-                          <input
-                            type="radio"
-                            name="rating-2"
-                            className="mask mask-star-2 bg-orange-400"
-                          />
-                          <input
-                            type="radio"
-                            name="rating-2"
-                            className="mask mask-star-2 bg-orange-400"
+                          <Rating
+                            initialRating={res.rating}
+                            readonly
+                            emptySymbol={["fa fa-star-o fa-2x"]}
+                            fullSymbol={["fa fa-star fa-2x"]}
                           />
                         </div>
                       </div>
