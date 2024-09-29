@@ -15,6 +15,33 @@ const LeftPart = ({ link, category }) => {
   const [first, setFirst] = useState(true);
   const [second, setSecond] = useState(true);
 
+  const [minPrice, setMinPrice] = useState(100); // Default minimum price
+  const [maxPrice, setMaxPrice] = useState(1000); // Default maximum price
+  const [range, setRange] = useState([100, 1000]); // Initial slider range
+
+  // Update slider and input field when values change
+  const handleSliderChange = (event) => {
+    const { value, name } = event.target;
+    if (name === "min") {
+      setMinPrice(Number(value));
+      setRange([Number(value), range[1]]);
+    } else if (name === "max") {
+      setMaxPrice(Number(value));
+      setRange([range[0], Number(value)]);
+    }
+  };
+
+  const handleInputChange = (event) => {
+    const { value, name } = event.target;
+    if (name === "min") {
+      setMinPrice(Number(value));
+      setRange([Number(value), range[1]]);
+    } else if (name === "max") {
+      setMaxPrice(Number(value));
+      setRange([range[0], Number(value)]);
+    }
+  };
+
   const handleAccordionClick = (index) => {
     setClicked(clicked === index ? null : index);
   };
@@ -126,33 +153,92 @@ const LeftPart = ({ link, category }) => {
       </div>
 
       {/* Filter Section */}
+
+      <h1 className="text-xl p-3 ">Filter By</h1>
+
+      <div className="border-b  border-grey-600"></div>
+      <div className="border-b-2 w-20 border-red-600"></div>
+
+      <h1 className="py-4 ">Categories</h1>
+
+      <div className="flex gap-2 items-center">
+        <input
+          type="checkbox"
+          id="checkbox-shoes"
+          value={first}
+          onChange={() => handleChange("shoes")}
+        />
+        <label htmlFor="checkbox-shoes">Shoes</label>
+      </div>
+
+      <div className="flex gap-2 items-center">
+        <input
+          type="checkbox"
+          id="checkbox-luggage-bags"
+          value={second}
+          onChange={() => handleChange("luggage&bags")}
+        />
+        <label htmlFor="checkbox-luggage-bags">Luggage and Bags</label>
+      </div>
       <div>
-        <h1 className="text-xl p-3 ">Filter By</h1>
-
-        <div className="border-b  border-grey-600"></div>
-        <div className="border-b-2 w-20 border-red-600"></div>
-
-        <h1 className="py-4 ">Categories</h1>
-
-        <div className="flex gap-2 items-center">
+        {" "}
+        {/* Slider */}
+        <h1 className="py-3">Price</h1>
+        <div className="w-full flex my-2 justify-between space-x-4">
           <input
-            type="checkbox"
-            id="checkbox-shoes"
-            value={first}
-            onChange={() => handleChange("shoes")}
+            type="range"
+            name="min"
+            min="0"
+            max="5000"
+            value={minPrice}
+            onChange={handleSliderChange}
+            className="w-1/2 appearance-none bg-gray-300 h-2 rounded-lg cursor-pointer accent-red-500"
           />
-          <label htmlFor="checkbox-shoes">Shoes</label>
-        </div>
-
-        <div className="flex gap-2 items-center">
           <input
-            type="checkbox"
-            id="checkbox-luggage-bags"
-            value={second}
-            onChange={() => handleChange("luggage&bags")}
+            type="range"
+            name="max"
+            min="0"
+            max="5000"
+            value={maxPrice}
+            onChange={handleSliderChange}
+            className="w-1/2 appearance-none bg-gray-300 h-2 rounded-lg cursor-pointer accent-red-500"
           />
-          <label htmlFor="checkbox-luggage-bags">Luggage and Bags</label>
         </div>
+        {/* Input fields */}
+        <div className="w-full flex justify-between space-x-6">
+          <label className="flex flex-col items-center">
+            <span className="font-medium">Min Price: ${minPrice}</span>
+            <input
+              type="number"
+              name="min"
+              value={minPrice}
+              onChange={handleInputChange}
+              min="0"
+              max={maxPrice - 1}
+              className="mt-1 p-2 border rounded-md w-24 text-center"
+            />
+          </label>
+
+          <label className="flex flex-col items-center">
+            <span className="font-medium">Max Price: ${maxPrice}</span>
+            <input
+              type="number"
+              name="max"
+              value={maxPrice}
+              onChange={handleInputChange}
+              min={minPrice + 1}
+              max="5000"
+              className="mt-1 p-2 border rounded-md w-24 text-center"
+            />
+          </label>
+        </div>
+        {/* Display selected range */}
+        <div className="text-lg font-semibold">
+          Selected Price Range: ${minPrice} - ${maxPrice}
+        </div>
+        <button className="btn btn-xs md:btn my-2 hover:bg-red-500 text-black bg-white hover:text-white hover:border-red-500 transition ease-in-out delay-150   duration-300">
+          Filter
+        </button>
       </div>
     </div>
   );
