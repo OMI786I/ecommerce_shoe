@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import React, { useState } from "react";
-import { FaMinus, FaPlus } from "react-icons/fa";
+import { FaMinus, FaPlus, FaArrowDown } from "react-icons/fa";
 import {
   Accordion,
   AccordionItem,
@@ -9,59 +9,76 @@ import {
   AccordionItemPanel,
 } from "react-accessible-accordion";
 
-// Demo styles, see 'Styles' section below for some notes on use.
+// DrawerContent Component
 
 const DrawerContent = () => {
-  const [clicked, setClicked] = useState(false);
+  const [clicked, setClicked] = useState(null);
 
+  // Content for Bags and Shoes
   const bagAndShoesContent = [
     {
       title: "Shoes",
       children: [
-        { title: "Women Shoes" },
-        { title: "Men Shoes" },
-        { title: "Boots" },
-        { title: "Casual Shoes" },
-        { title: "Flip Flops" },
+        {
+          title: "Women Shoes",
+          link: "/products/shoes_bags/shoes/women_shoes",
+        },
+        { title: "Men Shoes", link: "/products/shoes_bags/shoes/men_shoes" },
+        { title: "Boots", link: "/products/shoes_bags/shoes/boots" },
+        {
+          title: "Casual Shoes",
+          link: "/products/shoes_bags/shoes/casual_shoes",
+        },
+        { title: "Flip Shoes", link: "/products/shoes_bags/shoes/flip_shoes" },
       ],
     },
     {
-      title: "Luggage and bags",
+      title: "Luggage and Bags",
       children: [
         {
           title: "Stylish Backpacks",
+          link: "/products/shoes_bags/luggage_bags/stylishBags",
         },
         {
           title: "Shoulder Bags",
+          link: "/products/shoes_bags/luggage_bags/shoulder_bags",
         },
         {
           title: "Crossbody Bags",
+          link: "/products/shoes_bags/luggage_bags/crossBodyBags",
         },
         {
           title: "Briefcases",
+          link: "/products/shoes_bags/luggage_bags/briefCases",
         },
         {
           title: "Luggage & Travel",
+          link: "/products/shoes_bags/luggage_bags/luggage_travel",
         },
       ],
     },
     {
-      title: "Others and Accessories",
+      title: "Other Bags and Accessories",
       children: [
         {
           title: "Cosmetic Bags & Cases",
+          link: "/products/shoes_bags/otherBags_accessories/cosmeticBags_cases",
         },
         {
-          title: "Wallets & Card Holders",
+          title: "Wallet & Card Holders",
+          link: "/products/shoes_bags/otherBags_accessories/walletCards_holders",
         },
         {
           title: "Luggage Covers",
+          link: "/products/shoes_bags/otherBags_accessories/luggageCovers",
         },
         {
           title: "Passport Covers",
+          link: "/products/shoes_bags/otherBags_accessories/passportCovers",
         },
         {
           title: "Bag Parts & Accessories",
+          link: "/products/shoes_bags/otherBags_accessories/bagparts_accessories",
         },
       ],
     },
@@ -73,23 +90,23 @@ const DrawerContent = () => {
 
   return (
     <div className="text-lg">
-      <Link to={"/"}>
+      <Link to="/">
         <li className="p-1 border-b hover:text-red-600 transition ease-in-out delay-150 duration-300">
           Home
         </li>
       </Link>
 
-      <Accordion allowZeroExpanded className="p-1  hover:bg-transparent">
+      {/* Bags and Shoes Accordion */}
+      <Accordion allowZeroExpanded className="p-1 hover:bg-transparent">
         {bagAndShoesContent.map((item, index) => (
           <AccordionItem key={index}>
             <AccordionItemHeading onClick={() => handleAccordionClick(index)}>
               <AccordionItemButton className="flex items-center gap-2 hover:text-red-600 transition ease-in-out delay-150 duration-300 border-b p-2 -ml-2">
-                {item.title}
+                <span>{item.title}</span>
                 {clicked === index ? <FaMinus /> : <FaPlus />}
               </AccordionItemButton>
             </AccordionItemHeading>
 
-            {/* Render children if they exist */}
             {item.children && (
               <AccordionItemPanel>
                 {item.children.map((child, childIndex) => (
@@ -97,13 +114,7 @@ const DrawerContent = () => {
                     key={childIndex}
                     className="ml-4 hover:text-red-600 transition ease-in-out delay-150 duration-300 p-2"
                   >
-                    <Link
-                      to={`/products/${child.title
-                        .toLowerCase()
-                        .replace(/ /g, "-")}`}
-                    >
-                      {child.title}
-                    </Link>
+                    <Link to={child.link}>{child.title}</Link>
                   </div>
                 ))}
               </AccordionItemPanel>
@@ -112,12 +123,12 @@ const DrawerContent = () => {
         ))}
       </Accordion>
 
-      <Link to={"/"}>
+      <Link to="/contact">
         <li className="p-1 border-b hover:text-red-600 transition ease-in-out delay-150 duration-300">
           Contact Us
         </li>
       </Link>
-      <Link to={"/"}>
+      <Link to="/about">
         <li className="p-1 border-b hover:text-red-600 transition ease-in-out delay-150 duration-300">
           About Us
         </li>

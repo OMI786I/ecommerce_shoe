@@ -1,6 +1,8 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
 import "./index.css";
 import Root from "./Root";
 import Home from "./page/home/Home";
@@ -28,6 +30,20 @@ const router = createBrowserRouter([
       },
       {
         path: "/products",
+        element: <Products />,
+      },
+
+      {
+        path: "/products/:category",
+        element: <Products />,
+      },
+
+      {
+        path: "/products/:category/:subCategory",
+        element: <Products />,
+      },
+      {
+        path: "/products/:category/:subCategory/:product",
         element: <Products />,
       },
       {
