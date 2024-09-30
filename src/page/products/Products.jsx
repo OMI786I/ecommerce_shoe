@@ -8,13 +8,27 @@ import usePublicFetch from "../../customHook/usePublicFetch";
 const Products = () => {
   const link = useParams();
   const [category, setCategory] = useState("shoes and bags");
-  console.log(link.category);
-
+  const [product, setProduct] = useState("men");
   const { isPending, error, data, refetch } = usePublicFetch({
     endPoint: "shoes",
-    query: "",
+    query: product,
   });
+  console.log(data);
 
+  useEffect(() => {
+    if (link.product === "women_shoes") {
+      setProduct("women");
+    } else if (link.product === "men_shoes") {
+      setProduct("men");
+    } else if (link.product === "boots") {
+      setProduct("boots");
+    } else if (link.product === "casual_shoes") {
+      setProduct("casual");
+    } else if (link.product === "flip_shoes") {
+      setProduct("flip");
+    }
+  }, [link.product]);
+  console.log(product);
   useEffect(() => {
     if (link.category === "shoes_bags") {
       setCategory("shoes and bags");
