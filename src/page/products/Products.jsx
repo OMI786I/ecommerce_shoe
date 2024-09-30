@@ -7,7 +7,7 @@ import usePublicFetch from "../../customHook/usePublicFetch";
 
 const Products = () => {
   const link = useParams();
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState("shoes and bags");
   console.log(link.category);
 
   const { isPending, error, data, refetch } = usePublicFetch({

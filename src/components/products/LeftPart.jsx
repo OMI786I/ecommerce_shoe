@@ -10,7 +10,6 @@ import { FaMinus, FaPlus } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const LeftPart = ({ link, category }) => {
-  const [data, setData] = useState();
   const [clicked, setClicked] = useState(null);
   const [first, setFirst] = useState(true);
   const [second, setSecond] = useState(true);
@@ -89,13 +88,42 @@ const LeftPart = ({ link, category }) => {
       ],
     },
   ];
+  const [data, setData] = useState(bagAndShoesContent);
+  const othersAndAccessories = [
+    {
+      title: "Other Bags and Accessories",
+      children: [
+        {
+          title: "Cosmetic Bags & Cases",
+          link: "/products/shoes_bags/otherBags_accessories/cosmeticBags_cases",
+        },
+        {
+          title: "Wallet & Card Holders",
+          link: "/products/shoes_bags/otherBags_accessories/walletCards_holders",
+        },
+        {
+          title: "Luggage Covers",
+          link: "/products/shoes_bags/otherBags_accessories/luggageCovers",
+        },
+        {
+          title: "Passport Covers",
+          link: "/products/shoes_bags/otherBags_accessories/passportCovers",
+        },
+        {
+          title: "Bag Parts & Accessories",
+          link: "/products/shoes_bags/otherBags_accessories/bagparts_accessories",
+        },
+      ],
+    },
+  ];
 
   useEffect(() => {
     if (category === "shoes and bags") {
       setData(bagAndShoesContent);
+    } else if (category === "Others and accessories") {
+      setData(othersAndAccessories);
     }
   }, [category]);
-
   const handleChange = (data) => {
     if (data === "shoes") {
       {
@@ -115,6 +143,7 @@ const LeftPart = ({ link, category }) => {
       }
     }
   };
+  console.log(data);
 
   return (
     <div className="px-2">
@@ -126,7 +155,7 @@ const LeftPart = ({ link, category }) => {
         <div className="border-b-2 w-20 border-red-600"></div>
 
         <Accordion allowZeroExpanded className="p-1 hover:bg-transparent">
-          {bagAndShoesContent.map((item, index) => (
+          {data.map((item, index) => (
             <AccordionItem key={index}>
               <AccordionItemHeading onClick={() => handleAccordionClick(index)}>
                 <AccordionItemButton className="flex items-center gap-2 hover:text-red-600 transition ease-in-out delay-150 duration-300 border-b p-2 -ml-2">

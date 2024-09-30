@@ -18,6 +18,12 @@ const RightPart = ({ isPending, error, data, refetch }) => {
 
   console.log(activeCard, active);
 
+  if (isPending) {
+    <div className="flex justify-center items-center">
+      <span className="loading loading-spinner loading-lg"></span>;
+    </div>;
+  }
+
   return (
     <div>
       <div>
