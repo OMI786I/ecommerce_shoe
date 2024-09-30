@@ -119,7 +119,7 @@ const Data = () => {
                               </button>
                             </div>
 
-                            <Link to={`/products/${res._id}`}>
+                            <Link to={`/products/details/${res._id}`}>
                               <div className="tooltip" data-tip="Quick View">
                                 <button className="btn btn-xs rounded-full">
                                   <BiSearch />
@@ -145,7 +145,7 @@ const Data = () => {
                       <HiHeart />
                     </button>
                   </div>
-                  <Link to={`/products/${res._id}`}>
+                  <Link to={`/products/details/${res._id}`}>
                     <div className="tooltip" data-tip="Quick View">
                       <button className="btn btn-xs rounded-full">
                         <BiSearch />

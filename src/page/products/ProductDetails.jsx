@@ -4,9 +4,11 @@ import Rating from "react-rating";
 import "font-awesome/css/font-awesome.min.css";
 import { HiHeart } from "react-icons/hi";
 import { FaFacebook, FaGoogle, FaTwitter } from "react-icons/fa";
+import useDetailsFetch from "../../customHook/useDetailsFetch";
 const ProductDetails = () => {
   let { id } = useParams();
-
+  const { isPending, error, data, refetch } = useDetailsFetch(id);
+  console.log(data);
   const [isOpen, setIsOpen] = useState(false);
   const [value, setValue] = useState("S");
   const [colorValue, setColorValue] = useState("black");
@@ -16,28 +18,33 @@ const ProductDetails = () => {
     setIsOpen(!isOpen);
   };
 
+  if (isPending) {
+    return (
+      <div className="flex items-center justify-center max-w-full max-h-screen">
+        <span className="loading loading-spinner loading-lg"></span>
+      </div>
+    );
+  }
+
   return (
-    <div>
-      <div>{/**image */}</div>
+    <div className="flex justify-around gap-10 p-5">
       <div>
-        <h1 className="text-2xl text-gray-500">Original Title</h1>
+        <img className="w-96 rounded-xl" src={data.image} />
+      </div>
+      <div>
+        <h1 className="text-2xl text-gray-500 my-8">{data.title}</h1>
         <div>
           <div className="rating">
             <Rating
-              initialRating={4}
+              initialRating={data.rating}
               readonly
               emptySymbol={["fa fa-star-o fa-2x"]}
               fullSymbol={["fa fa-star fa-2x"]}
             />
           </div>
         </div>
-        <h1 className="text-xl font-bold">$21</h1>
-        <p className="text-gray-500">
-          Block out the haters with the fresh adidas® Originals Kaval
-          Windbreaker Jacket. Part of the Kaval Collection. Regular fit is
-          eased, but not sloppy, and perfect for any activity. Plain-woven
-          jacket specifically constructed for freedom of movement.
-        </p>
+        <h1 className="text-xl font-bold">${data.price}</h1>
+        <p className="text-gray-500 my-5">{data.description}</p>
         <div className="flex gap-5">
           {/**drop down */}
           <div className="relative inline-block text-left">
@@ -121,18 +128,19 @@ const ProductDetails = () => {
             </div>
           </div>
         </div>
-        <div className="flex gap-2">
-          {" "}
+        <div className="flex items-center gap-2 my-6">
+          <label className="font-bold">Quantity</label>
           <input
             type="number"
             placeholder=""
             className="input w-1/2 input-bordered max-w-xs"
+            min={0}
           />
           <button className="btn bg-black text-white hover:bg-red-600">
             +ADD TO CART
           </button>
         </div>{" "}
-        <div className="flex items-center gap-3 hover:text-red-600 hover:cursor-pointer duration-100">
+        <div className="flex my-8 items-center gap-3 hover:text-red-600 hover:cursor-pointer duration-100">
           <HiHeart className="text-xl" />
           <p>Add to wishlist</p>
         </div>
