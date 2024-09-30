@@ -117,7 +117,7 @@ const LeftPart = ({ link, category }) => {
   };
 
   return (
-    <div>
+    <div className="px-2">
       {/* Accordion Section */}
       <div className=" ">
         <h1 className="text-xl p-3 ">{category}</h1>
@@ -184,41 +184,47 @@ const LeftPart = ({ link, category }) => {
         {" "}
         {/* Slider */}
         <h1 className="py-3">Price</h1>
-        <div className="w-full flex my-2 justify-between space-x-4">
-          <input
-            type="range"
-            name="min"
-            min="0"
-            max="5000"
-            value={minPrice}
-            onChange={handleSliderChange}
-            className="w-1/2 appearance-none bg-gray-300 h-2 rounded-lg cursor-pointer accent-red-500"
-          />
-          <input
-            type="range"
-            name="max"
-            min="0"
-            max="5000"
-            value={maxPrice}
-            onChange={handleSliderChange}
-            className="w-1/2 appearance-none bg-gray-300 h-2 rounded-lg cursor-pointer accent-red-500"
-          />
-        </div>
-        {/* Input fields */}
-        <div className="w-full flex justify-between space-x-6">
-          <label className="flex flex-col items-center">
-            <span className="font-medium">Min Price: ${minPrice}</span>
+        <div className="flex flex-col items-start">
+          <div>
+            {" "}
             <input
-              type="number"
+              type="range"
               name="min"
-              value={minPrice}
-              onChange={handleInputChange}
               min="0"
-              max={maxPrice - 1}
-              className="mt-1 p-2 border rounded-md w-24 text-center"
+              max="5000"
+              value={minPrice}
+              onChange={handleSliderChange}
+              className="appearance-none bg-gray-300 h-2 rounded-lg cursor-pointer accent-red-500"
             />
-          </label>
-
+          </div>
+          <div>
+            <label className="flex flex-col items-center">
+              <span className="font-medium">Min Price: ${minPrice}</span>
+              <input
+                type="number"
+                name="min"
+                value={minPrice}
+                onChange={handleInputChange}
+                min="0"
+                max={maxPrice - 1}
+                className="mt-1 p-2 border rounded-md w-24 text-center"
+              />
+            </label>
+          </div>
+        </div>
+        <div className="flex flex-col items-start">
+          <div>
+            {" "}
+            <input
+              type="range"
+              name="max"
+              min="0"
+              max="5000"
+              value={maxPrice}
+              onChange={handleSliderChange}
+              className=" appearance-none bg-gray-300 h-2 rounded-lg cursor-pointer accent-red-500"
+            />
+          </div>
           <label className="flex flex-col items-center">
             <span className="font-medium">Max Price: ${maxPrice}</span>
             <input
