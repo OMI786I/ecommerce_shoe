@@ -1,0 +1,13 @@
+import React from "react";
+import { useQuery } from "@tanstack/react-query";
+const useDetailsFetch = ({ id }) => {
+  const { isPending, error, data, refetch } = useQuery({
+    queryKey: ["repoData", id],
+    queryFn: () =>
+      fetch(`http://localhost:5000/${id}`).then((res) => res.json()),
+  });
+
+  return { isPending, error, data, refetch };
+};
+
+export default useDetailsFetch;

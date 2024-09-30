@@ -118,11 +118,14 @@ const Data = () => {
                                 <HiHeart />
                               </button>
                             </div>
-                            <div className="tooltip" data-tip="Quick View">
-                              <button className="btn btn-xs rounded-full">
-                                <BiSearch />
-                              </button>
-                            </div>
+
+                            <Link to={`/products/${res._id}`}>
+                              <div className="tooltip" data-tip="Quick View">
+                                <button className="btn btn-xs rounded-full">
+                                  <BiSearch />
+                                </button>
+                              </div>
+                            </Link>
                           </div>
                           <div className="tooltip" data-tip="Add to cart">
                             <Link to={"/wishlist"}>
@@ -142,11 +145,13 @@ const Data = () => {
                       <HiHeart />
                     </button>
                   </div>
-                  <div className="tooltip" data-tip="Quick View">
-                    <button className="btn btn-xs rounded-full">
-                      <BiSearch />
-                    </button>
-                  </div>
+                  <Link to={`/products/${res._id}`}>
+                    <div className="tooltip" data-tip="Quick View">
+                      <button className="btn btn-xs rounded-full">
+                        <BiSearch />
+                      </button>
+                    </div>
+                  </Link>
                 </div>
               </div>
             ))

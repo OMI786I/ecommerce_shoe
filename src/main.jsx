@@ -14,6 +14,7 @@ import {
   QueryClientProvider,
   useQuery,
 } from "@tanstack/react-query";
+import ProductDetails from "./page/products/ProductDetails";
 const queryClient = new QueryClient();
 const router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
       {
         path: "/products",
         element: <Products />,
+      },
+      {
+        path: "/products/:id",
+        element: <ProductDetails />,
       },
 
       {
