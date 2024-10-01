@@ -25,6 +25,8 @@ const Products = () => {
         setProduct("cosmetic");
       } else if (link.subCategory === "wallet_cardHolders") {
         setProduct("wallet");
+      } else if (link.subCategory === "luggage_covers") {
+        setProduct("luggage_cover");
       } else {
         setProduct("wallet");
       }
@@ -64,11 +66,13 @@ const Products = () => {
         setSubCategory("bags");
       }
     }
-  }, [link.category, link.subCategory, link.product]);
+  }, [link.category, link.subCategory, link.product, category]);
 
   if (isPending) {
     return (
-      <span className="loading loading-spinner loading-lg text-center"></span>
+      <div className="flex justify-center">
+        <span className="loading loading-spinner loading-lg text-center"></span>
+      </div>
     );
   }
 

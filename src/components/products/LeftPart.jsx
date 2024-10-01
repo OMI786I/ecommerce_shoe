@@ -81,52 +81,55 @@ const LeftPart = ({ link, category, product }) => {
       title: "Luggage and Bags",
       children: [
         {
+          lead: "stylish",
           title: "Stylish Backpacks",
           link: "/products/shoes_bags/luggage_bags/stylishBags",
         },
         {
+          lead: "shoulder",
           title: "Shoulder Bags",
           link: "/products/shoes_bags/luggage_bags/shoulder_bags",
         },
         {
+          lead: "shoulder",
           title: "Crossbody Bags",
           link: "/products/shoes_bags/luggage_bags/crossBodyBags",
         },
         {
+          lead: "briefcases",
           title: "Briefcases",
           link: "/products/shoes_bags/luggage_bags/briefCases",
         },
         {
+          lead: "luggage",
           title: "Luggage & Travel",
           link: "/products/shoes_bags/luggage_bags/luggage_travel",
         },
       ],
     },
   ];
+
+  //http://localhost:5173/products/others_accessories/cosmeticBags_cases
+
   const [data, setData] = useState(bagAndShoesContent);
   const othersAndAccessories = [
     {
       title: "Other Bags and Accessories",
       children: [
         {
+          lead: "cosmetic",
           title: "Cosmetic Bags & Cases",
-          link: "/products/shoes_bags/otherBags_accessories/cosmeticBags_cases",
+          link: "/products/others_accessories/cosmeticBags_cases",
         },
         {
+          lead: "wallet",
           title: "Wallet & Card Holders",
-          link: "/products/shoes_bags/otherBags_accessories/walletCards_holders",
+          link: "/products/others_accessories/walletCards_holders",
         },
         {
+          lead: "luggage_cover",
           title: "Luggage Covers",
-          link: "/products/shoes_bags/otherBags_accessories/luggageCovers",
-        },
-        {
-          title: "Passport Covers",
-          link: "/products/shoes_bags/otherBags_accessories/passportCovers",
-        },
-        {
-          title: "Bag Parts & Accessories",
-          link: "/products/shoes_bags/otherBags_accessories/bagparts_accessories",
+          link: "/products/others_accessories/luggage_covers",
         },
       ],
     },

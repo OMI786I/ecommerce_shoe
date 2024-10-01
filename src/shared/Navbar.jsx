@@ -136,12 +136,6 @@ const Navbar = () => {
           >
             <p>Luggage and Covers</p>
           </Link>
-          <Link
-            className="hoverText cursor-pointer"
-            to={"/products/others_accessories/passport_covers"}
-          >
-            <p>Passport Covers</p>
-          </Link>
         </div>
       </div>
       <NavLink to="/contact">
