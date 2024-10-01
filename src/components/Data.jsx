@@ -21,10 +21,6 @@ const Data = () => {
 
   console.log(data);
 
-  if (error) {
-    return error;
-  }
-
   if (isPending) {
     <span className="loading loading-spinner loading-lg text-center"></span>;
   }

@@ -76,10 +76,6 @@ const DrawerContent = () => {
           title: "Passport Covers",
           link: "/products/shoes_bags/otherBags_accessories/passportCovers",
         },
-        {
-          title: "Bag Parts & Accessories",
-          link: "/products/shoes_bags/otherBags_accessories/bagparts_accessories",
-        },
       ],
     },
   ];

@@ -15,7 +15,7 @@ const useDetailsFetch = (id) => {
     if (!data) {
       setEndPoint("bags");
     }
-  }, [data]);
+  }, [id]);
 
   return { isPending, error, data, refetch };
 };

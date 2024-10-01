@@ -123,12 +123,7 @@ const Navbar = () => {
           >
             <p>Cosmetic bags and Cases</p>
           </Link>
-          <Link
-            className="hoverText cursor-pointer"
-            to={"/products/others_accessories/bagParts_accessories"}
-          >
-            <p>Bag parts and accessories</p>
-          </Link>
+
           <Link
             className="hoverText cursor-pointer"
             to={"/products/others_accessories/wallet_cardHolders"}
@@ -146,12 +141,6 @@ const Navbar = () => {
             to={"/products/others_accessories/passport_covers"}
           >
             <p>Passport Covers</p>
-          </Link>
-          <Link
-            className="hoverText cursor-pointer"
-            to={"/products/others_accessories/bagParts_accessories"}
-          >
-            <p>Bag Parts and accessories</p>
           </Link>
         </div>
       </div>
