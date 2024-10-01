@@ -9,35 +9,59 @@ const Products = () => {
   const link = useParams();
   const [category, setCategory] = useState("shoes and bags");
   const [product, setProduct] = useState("men");
+  const [subCategory2, setSubCategory] = useState("");
   const { isPending, error, data, refetch } = usePublicFetch({
-    endPoint: "shoes",
+    endPoint: subCategory2,
     query: product,
   });
-  console.log(data);
 
-  useEffect(() => {
-    if (link.product === "women_shoes") {
-      setProduct("women");
-    } else if (link.product === "men_shoes") {
-      setProduct("men");
-    } else if (link.product === "boots") {
-      setProduct("boots");
-    } else if (link.product === "casual_shoes") {
-      setProduct("casual");
-    } else if (link.product === "flip_shoes") {
-      setProduct("flip");
-    }
-  }, [link.product]);
-  console.log(product);
   useEffect(() => {
     if (link.category === "shoes_bags") {
       setCategory("shoes and bags");
+      setSubCategory("shoes");
     } else if (link.category === "others_accessories") {
       setCategory("Others and accessories");
+      setSubCategory("shoes");
     } else {
       setCategory("");
     }
-  }, [link.category]);
+
+    if (link.subCategory === "luggage_bags") {
+      setSubCategory("bags");
+    }
+
+    if (link.product === "stylishBags") {
+      setProduct("stylish");
+      setSubCategory("bags");
+    } else if (link.product === "crossBodyBags") {
+      setProduct("shoulder");
+      setSubCategory("bags");
+    } else if (link.product === "luggage_travel") {
+      setProduct("luggage");
+      setSubCategory("bags");
+    } else if (link.product === "shoulder_bags") {
+      setProduct("shoulder");
+      setSubCategory("bags");
+    } else if (link.product === "women_shoes") {
+      setProduct("women");
+      setSubCategory("shoes");
+    } else if (link.product === "men_shoes") {
+      setProduct("men");
+      setSubCategory("shoes");
+    } else if (link.product === "boots") {
+      setProduct("boots");
+      setSubCategory("shoes");
+    } else if (link.product === "casual_shoes") {
+      setProduct("casual");
+      setSubCategory("shoes");
+    } else if (link.product === "flip_shoes") {
+      setProduct("flip");
+      setSubCategory("shoes");
+    } else if (link.product === "briefCases") {
+      setProduct("briefcases");
+      setSubCategory("bags");
+    }
+  }, [link.category, link.subCategory, link.product]);
 
   if (isPending) {
     return (
@@ -62,6 +86,7 @@ const Products = () => {
             error={error}
             data={data}
             refetch={refetch}
+            subCategory2={subCategory2}
           />
         </div>
       </div>

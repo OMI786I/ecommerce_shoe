@@ -6,7 +6,7 @@ import { IoCartOutline } from "react-icons/io5";
 import Rating from "react-rating";
 import { Link } from "react-router-dom";
 
-const RightPart = ({ isPending, error, data, refetch }) => {
+const RightPart = ({ isPending, error, data, refetch, subCategory2 }) => {
   const [active, setActive] = useState(false);
   const [activeCard, setActiveCard] = useState(false);
   const handleClickCard = () => {
