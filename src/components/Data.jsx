@@ -110,7 +110,7 @@ const Data = () => {
                         </div>
                       </div>
                       <div className="flex justify-between">
-                        <h1 className="font-bold">{res.price}</h1>
+                        <h1 className="font-bold">${res.price}</h1>
                         <div className="flex">
                           <div className="flex md:hidden gap-1">
                             <div className="tooltip" data-tip="add to wishlist">

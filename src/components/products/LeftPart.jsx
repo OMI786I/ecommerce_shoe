@@ -7,9 +7,10 @@ import {
   AccordionItemPanel,
 } from "react-accessible-accordion";
 import { FaMinus, FaPlus } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
-const LeftPart = ({ link, category }) => {
+const LeftPart = ({ link, category, product }) => {
+  console.log(product);
   const [clicked, setClicked] = useState(null);
   const [first, setFirst] = useState(true);
   const [second, setSecond] = useState(true);
@@ -50,16 +51,30 @@ const LeftPart = ({ link, category }) => {
       title: "Shoes",
       children: [
         {
+          lead: "women",
           title: "Women Shoes",
           link: "/products/shoes_bags/shoes/women_shoes",
         },
-        { title: "Men Shoes", link: "/products/shoes_bags/shoes/men_shoes" },
-        { title: "Boots", link: "/products/shoes_bags/shoes/boots" },
         {
+          lead: "men",
+          title: "Men Shoes",
+          link: "/products/shoes_bags/shoes/men_shoes",
+        },
+        {
+          lead: "boots",
+          title: "Boots",
+          link: "/products/shoes_bags/shoes/boots",
+        },
+        {
+          lead: "casual",
           title: "Casual Shoes",
           link: "/products/shoes_bags/shoes/casual_shoes",
         },
-        { title: "Flip Shoes", link: "/products/shoes_bags/shoes/flip_shoes" },
+        {
+          lead: "flip",
+          title: "Flip Shoes",
+          link: "/products/shoes_bags/shoes/flip_shoes",
+        },
       ],
     },
     {
@@ -169,7 +184,9 @@ const LeftPart = ({ link, category }) => {
                   {item.children.map((child, childIndex) => (
                     <div
                       key={childIndex}
-                      className="ml-4 hover:text-red-600 transition ease-in-out delay-150 duration-300 p-2"
+                      className={`ml-4 hover:text-red-600 transition ease-in-out delay-150 duration-300 p-2 ${
+                        child.lead === product ? `text-red-600` : ``
+                      }`}
                     >
                       <Link to={child.link}>{child.title}</Link>
                     </div>

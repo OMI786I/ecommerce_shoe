@@ -54,7 +54,7 @@ const Products = () => {
 
       <div className="grid grid-cols-4">
         <div className="col-span-1">
-          <LeftPart link={link} category={category} />
+          <LeftPart link={link} category={category} product={product} />
         </div>
         <div className="col-span-3">
           <RightPart
