@@ -15,7 +15,11 @@ const useDetailsFetch = (id) => {
     if (!data) {
       setEndPoint("bags");
     }
-  }, [id]);
+    if (endPoint === "bags" && !data) {
+      // If no data is fetched for bags, try accessories
+      setEndPoint("accessories");
+    }
+  }, [data, error, endPoint]);
 
   return { isPending, error, data, refetch };
 };

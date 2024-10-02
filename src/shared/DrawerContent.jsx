@@ -62,19 +62,15 @@ const DrawerContent = () => {
       children: [
         {
           title: "Cosmetic Bags & Cases",
-          link: "/products/shoes_bags/otherBags_accessories/cosmeticBags_cases",
+          link: "/products/others_accessories/cosmeticBags_cases",
         },
         {
           title: "Wallet & Card Holders",
-          link: "/products/shoes_bags/otherBags_accessories/walletCards_holders",
+          link: "/products/others_accessories/wallet_cardHolders",
         },
         {
           title: "Luggage Covers",
-          link: "/products/shoes_bags/otherBags_accessories/luggageCovers",
-        },
-        {
-          title: "Passport Covers",
-          link: "/products/shoes_bags/otherBags_accessories/passportCovers",
+          link: "/products/others_accessories/luggage_covers",
         },
       ],
     },
