@@ -14,6 +14,10 @@ const LeftPart = ({ link, category, product }) => {
   const [clicked, setClicked] = useState(null);
   const [first, setFirst] = useState(true);
   const [second, setSecond] = useState(true);
+  const [third, setThird] = useState(true);
+  const [fourth, setFourth] = useState(true);
+  const [fifth, setFifth] = useState(true);
+  let [filterCheck, setFilterChech] = useState(true);
 
   const [minPrice, setMinPrice] = useState(100); // Default minimum price
   const [maxPrice, setMaxPrice] = useState(1000); // Default maximum price
@@ -111,7 +115,7 @@ const LeftPart = ({ link, category, product }) => {
 
   //http://localhost:5173/products/others_accessories/cosmeticBags_cases
 
-  const [data, setData] = useState(bagAndShoesContent);
+  let [data, setData] = useState(bagAndShoesContent);
   const othersAndAccessories = [
     {
       title: "Other Bags and Accessories",
@@ -136,28 +140,59 @@ const LeftPart = ({ link, category, product }) => {
   ];
 
   useEffect(() => {
-    if (category === "shoes and bags") {
+    const normalizedCategory = category.trim().toLowerCase(); // Normalize the category string
+
+    if (normalizedCategory === "shoes and bags") {
       setData(bagAndShoesContent);
-    } else if (category === "Others and accessories") {
+      setFilterChech(true);
+    } else if (normalizedCategory === "others and accessories") {
       setData(othersAndAccessories);
+      setFilterChech(false);
     }
   }, [category]);
-  const handleChange = (data) => {
-    if (data === "shoes") {
+  const handleChange = (data2) => {
+    if (data2 === "shoes") {
       {
         if (first == true) {
-          console.log(data);
+          console.log(data2);
         }
         setFirst(!first);
       }
     }
-
-    if (data === "luggage&bags") {
+    // cosmetic
+    // wallet
+    // luggage&covers
+    if (data2 === "luggage&bags") {
       {
         if (second == true) {
-          console.log(data);
+          console.log(data2);
         }
         setSecond(!second);
+      }
+    }
+
+    if (data2 === "cosmetic") {
+      {
+        if (third == true) {
+          console.log(data2);
+        }
+        setThird(!third);
+      }
+    }
+    if (data2 === "wallet") {
+      {
+        if (fourth == true) {
+          console.log(data2);
+        }
+        setFourth(!fourth);
+      }
+    }
+    if (data2 === "luggage&covers") {
+      {
+        if (fifth == true) {
+          console.log(data2);
+        }
+        setFifth(!fifth);
       }
     }
   };
@@ -209,26 +244,63 @@ const LeftPart = ({ link, category, product }) => {
       <div className="border-b-2 w-20 border-red-600"></div>
 
       <h1 className="py-4 ">Categories</h1>
+      {filterCheck === true ? (
+        <div>
+          <div className="flex gap-2 items-center">
+            <input
+              type="checkbox"
+              id="checkbox-shoes"
+              value={first}
+              onChange={() => handleChange("shoes")}
+            />
+            <label htmlFor="checkbox-shoes">Shoes</label>
+          </div>
 
-      <div className="flex gap-2 items-center">
-        <input
-          type="checkbox"
-          id="checkbox-shoes"
-          value={first}
-          onChange={() => handleChange("shoes")}
-        />
-        <label htmlFor="checkbox-shoes">Shoes</label>
-      </div>
+          <div className="flex gap-2 items-center">
+            <input
+              type="checkbox"
+              id="checkbox-luggage-bags"
+              value={second}
+              onChange={() => handleChange("luggage&bags")}
+            />
+            <label htmlFor="checkbox-luggage-bags">Luggage and Bags</label>
+          </div>
+        </div>
+      ) : (
+        <div>
+          <div className="flex gap-2 items-center">
+            <input
+              type="checkbox"
+              id="checkbox-shoes"
+              value={third}
+              onChange={() => handleChange("cosmetic")}
+            />
+            <label htmlFor="checkbox-shoes">Cosmetics Bags and Cases</label>
+          </div>
 
-      <div className="flex gap-2 items-center">
-        <input
-          type="checkbox"
-          id="checkbox-luggage-bags"
-          value={second}
-          onChange={() => handleChange("luggage&bags")}
-        />
-        <label htmlFor="checkbox-luggage-bags">Luggage and Bags</label>
-      </div>
+          <div className="flex gap-2 items-center">
+            <input
+              type="checkbox"
+              id="checkbox-luggage-bags"
+              value={fourth}
+              onChange={() => handleChange("wallet")}
+            />
+            <label htmlFor="checkbox-luggage-bags">
+              Wallet and Card Holders
+            </label>
+          </div>
+          <div className="flex gap-2 items-center">
+            <input
+              type="checkbox"
+              id="checkbox-luggage-bags"
+              value={second}
+              onChange={() => handleChange("luggage&covers")}
+            />
+            <label htmlFor="checkbox-luggage-bags">luggage and covers</label>
+          </div>
+        </div>
+      )}
+
       <div>
         {" "}
         {/* Slider */}
