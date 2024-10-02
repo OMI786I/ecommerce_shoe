@@ -15,6 +15,8 @@ import {
   useQuery,
 } from "@tanstack/react-query";
 import ProductDetails from "./page/products/ProductDetails";
+import SignUp from "./page/signUp/signUp";
+
 const queryClient = new QueryClient();
 const router = createBrowserRouter([
   {
@@ -28,6 +30,10 @@ const router = createBrowserRouter([
       {
         path: "/login",
         element: <Login />,
+      },
+      {
+        path: "signUp",
+        element: <SignUp />,
       },
       {
         path: "/products",
