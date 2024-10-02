@@ -10,9 +10,16 @@ const Products = () => {
   const [category, setCategory] = useState("shoes and bags");
   const [product, setProduct] = useState("men");
   const [subCategory2, setSubCategory] = useState("");
+  let [price, setPrice] = useState({
+    min: 0,
+    max: 1000,
+  });
+  console.log(price);
   const { isPending, error, data, refetch } = usePublicFetch({
     endPoint: subCategory2,
     query: product,
+    min: price.min,
+    max: price.max,
   });
   console.log(link, product, subCategory2);
 
@@ -85,7 +92,14 @@ const Products = () => {
 
       <div className="grid grid-cols-4">
         <div className="col-span-1">
-          <LeftPart link={link} category={category} product={product} />
+          <LeftPart
+            link={link}
+            category={category}
+            product={product}
+            setPrice={setPrice}
+            price={price}
+            refetch={refetch}
+          />
         </div>
         <div className="col-span-3">
           <RightPart

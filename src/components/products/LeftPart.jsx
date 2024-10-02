@@ -9,7 +9,7 @@ import {
 import { FaMinus, FaPlus } from "react-icons/fa";
 import { Link, useParams } from "react-router-dom";
 
-const LeftPart = ({ link, category, product }) => {
+const LeftPart = ({ link, category, product, setPrice, refetch, price }) => {
   console.log(product);
   const [clicked, setClicked] = useState(null);
   const [first, setFirst] = useState(true);
@@ -19,10 +19,10 @@ const LeftPart = ({ link, category, product }) => {
   const [fifth, setFifth] = useState(true);
   let [filterCheck, setFilterChech] = useState(true);
 
-  const [minPrice, setMinPrice] = useState(100); // Default minimum price
-  const [maxPrice, setMaxPrice] = useState(1000); // Default maximum price
+  const [minPrice, setMinPrice] = useState(price.min); // Default minimum price
+  const [maxPrice, setMaxPrice] = useState(price.max); // Default maximum price
   const [range, setRange] = useState([100, 1000]); // Initial slider range
-
+  console.log(minPrice, maxPrice);
   // Update slider and input field when values change
   const handleSliderChange = (event) => {
     const { value, name } = event.target;
@@ -150,6 +150,15 @@ const LeftPart = ({ link, category, product }) => {
       setFilterChech(false);
     }
   }, [category]);
+
+  const handleFilter = () => {
+    setPrice({
+      min: minPrice,
+      max: maxPrice,
+    });
+    refetch();
+  };
+
   const handleChange = (data2) => {
     if (data2 === "shoes") {
       {
@@ -363,7 +372,10 @@ const LeftPart = ({ link, category, product }) => {
         <div className="text-lg font-semibold">
           Selected Price Range: ${minPrice} - ${maxPrice}
         </div>
-        <button className="btn btn-xs md:btn my-2 hover:bg-red-500 text-black bg-white hover:text-white hover:border-red-500 transition ease-in-out delay-150   duration-300">
+        <button
+          onClick={() => handleFilter()}
+          className="btn btn-xs md:btn my-2 hover:bg-red-500 text-black bg-white hover:text-white hover:border-red-500 transition ease-in-out delay-150   duration-300"
+        >
           Filter
         </button>
       </div>
