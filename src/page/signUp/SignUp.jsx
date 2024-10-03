@@ -15,6 +15,7 @@ const SignUp = () => {
   const [loading, setLoading] = useState(true);
   const [showPassWord, setShowPassWord] = useState(false);
   const [showPassWord2, setShowPassWord2] = useState(false);
+  const [uploadImage, setUploadImage] = useState(true);
 
   console.log(imageValue);
   const {
@@ -28,7 +29,7 @@ const SignUp = () => {
 
   const onSubmit = async (data) => {
     const imgData = new FormData();
-    imgData.append("key", "44091fd0ed2db824d5a380c07a5d39cc"); // Your ImgBB API key
+    imgData.append("key", import.meta.env.VITE_IMGBB_APIKEY);
     imgData.append("image", imageValue);
 
     // Upload image to ImgBB
@@ -38,9 +39,32 @@ const SignUp = () => {
     });
 
     const result = await response.json();
+    const imageSubmit = result.data.display_url;
+    console.log(result.data.display_url);
 
-    console.log(result);
+    console.log(data);
+    if (imageSubmit) {
+      setUploadImage(true);
+      const toSendData = {
+        name: data.name,
+        email: data.email,
+        password: data.password,
+        image: imageSubmit,
+      };
+      console.log(toSendData);
+    } else {
+      setUploadImage(false);
+    }
   };
+
+  if (uploadImage === false) {
+    return (
+      <div className="flex justify-center">
+        {" "}
+        <span className="loading loading-spinner loading-lg"></span>
+      </div>
+    );
+  }
 
   return (
     <div>
