@@ -6,6 +6,7 @@ import { FaRegEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
 
 import toast, { Toaster } from "react-hot-toast";
+import ImagePicker from "../../components/ImagePicker";
 
 const SignUp = () => {
   const location = useLocation();
@@ -145,19 +146,7 @@ const SignUp = () => {
                 <p className="text-red-600">{errors.confirmPassword.message}</p>
               )}
             </div>
-
-            <div className="form-control w-full my-6">
-              <label>image url</label>
-              <input
-                {...register("image", { required: true })}
-                type="text"
-                className=" input input-bordered"
-              />
-              {errors.image && (
-                <p className="text-red-600">image is required</p>
-              )}
-            </div>
-
+            <ImagePicker />
             <div className="form-control mt-6">
               <input
                 className="btn btn-neutral"
