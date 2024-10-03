@@ -16,6 +16,7 @@ import {
 } from "@tanstack/react-query";
 import ProductDetails from "./page/products/ProductDetails";
 import SignUp from "./page/signUp/signUp";
+import AuthProvider from "./provider/AuthProvider";
 
 const queryClient = new QueryClient();
 const router = createBrowserRouter([
@@ -68,7 +69,9 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
     </QueryClientProvider>
   </React.StrictMode>
 );
