@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import classes from "./image-picker.module.css";
-const ImagePicker = ({ label, name }) => {
+const ImagePicker = ({ label, name, setImageValue }) => {
   const [pickedImage, setPickedImage] = useState();
   const imageInputRef = useRef();
   function handlePickClick() {
@@ -18,6 +18,7 @@ const ImagePicker = ({ label, name }) => {
       setPickedImage(fileReader.result);
     };
     fileReader.readAsDataURL(file);
+    setImageValue(file);
   };
 
   return (

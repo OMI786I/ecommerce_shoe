@@ -8,16 +8,20 @@
   display: none;
 }
 .picker .button {
-  border: 0;
+  border: 1px solid black;
+
   padding: 0.5rem 1.5rem;
-  background: #a4abb9;
-  border-radius: 2px;
+  background: #ffffff;
+
+  border-radius: 10px;
   cursor: pointer;
   font: inherit;
 }
 .picker .button:hover,
 .picker .button:focus {
-  background: #b3b9c6;
+  background: #e31f1f;
+  color: white;
+  transition: 300ms ease-in-out;
 }
 .preview {
   width: 10rem;

@@ -11,12 +11,12 @@ import ImagePicker from "../../components/ImagePicker";
 const SignUp = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const [imageValue, setImageValue] = useState();
   const [loading, setLoading] = useState(true);
   const [showPassWord, setShowPassWord] = useState(false);
   const [showPassWord2, setShowPassWord2] = useState(false);
 
-  const status = "active";
-
+  console.log(imageValue);
   const {
     register,
     handleSubmit,
@@ -26,8 +26,20 @@ const SignUp = () => {
 
   const password = watch("password");
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data) => {
+    const imgData = new FormData();
+    imgData.append("key", "44091fd0ed2db824d5a380c07a5d39cc"); // Your ImgBB API key
+    imgData.append("image", imageValue);
+
+    // Upload image to ImgBB
+    const response = await fetch("https://api.imgbb.com/1/upload", {
+      method: "POST",
+      body: imgData,
+    });
+
+    const result = await response.json();
+
+    console.log(result);
   };
 
   return (
@@ -146,7 +158,12 @@ const SignUp = () => {
                 <p className="text-red-600">{errors.confirmPassword.message}</p>
               )}
             </div>
-            <ImagePicker />
+            {/*
+            <div>
+              <input type="file" className="" {...register("image")} />
+            </div>*/}
+
+            <ImagePicker setImageValue={setImageValue} />
             <div className="form-control mt-6">
               <input
                 className="btn btn-neutral"
