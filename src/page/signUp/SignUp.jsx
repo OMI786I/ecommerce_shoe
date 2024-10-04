@@ -8,6 +8,7 @@ import { FaRegEyeSlash } from "react-icons/fa";
 import toast, { Toaster } from "react-hot-toast";
 import ImagePicker from "../../components/ImagePicker";
 import { AuthContext } from "../../provider/AuthProvider";
+import axios from "axios";
 
 const SignUp = () => {
   const { createUser } = useContext(AuthContext);
@@ -15,7 +16,6 @@ const SignUp = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [imageValue, setImageValue] = useState();
-  const [loading, setLoading] = useState(true);
   const [showPassWord, setShowPassWord] = useState(false);
   const [showPassWord2, setShowPassWord2] = useState(false);
   const [uploadImage, setUploadImage] = useState(true);
@@ -31,6 +31,7 @@ const SignUp = () => {
   const password = watch("password");
 
   const onSubmit = async (data) => {
+    setUploadImage(false);
     const imgData = new FormData();
     imgData.append("key", import.meta.env.VITE_IMGBB_APIKEY);
     imgData.append("image", imageValue);
@@ -46,27 +47,40 @@ const SignUp = () => {
     console.log(result.data.display_url);
 
     console.log(data);
-    if (imageSubmit) {
-      setUploadImage(true);
-      const toSendData = {
-        name: data.name,
-        email: data.email,
-        password: data.password,
-        image: imageSubmit,
-      };
-      console.log(toSendData);
 
-      createUser(data.email, data.password)
-        .then((res) => {
-          console.log(res);
-          toast.success("successfully Registered");
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    } else {
-      setUploadImage(false);
-    }
+    const toSendData = {
+      name: data.name,
+      email: data.email,
+      password: data.password,
+      image: imageSubmit,
+    };
+    console.log(toSendData);
+
+    createUser(data.email, data.password)
+      .then((res) => {
+        console.log(res);
+        toast.success("successfully Registered");
+
+        axios
+          .post("http://localhost:5000/user", {
+            ...toSendData,
+          })
+          .then(function (response) {
+            if (response.data.insertedId) {
+              toast.success("You have successfully added");
+              setUploadImage(true);
+              navigate(location?.state ? location.state : "/");
+            }
+
+            console.log(response);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   if (uploadImage === false) {
