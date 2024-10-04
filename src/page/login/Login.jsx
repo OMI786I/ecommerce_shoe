@@ -47,36 +47,51 @@ const Login = () => {
   };
 
   const handleGoogle = () => {
-    googleSignIn().then((result) => {
-      console.log(result.user);
-      console.log(result.user.email);
-      console.log(result.user.displayName);
-      console.log(result.user.photoURL);
-      const toSendData = {
-        name: result.user.displayName,
-        email: result.user.email,
-        image: result.user.photoURL,
-      };
-      axios
-        .post("http://localhost:5000/user", {
-          ...toSendData,
-        })
-        .then(function (response) {
-          if (response.data.insertedId) {
-            toast.success("You have successfully added");
+    googleSignIn()
+      .then((result) => {
+        console.log(result.user);
+        console.log(result.user.email);
+        console.log(result.user.displayName);
+        console.log(result.user.photoURL);
+        const toSendData = {
+          name: result.user.displayName,
+          email: result.user.email,
+          image: result.user.photoURL,
+        };
+        axios
+          .post("http://localhost:5000/user/check", {
+            email: result.user.email,
+          })
+          .then((response) => {
+            if (response.data.exists) {
+              // User already exists, proceed to login
+              toast.success("Welcome back!");
+              navigate(location?.state ? location.state : "/");
+            } else {
+              // User doesn't exist, insert new user into the database
+              axios
+                .post("http://localhost:5000/user", { ...toSendData })
+                .then((response) => {
+                  if (response.data.insertedId) {
+                    toast.success("You have successfully been added");
+                    navigate(location?.state ? location.state : "/");
+                  }
+                })
+                .catch((error) => {
+                  console.log("Error inserting new user:", error);
+                });
+            }
+          })
+          .catch((error) => {
+            console.log("Error checking user existence:", error);
+          });
 
-            navigate(location?.state ? location.state : "/");
-          }
-
-          console.log(response);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-
-      navigate(location?.state ? location.state : "/");
-      toast.success("Successfully logged in");
-    });
+        // Success toast for Google login
+        toast.success("Successfully logged in with Google");
+      })
+      .catch((error) => {
+        console.log("Google Sign In Error:", error);
+      });
   };
 
   const handleValidateCapthca = (e) => {
