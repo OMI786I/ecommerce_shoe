@@ -10,7 +10,8 @@ import Swal from "sweetalert2";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import toast from "react-hot-toast";
 import { AuthContext } from "../../provider/AuthProvider";
-
+import { FcGoogle } from "react-icons/fc";
+import axios from "axios";
 const Login = () => {
   useEffect(() => {
     loadCaptchaEnginge(6);
@@ -20,6 +21,7 @@ const Login = () => {
   const navigate = useNavigate();
   const [disabled, setDisabled] = useState(true);
   const [showPassWord, setShowPassWord] = useState(false);
+  const { googleSignIn } = useContext(AuthContext);
   const handleLogin = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -42,6 +44,39 @@ const Login = () => {
         toast.error("Couldn't sign. Are you registered?");
         console.log(error);
       });
+  };
+
+  const handleGoogle = () => {
+    googleSignIn().then((result) => {
+      console.log(result.user);
+      console.log(result.user.email);
+      console.log(result.user.displayName);
+      console.log(result.user.photoURL);
+      const toSendData = {
+        name: result.user.displayName,
+        email: result.user.email,
+        image: result.user.photoURL,
+      };
+      axios
+        .post("http://localhost:5000/user", {
+          ...toSendData,
+        })
+        .then(function (response) {
+          if (response.data.insertedId) {
+            toast.success("You have successfully added");
+
+            navigate(location?.state ? location.state : "/");
+          }
+
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+
+      navigate(location?.state ? location.state : "/");
+      toast.success("Successfully logged in");
+    });
   };
 
   const handleValidateCapthca = (e) => {
@@ -134,6 +169,11 @@ const Login = () => {
               </Link>
             </small>
           </p>
+          <div className="flex gap-4 p-3">
+            <button className="btn" onClick={handleGoogle}>
+              <FcGoogle className="text-3xl" />
+            </button>
+          </div>
         </div>
       </div>
     </div>
