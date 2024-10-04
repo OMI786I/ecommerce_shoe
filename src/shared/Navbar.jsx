@@ -7,7 +7,12 @@ import { FaArrowDown } from "react-icons/fa";
 import { IoIosOptions } from "react-icons/io";
 import "../styles/styles.css";
 import DrawerContent from "./DrawerContent";
+import { useContext } from "react";
+import { AuthContext } from "../provider/AuthProvider";
+import { useQuery } from "@tanstack/react-query";
 const Navbar = () => {
+  const { user } = useContext(AuthContext);
+
   const navLink = (
     <div className="flex-row  md:flex-col gap-6  ">
       <NavLink to="/">
@@ -151,6 +156,21 @@ const Navbar = () => {
     </div>
   );
 
+  if (user) {
+    console.log("user", user.email);
+  }
+
+  const { isPending, error, data } = useQuery({
+    queryKey: ["repoData"],
+    queryFn: () =>
+      fetch(`http://localhost:5000/user?email=${user.email}`).then((res) =>
+        res.json()
+      ),
+  });
+  console.log(data);
+
+  if (error) return "An error has occurred: " + error.message;
+
   return (
     <div>
       {/**cupon */}
@@ -191,7 +211,7 @@ const Navbar = () => {
           </div>
         </div>
         <Link to={"/"}>
-          <span className="text-5xl text-center font-bold">Junno</span>
+          <span className="text-5xl text-center font-bold">KenaKata</span>
         </Link>
         <div className="w-full hidden lg:block max-w-sm min-w-[200px] relative mt-4">
           <div className="relative">
