@@ -9,11 +9,13 @@ import {
 import Swal from "sweetalert2";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import toast from "react-hot-toast";
+import { AuthContext } from "../../provider/AuthProvider";
 
 const Login = () => {
   useEffect(() => {
     loadCaptchaEnginge(6);
   }, []);
+  const { signIn } = useContext(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
   const [disabled, setDisabled] = useState(true);
@@ -24,22 +26,22 @@ const Login = () => {
     const email = form.email.value;
     const password = form.password.value;
     console.log(email, password);
-    // signIn(email, password)
-    //   .then((result) => {
-    //     const user = result.user;
-    //     navigate(location?.state ? location.state : "/");
-    //     console.log(user);
-    //     console.log(user);
-    //     Swal.fire({
-    //       title: "Successfully logged In!",
-    //       text: "You clicked the button!",
-    //       icon: "success",
-    //     });
-    //   })
-    //   .catch((error) => {
-    //     toast.error("Couldn't sign. Are you registered?");
-    //     console.log(error);
-    //   });
+    signIn(email, password)
+      .then((result) => {
+        const user = result.user;
+        navigate(location?.state ? location.state : "/");
+        console.log(user);
+        console.log(user);
+        Swal.fire({
+          title: "Successfully logged In!",
+          text: "You clicked the button!",
+          icon: "success",
+        });
+      })
+      .catch((error) => {
+        toast.error("Couldn't sign. Are you registered?");
+        console.log(error);
+      });
   };
 
   const handleValidateCapthca = (e) => {
