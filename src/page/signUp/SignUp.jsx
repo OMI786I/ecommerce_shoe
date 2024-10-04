@@ -7,8 +7,11 @@ import { FaRegEyeSlash } from "react-icons/fa";
 
 import toast, { Toaster } from "react-hot-toast";
 import ImagePicker from "../../components/ImagePicker";
+import { AuthContext } from "../../provider/AuthProvider";
 
 const SignUp = () => {
+  const { createUser } = useContext(AuthContext);
+
   const location = useLocation();
   const navigate = useNavigate();
   const [imageValue, setImageValue] = useState();
@@ -52,6 +55,15 @@ const SignUp = () => {
         image: imageSubmit,
       };
       console.log(toSendData);
+
+      createUser(data.email, data.password)
+        .then((res) => {
+          console.log(res);
+          toast.success("successfully Registered");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     } else {
       setUploadImage(false);
     }
