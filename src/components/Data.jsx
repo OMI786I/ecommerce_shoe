@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import usePublicFetch from "../customHook/usePublicFetch";
 import Rating from "react-rating";
 import "font-awesome/css/font-awesome.min.css";
+import useWishList from "../customHook/useWishList";
 
 const Data = () => {
   const [query, setQuery] = useState("men");
@@ -22,9 +23,9 @@ const Data = () => {
   });
 
   console.log(data);
-
+  const wishPost = useWishList();
   const handleWishList = (res) => {
-    console.log(res);
+    wishPost(res);
   };
 
   if (isPending) {
