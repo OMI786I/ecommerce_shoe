@@ -5,6 +5,7 @@ import { HiHeart } from "react-icons/hi";
 import { IoCartOutline } from "react-icons/io5";
 import Rating from "react-rating";
 import { Link } from "react-router-dom";
+import useWishList from "../../customHook/useWishList";
 
 const RightPart = ({ isPending, error, data, refetch, subCategory2 }) => {
   const [active, setActive] = useState(false);
@@ -14,6 +15,10 @@ const RightPart = ({ isPending, error, data, refetch, subCategory2 }) => {
   };
   const handleClickHero = () => {
     setActiveCard(!activeCard);
+  };
+  const wishPost = useWishList();
+  const handleWishList = (res) => {
+    wishPost(res);
   };
 
   console.log(activeCard, active);
@@ -76,7 +81,10 @@ const RightPart = ({ isPending, error, data, refetch, subCategory2 }) => {
                                   className="tooltip"
                                   data-tip="add to wishlist"
                                 >
-                                  <button className="btn btn-xs rounded-full">
+                                  <button
+                                    className="btn btn-xs rounded-full"
+                                    onClick={() => handleWishList(res)}
+                                  >
                                     <HiHeart />
                                   </button>
                                 </div>
@@ -106,7 +114,10 @@ const RightPart = ({ isPending, error, data, refetch, subCategory2 }) => {
                     </div>
                     <div className="hidden bottom-[55%] left-[35%] absolute md:group-hover:block text-red-500 duration-75">
                       <div className="tooltip" data-tip="add to wishlist">
-                        <button className="btn btn-xs rounded-full">
+                        <button
+                          className="btn btn-xs rounded-full"
+                          onClick={() => handleWishList(res)}
+                        >
                           <HiHeart />
                         </button>
                       </div>

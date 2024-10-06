@@ -17,6 +17,7 @@ import {
 import ProductDetails from "./page/products/ProductDetails";
 import SignUp from "./page/signUp/signUp";
 import AuthProvider from "./provider/AuthProvider";
+import Wishlist from "./page/wishlist/Wishlist";
 
 const queryClient = new QueryClient();
 const router = createBrowserRouter([
@@ -61,6 +62,10 @@ const router = createBrowserRouter([
       {
         path: "/accessories",
         element: <Accessories />,
+      },
+      {
+        path: "/wishlist",
+        element: <Wishlist />,
       },
     ],
   },

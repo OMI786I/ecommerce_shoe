@@ -310,11 +310,13 @@ const Navbar = () => {
             <span className="indicator-item badge badge-secondary">
               {count}
             </span>
-            <div className="tooltip" data-tip="Wishlist">
-              <button className="">
-                <PiHeartStraight className="text-3xl" />
-              </button>
-            </div>
+            <Link to={"/wishlist"}>
+              <div className="tooltip" data-tip="Wishlist">
+                <button className="">
+                  <PiHeartStraight className="text-3xl" />
+                </button>
+              </div>
+            </Link>
           </div>
           <div className="indicator">
             <span className="indicator-item badge badge-secondary">0</span>
