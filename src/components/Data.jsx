@@ -23,6 +23,10 @@ const Data = () => {
 
   console.log(data);
 
+  const handleWishList = (res) => {
+    console.log(res);
+  };
+
   if (isPending) {
     <span className="loading loading-spinner loading-lg text-center"></span>;
   }
@@ -112,7 +116,10 @@ const Data = () => {
                         <div className="flex">
                           <div className="flex md:hidden gap-1">
                             <div className="tooltip" data-tip="add to wishlist">
-                              <button className="btn btn-xs rounded-full">
+                              <button
+                                onClick={() => handleWishList(res)}
+                                className="btn btn-xs rounded-full"
+                              >
                                 <HiHeart />
                               </button>
                             </div>
@@ -126,11 +133,12 @@ const Data = () => {
                             </Link>
                           </div>
                           <div className="tooltip" data-tip="Add to cart">
-                            <Link to={"/wishlist"}>
-                              <button className="btn btn-xs rounded-full">
-                                <IoCartOutline className="text-xl" />
-                              </button>
-                            </Link>
+                            <button
+                              onClick={() => console.log("clicked")}
+                              className="btn btn-xs rounded-full"
+                            >
+                              <IoCartOutline className="text-xl" />
+                            </button>
                           </div>
                         </div>
                       </div>
@@ -139,7 +147,10 @@ const Data = () => {
                 </div>
                 <div className="hidden bottom-[55%] left-[35%] absolute md:group-hover:block text-red-500 duration-75">
                   <div className="tooltip" data-tip="add to wishlist">
-                    <button className="btn btn-xs rounded-full">
+                    <button
+                      onClick={() => handleWishList(res)}
+                      className="btn btn-xs rounded-full"
+                    >
                       <HiHeart />
                     </button>
                   </div>

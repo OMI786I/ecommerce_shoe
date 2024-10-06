@@ -45,3 +45,7 @@
     transform: translateY(0);
   }
 }
+
+.tooltip {
+  pointer-events: auto; /* Ensure that tooltip allows clicks */
+}
