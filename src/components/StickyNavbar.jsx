@@ -13,80 +13,124 @@ const StickyNavbar = () => {
       {/** bags and shoes*/}
 
       <div className="dropdown dropdown-hover">
-        <button className="dropbtn flex items-center gap-1">
-          <span>Bags and Shoes</span> <FaArrowDown />
-        </button>
+        <Link to={"/products/shoes_bags"}>
+          <button className="dropbtn flex items-center gap-1">
+            <span>Bags and Shoes</span> <FaArrowDown />
+          </button>
+        </Link>
 
         <div className="dropdown-content">
-          <div className="grid grid-cols-3 gap-3 justify-center">
+          <div className="grid grid-cols-2 gap-3 justify-center">
             <div>
-              <h1 className="font-bold hover:text-red-600 my-2">Shoes</h1>
+              <Link
+                className="p-0 font-bold hover:text-red-600 my-2"
+                to={"/products/shoes_bags/shoes"}
+              >
+                <h1 className="">
+                  <span>Shoes</span>
+                </h1>
+              </Link>
+
               <div>
-                <p className="hoverText cursor-pointer">Women Shoes</p>
-                <p className="hoverText cursor-pointer">Men Shoes</p>
-                <p className="hoverText cursor-pointer">Boots</p>
-                <p className="hoverText cursor-pointer">Casual Shoes</p>
-                <p className="hoverText cursor-pointer">Flip flops</p>
+                <Link
+                  className="hoverText cursor-pointer"
+                  to={"/products/shoes_bags/shoes/women_shoes"}
+                >
+                  <p>Women Shoes</p>
+                </Link>
+                <Link
+                  className="hoverText cursor-pointer"
+                  to={"/products/shoes_bags/shoes/men_shoes"}
+                >
+                  <p>Men Shoes</p>
+                </Link>
+                <Link
+                  className="hoverText cursor-pointer"
+                  to={"/products/shoes_bags/shoes/boots"}
+                >
+                  <p>Boots</p>
+                </Link>
+                <Link
+                  className="hoverText cursor-pointer"
+                  to={"/products/shoes_bags/shoes/casual_shoes"}
+                >
+                  <p>Casual Shoes</p>
+                </Link>
+                <Link
+                  className="hoverText cursor-pointer"
+                  to={"/products/shoes_bags/shoes/flip_shoes"}
+                >
+                  <p>Flip Shoes</p>
+                </Link>
               </div>
             </div>
             <div>
-              <h1 className="font-bold hover:text-red-600 my-2">
-                Luggage and bags
-              </h1>
+              <Link to={"/products/shoes_bags/luggage_bags"}>
+                {" "}
+                <h1 className="font-bold hover:text-red-600 my-2">
+                  Luggage and bags
+                </h1>
+              </Link>
+
               <div>
-                <p className="hoverText cursor-pointer">Stylish Backpacks</p>
-                <p className="hoverText cursor-pointer">Shoulder Bags</p>
-                <p className="hoverText cursor-pointer">Crossbody Bags</p>
-                <p className="hoverText cursor-pointer">Briefcases</p>
-                <p className="hoverText cursor-pointer">Luggage & Travel</p>
-              </div>
-            </div>
-            <div>
-              <h1 className="font-bold hover:text-red-600 my-2">
-                Other Bags & Accessories
-              </h1>
-              <div>
-                <p className="hoverText cursor-pointer">
-                  Cosmetic Bags & Cases
-                </p>
-                <p className="hoverText cursor-pointer">
-                  Wallets & Card Holders
-                </p>
-                <p className="hoverText cursor-pointer">Luggage Covers</p>
-                <p className="hoverText cursor-pointer">Passport Covers</p>
-                <p className="hoverText cursor-pointer">
-                  Bag Parts & Accessories
-                </p>
+                <Link
+                  className="hoverText cursor-pointer"
+                  to={"/products/shoes_bags/luggage_bags/stylishBags"}
+                >
+                  <p>Stylish Bag packs</p>
+                </Link>
+                <Link
+                  className="hoverText cursor-pointer"
+                  to={"/products/shoes_bags/luggage_bags/crossBodyBags"}
+                >
+                  <p>Cross body bags</p>
+                </Link>
+
+                <Link
+                  className="hoverText cursor-pointer"
+                  to={"/products/shoes_bags/luggage_bags/briefCases"}
+                >
+                  <p>Brief Cases</p>
+                </Link>
+                <Link
+                  className="hoverText cursor-pointer"
+                  to={"/products/shoes_bags/luggage_bags/luggage_travel"}
+                >
+                  <p>Luggage and Travel</p>
+                </Link>
               </div>
             </div>
           </div>
         </div>
       </div>
-
       {/**others and accessories */}
 
       <div className="dropdown">
-        <Link to={"/products"}>
+        <Link to={"/products/others_accessories"}>
           <button className="dropbtn flex items-center gap-1">
             <span>Others and Accessories</span> <FaArrowDown />
           </button>
         </Link>
         <div className="dropdown-content-accessories flex flex-row gap-10 text-xl ">
-          <p className="hover:text-red-600 hover:translate-x-3 cursor-pointer transition ease-in-out delay-150 border-b p-1 duration-300">
-            Cosmetic Bags & Cases
-          </p>
-          <p className="hover:text-red-600 hover:translate-x-3 cursor-pointer transition ease-in-out delay-150 border-b  p-1   duration-300">
-            Wallets & Card Holders
-          </p>
-          <p className="hover:text-red-600 hover:translate-x-3 cursor-pointer transition ease-in-out delay-150 border-b p-1  duration-300">
-            Luggage Covers
-          </p>
-          <p className="hover:text-red-600 hover:translate-x-3 cursor-pointer transition ease-in-out delay-150 border-b  p-1  duration-300">
-            Passport Covers
-          </p>
-          <p className="hover:text-red-600 hover:translate-x-3 cursor-pointer transition ease-in-out delay-150 border-b p-1 duration-300">
-            Bag Parts & Accessories
-          </p>
+          <Link
+            className="hoverText cursor-pointer"
+            to={"/products/others_accessories/cosmeticBags_cases"}
+          >
+            <p>Cosmetic bags and Cases</p>
+          </Link>
+
+          <Link
+            className="hoverText cursor-pointer"
+            to={"/products/others_accessories/wallet_cardHolders"}
+          >
+            <p>Wallet and cardHolders</p>
+          </Link>
+          <Link
+            className="hoverText cursor-pointer"
+            to={"/products/others_accessories/luggage_covers"}
+          >
+            <p>Luggage and Covers</p>
+          </Link>
         </div>
       </div>
       <NavLink to="/contact">

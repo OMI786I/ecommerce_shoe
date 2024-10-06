@@ -7,11 +7,11 @@ import { FaArrowDown } from "react-icons/fa";
 import { IoIosOptions } from "react-icons/io";
 import "../styles/styles.css";
 import DrawerContent from "./DrawerContent";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
 const Navbar = () => {
-  const { user } = useContext(AuthContext);
+  const { user, logout } = useContext(AuthContext);
 
   const navLink = (
     <div className="flex-row  md:flex-col gap-6  ">
@@ -161,7 +161,7 @@ const Navbar = () => {
   }
 
   const { isPending, error, data } = useQuery({
-    queryKey: ["repoData"],
+    queryKey: ["repoData", user],
     queryFn: () =>
       fetch(`http://localhost:5000/user?email=${user.email}`).then((res) =>
         res.json()
@@ -169,7 +169,7 @@ const Navbar = () => {
   });
   console.log(data);
 
-  if (error) return "An error has occurred: " + error.message;
+  console.log(error);
 
   return (
     <div>
@@ -251,36 +251,49 @@ const Navbar = () => {
           {/**avatar */}
           <div>
             {" "}
-            <div className="dropdown dropdown-end  ">
-              <label tabIndex="0" className="btn btn-ghost btn-circle avatar">
-                <div className="w-16 rounded-full">
-                  <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"></img>
-                </div>
-              </label>
+            {user && data ? (
+              <div className="dropdown dropdown-end  ">
+                <label tabIndex="0" className="btn btn-ghost btn-circle avatar">
+                  <div className="w-16 rounded-full">
+                    <img
+                      src={data?.[0]?.image || "/src/assets/images/avatar.jpg"}
+                    ></img>
+                  </div>
+                </label>
 
-              <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
-                <li>
-                  <Link to={"/dashboard"}>
-                    <button className="flex items-center gap-2">
-                      <RxDashboard />
-                      My Account
+                <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+                  <li>
+                    <Link to={"/dashboard"}>
+                      <button className="flex items-center gap-2">
+                        <RxDashboard />
+                        My Account
+                      </button>
+                    </Link>
+                    <Link to={"/checkout"}>
+                      <button className="flex items-center gap-2">
+                        <MdOutlineShoppingCartCheckout />
+                        Checkout
+                      </button>
+                    </Link>
+                  </li>
+                  <li>
+                    <button onClick={logout}>
+                      <HiLogout />
+                      Logout
                     </button>
-                  </Link>
-                  <Link to={"/checkout"}>
-                    <button className="flex items-center gap-2">
-                      <MdOutlineShoppingCartCheckout />
-                      Checkout
-                    </button>
-                  </Link>
-                </li>
-                <li>
-                  <button>
-                    <HiLogout />
-                    Logout
-                  </button>
-                </li>
-              </ul>
-            </div>
+                  </li>
+                </ul>
+              </div>
+            ) : (
+              <Link to={"/login"}>
+                {" "}
+                <label tabIndex="0" className="btn btn-ghost btn-circle avatar">
+                  <div className="w-16 rounded-full">
+                    <img src="/src/assets/images/avatar.jpg"></img>
+                  </div>
+                </label>
+              </Link>
+            )}
           </div>
           <div className="indicator">
             <span className="indicator-item badge badge-secondary">0</span>

@@ -17,6 +17,8 @@ const Data = () => {
   const { isPending, error, data, refetch } = usePublicFetch({
     endPoint: "shoes",
     query: `${query}`,
+    min: 0,
+    max: 100000,
   });
 
   console.log(data);
