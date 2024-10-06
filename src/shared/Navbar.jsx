@@ -181,9 +181,15 @@ const Navbar = () => {
           <span className="text-red-500">Junno50</span>
         </p>
         <div>
-          <Link to={"/login"}>
-            <button className="btn btn-sm">Login</button>
-          </Link>
+          {user ? (
+            <button className="btn btn-sm" onClick={logout}>
+              Logout
+            </button>
+          ) : (
+            <Link to={"/login"}>
+              <button className="btn btn-sm">Login</button>
+            </Link>
+          )}
         </div>
       </div>
       {/**navlink upper */}
