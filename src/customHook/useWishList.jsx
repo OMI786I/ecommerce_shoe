@@ -2,10 +2,11 @@ import axios from "axios";
 import React, { useContext } from "react";
 import toast from "react-hot-toast";
 import { AuthContext } from "../provider/AuthProvider";
+import useWishListFetch from "./useWishListFetch";
 
 const useWishList = () => {
   const { user } = useContext(AuthContext);
-
+  const { refetch } = useWishListFetch();
   const wishPost = (res) => {
     const email = user.email;
     const id = res._id;
@@ -38,6 +39,7 @@ const useWishList = () => {
             .then((response) => {
               if (response.data.insertedId) {
                 toast.success("You have successfully added to wishlist");
+                refetch();
               }
             })
             .catch((error) => {

@@ -7,12 +7,16 @@ import { FaArrowDown } from "react-icons/fa";
 import { IoIosOptions } from "react-icons/io";
 import "../styles/styles.css";
 import DrawerContent from "./DrawerContent";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
+
+import useWishListFetch from "../customHook/useWishListFetch";
+import axios from "axios";
 const Navbar = () => {
   const { user, logout } = useContext(AuthContext);
-
+  const { count, refetch } = useWishListFetch();
+  const [userData, setUserData] = useState();
   const navLink = (
     <div className="flex-row  md:flex-col gap-6  ">
       <NavLink to="/">
@@ -156,20 +160,19 @@ const Navbar = () => {
     </div>
   );
 
-  if (user) {
-    console.log("user", user.email);
-  }
-
-  const { isPending, error, data } = useQuery({
-    queryKey: ["repoData", user],
-    queryFn: () =>
-      fetch(`http://localhost:5000/user?email=${user.email}`).then((res) =>
-        res.json()
-      ),
-  });
-  console.log(data);
-
-  console.log(error);
+  useEffect(() => {
+    if (user) {
+      axios
+        .get(`http://localhost:5000/user?email=${user.email}`)
+        .then((data) => {
+          setUserData(data.data);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+    refetch();
+  }, [user, count, refetch]);
 
   return (
     <div>
@@ -257,12 +260,14 @@ const Navbar = () => {
           {/**avatar */}
           <div>
             {" "}
-            {user && data ? (
+            {user && userData ? (
               <div className="dropdown dropdown-end  ">
                 <label tabIndex="0" className="btn btn-ghost btn-circle avatar">
                   <div className="w-16 rounded-full">
                     <img
-                      src={data?.[0]?.image || "/src/assets/images/avatar.jpg"}
+                      src={
+                        userData?.[0]?.image || "/src/assets/images/avatar.jpg"
+                      }
                     ></img>
                   </div>
                 </label>
@@ -302,8 +307,10 @@ const Navbar = () => {
             )}
           </div>
           <div className="indicator">
-            <span className="indicator-item badge badge-secondary">0</span>
-            <div className="tooltip" data-tip="Cart">
+            <span className="indicator-item badge badge-secondary">
+              {count}
+            </span>
+            <div className="tooltip" data-tip="Wishlist">
               <button className="">
                 <PiHeartStraight className="text-3xl" />
               </button>
