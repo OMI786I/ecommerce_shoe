@@ -9,9 +9,9 @@ const useCartFetch = () => {
   const { isPending, error, data, refetch } = useQuery({
     queryKey: ["repoData"],
     queryFn: () =>
-      fetch(`http://localhost:5000/cart?email=${user.email}`).then((res) =>
-        res.json()
-      ),
+      fetch(`http://localhost:5000/cart?email=${user.email}`, {
+        credentials: "include",
+      }).then((res) => res.json()),
   });
   useEffect(() => {
     if (data) {
@@ -20,7 +20,10 @@ const useCartFetch = () => {
       setCount2(data.length);
       console.log(price);
     }
-  });
+    if (!user) {
+      setCount2(0);
+    }
+  }, [data, user]);
 
   return { data, error, isPending, refetch, count2, price };
 };
