@@ -14,20 +14,37 @@ const useCartPost = () => {
     delete finalData._id;
 
     axios
-      .post(`http://localhost:5000/cart`, finalData)
+      .post(`http://localhost:5000/cart/check`, {
+        email: finalData.email,
+        id: finalData.id,
+      })
       .then((res) => {
-        if (res.data.insertedId) {
+        if (res.data.exists) {
           Swal.fire({
             position: "top-end",
-            icon: "success",
-            title: "Added to cart",
+            icon: "error",
+            title: "Already in Cart!",
             showConfirmButton: false,
             timer: 1500,
           });
+        } else {
+          axios
+            .post(`http://localhost:5000/cart`, finalData)
+            .then((res) => {
+              if (res.data.insertedId) {
+                Swal.fire({
+                  position: "top-end",
+                  icon: "success",
+                  title: "Added to cart",
+                  showConfirmButton: false,
+                  timer: 1500,
+                });
+              }
+            })
+            .catch((error) => {
+              console.log(error);
+            });
         }
-      })
-      .catch((error) => {
-        console.log(error);
       });
   };
 
