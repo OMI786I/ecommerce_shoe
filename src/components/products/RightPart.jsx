@@ -6,6 +6,7 @@ import { IoCartOutline } from "react-icons/io5";
 import Rating from "react-rating";
 import { Link } from "react-router-dom";
 import useWishList from "../../customHook/useWishList";
+import useCartPost from "../../customHook/useCartPost";
 
 const RightPart = ({ isPending, error, data, refetch, subCategory2 }) => {
   const [active, setActive] = useState(false);
@@ -17,8 +18,12 @@ const RightPart = ({ isPending, error, data, refetch, subCategory2 }) => {
     setActiveCard(!activeCard);
   };
   const wishPost = useWishList();
+  const cartPost = useCartPost();
   const handleWishList = (res) => {
     wishPost(res);
+  };
+  const handleAddCart = (res) => {
+    cartPost(res);
   };
 
   console.log(activeCard, active);
@@ -101,11 +106,12 @@ const RightPart = ({ isPending, error, data, refetch, subCategory2 }) => {
                                 </Link>
                               </div>
                               <div className="tooltip" data-tip="Add to cart">
-                                <Link to={"/wishlist"}>
-                                  <button className="btn btn-xs rounded-full">
-                                    <IoCartOutline className="text-xl" />
-                                  </button>
-                                </Link>
+                                <button
+                                  className="btn btn-xs rounded-full"
+                                  onClick={() => handleAddCart(res)}
+                                >
+                                  <IoCartOutline className="text-xl" />
+                                </button>
                               </div>
                             </div>
                           </div>

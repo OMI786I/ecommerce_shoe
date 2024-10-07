@@ -6,6 +6,7 @@ import { HiHeart } from "react-icons/hi";
 import { FaFacebook, FaGoogle, FaTwitter } from "react-icons/fa";
 import useDetailsFetch from "../../customHook/useDetailsFetch";
 import useWishList from "../../customHook/useWishList";
+import useCartPost from "../../customHook/useCartPost";
 const ProductDetails = () => {
   let { id } = useParams();
   const { isPending, error, data, refetch } = useDetailsFetch(id);
@@ -18,10 +19,13 @@ const ProductDetails = () => {
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
-
+  const cartPost = useCartPost();
   const wishPost = useWishList();
   const handleWishList = (res) => {
     wishPost(res);
+  };
+  const handleAddCart = (res) => {
+    cartPost(res);
   };
 
   if (isPending) {
@@ -135,24 +139,20 @@ const ProductDetails = () => {
           </div>
         </div>
         <div className="flex items-center gap-2 my-6">
-          <label className="font-bold">Quantity</label>
-          <input
-            type="number"
-            placeholder=""
-            className="input w-1/2 input-bordered max-w-xs"
-            min={0}
-          />
-          <button className="btn bg-black text-white hover:bg-red-600">
+          <button
+            onClick={() => handleAddCart(data)}
+            className="btn bg-black text-white hover:bg-red-600"
+          >
             +ADD TO CART
           </button>
+          <button
+            onClick={() => handleWishList(data)}
+            className="btn hover:bg-red-500 text-black bg-white hover:text-white hover:border-red-500"
+          >
+            <HiHeart className="text-xl" />
+            <p>Add to wishlist</p>
+          </button>
         </div>{" "}
-        <div
-          onClick={() => handleWishList(data)}
-          className="btn hover:bg-red-500 text-black bg-white hover:text-white hover:border-red-500"
-        >
-          <HiHeart className="text-xl" />
-          <p>Add to wishlist</p>
-        </div>
         <div className="flex items-center gap-4">
           Share
           <div className="flex gap-2">

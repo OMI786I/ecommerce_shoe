@@ -7,12 +7,17 @@ import usePublicFetch from "../customHook/usePublicFetch";
 import Rating from "react-rating";
 import "font-awesome/css/font-awesome.min.css";
 import useWishList from "../customHook/useWishList";
+import useCartPost from "../customHook/useCartPost";
 
 const Data = () => {
   const [query, setQuery] = useState("men");
   const [manButton, setManButton] = useState(false);
   const [womanButton, setWomanButton] = useState(false);
   const [casualButton, setCasualButton] = useState(false);
+  const cartPost = useCartPost();
+  const handleAddCart = (res) => {
+    cartPost(res);
+  };
   console.log(manButton);
   console.log(query);
   const { isPending, error, data, refetch } = usePublicFetch({
@@ -135,7 +140,7 @@ const Data = () => {
                           </div>
                           <div className="tooltip" data-tip="Add to cart">
                             <button
-                              onClick={() => console.log("clicked")}
+                              onClick={() => handleAddCart(res)}
                               className="btn btn-xs rounded-full"
                             >
                               <IoCartOutline className="text-xl" />

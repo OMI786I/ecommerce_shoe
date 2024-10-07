@@ -15,10 +15,14 @@ const useCartPost = () => {
     delete finalData._id;
 
     axios
-      .post(`http://localhost:5000/cart/check`, {
-        email: finalData.email,
-        id: finalData.id,
-      })
+      .post(
+        `http://localhost:5000/cart/check`,
+        {
+          email: finalData.email,
+          id: finalData.id,
+        },
+        { withCredentials: true }
+      )
       .then((res) => {
         if (res.data.exists) {
           Swal.fire({
@@ -30,7 +34,9 @@ const useCartPost = () => {
           });
         } else {
           axios
-            .post(`http://localhost:5000/cart`, finalData)
+            .post(`http://localhost:5000/cart`, finalData, {
+              withCredentials: true,
+            })
             .then((res) => {
               if (res.data.insertedId) {
                 Swal.fire({
