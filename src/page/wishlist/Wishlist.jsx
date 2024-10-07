@@ -2,10 +2,16 @@ import React from "react";
 import useWishListFetch from "../../customHook/useWishListFetch";
 import { BiCart } from "react-icons/bi";
 import useCartPost from "../../customHook/useCartPost";
+import { AiTwotoneDelete } from "react-icons/ai";
+import useCartDelete from "../../customHook/useCartDelete";
 
 const Wishlist = () => {
   const { fetchData, refetch, isPending } = useWishListFetch();
   const cartPost = useCartPost();
+  const handleDelete = useCartDelete();
+  const handleDeleteProduct = (id) => {
+    handleDelete(id);
+  };
   if (isPending) {
     return (
       <div className="flex justify-center items-center min-h-screen">
@@ -41,12 +47,21 @@ const Wishlist = () => {
                 <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
                   ${res.price}
                 </p>
-                <button
-                  onClick={() => handleAddCart(res)}
-                  className="btn hover:bg-red-500 text-black bg-white hover:text-white hover:border-red-500"
-                >
-                  <BiCart /> Add to Cart
-                </button>
+                <div className="flex gap-1">
+                  {" "}
+                  <button
+                    onClick={() => handleAddCart(res)}
+                    className="btn hover:bg-red-500 text-black bg-white hover:text-white hover:border-red-500"
+                  >
+                    <BiCart /> Add to Cart
+                  </button>
+                  <button
+                    onClick={() => handleDeleteProduct(res._id)}
+                    className="btn btn-error text-white"
+                  >
+                    <AiTwotoneDelete /> delete
+                  </button>
+                </div>
               </div>
             </div>
           ))}
