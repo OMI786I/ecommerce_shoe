@@ -1,22 +1,28 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 
 const useCartFetch = () => {
   const { user } = useContext(AuthContext);
-  const { isPending, error, data } = useQuery({
+  const [price, setPrice] = useState(0);
+  const [count2, setCount2] = useState(0);
+  const { isPending, error, data, refetch } = useQuery({
     queryKey: ["repoData"],
     queryFn: () =>
       fetch(`http://localhost:5000/cart?email=${user.email}`).then((res) =>
         res.json()
       ),
   });
+  useEffect(() => {
+    if (data) {
+      const price = data.reduce((a, v) => (a = a + v.price), 0);
+      setPrice(price);
+      setCount2(data.length);
+      console.log(price);
+    }
+  });
 
-  if (isPending) return "Loading...";
-
-  if (error) return "An error has occurred: " + error.message;
-
-  return <div></div>;
+  return { data, error, isPending, refetch, count2, price };
 };
 
 export default useCartFetch;

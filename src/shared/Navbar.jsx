@@ -13,9 +13,11 @@ import { useQuery } from "@tanstack/react-query";
 
 import useWishListFetch from "../customHook/useWishListFetch";
 import axios from "axios";
+import useCartFetch from "../customHook/useCartFetch";
 const Navbar = () => {
   const { user, logout } = useContext(AuthContext);
   const { count, refetch } = useWishListFetch();
+  const { count2, price } = useCartFetch();
   const [userData, setUserData] = useState();
   const navLink = (
     <div className="flex-row  md:flex-col gap-6  ">
@@ -319,7 +321,9 @@ const Navbar = () => {
             </Link>
           </div>
           <div className="indicator">
-            <span className="indicator-item badge badge-secondary">0</span>
+            <span className="indicator-item badge badge-secondary">
+              {count2}
+            </span>
             <Link to={"/cart"}>
               {" "}
               <div className="tooltip" data-tip="Cart">
@@ -330,7 +334,7 @@ const Navbar = () => {
             </Link>
           </div>
           <div>
-            <p>$0</p>
+            <p>${price}</p>
           </div>
         </div>
       </div>

@@ -2,11 +2,12 @@ import React, { useContext, useState } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import axios from "axios";
 import Swal from "sweetalert2";
+import useCartFetch from "./useCartFetch";
 
 const useCartPost = () => {
   const [data, setData] = useState();
   const { user } = useContext(AuthContext);
-
+  const { refetch } = useCartFetch();
   const cartPost = (res) => {
     const email = user.email;
     const id = res._id;
@@ -39,6 +40,7 @@ const useCartPost = () => {
                   showConfirmButton: false,
                   timer: 1500,
                 });
+                refetch();
               }
             })
             .catch((error) => {
