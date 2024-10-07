@@ -35,7 +35,9 @@ const useWishList = () => {
           toast.error("Already in wishlist!");
         } else {
           axios
-            .post("http://localhost:5000/wishlist", finalData)
+            .post("http://localhost:5000/wishlist", finalData, {
+              credentials: "include",
+            })
             .then((response) => {
               if (response.data.insertedId) {
                 toast.success("You have successfully added to wishlist");

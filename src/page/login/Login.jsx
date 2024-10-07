@@ -33,11 +33,11 @@ const Login = () => {
         const user = result.user;
         navigate(location?.state ? location.state : "/");
         console.log(user);
-        axios
-          .post("http://localhost:5000/jwt", user, { withCredentials: true })
-          .then((res) => {
-            console.log(res.data);
-          });
+        // axios
+        //   .post("http://localhost:5000/jwt", user, { withCredentials: true })
+        //   .then((res) => {
+        //     console.log(res.data);
+        //   });
 
         Swal.fire({
           title: "Successfully logged In!",
