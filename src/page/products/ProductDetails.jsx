@@ -5,6 +5,7 @@ import "font-awesome/css/font-awesome.min.css";
 import { HiHeart } from "react-icons/hi";
 import { FaFacebook, FaGoogle, FaTwitter } from "react-icons/fa";
 import useDetailsFetch from "../../customHook/useDetailsFetch";
+import useWishList from "../../customHook/useWishList";
 const ProductDetails = () => {
   let { id } = useParams();
   const { isPending, error, data, refetch } = useDetailsFetch(id);
@@ -16,6 +17,11 @@ const ProductDetails = () => {
   // Toggle dropdown state
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
+  };
+
+  const wishPost = useWishList();
+  const handleWishList = (res) => {
+    wishPost(res);
   };
 
   if (isPending) {
@@ -140,7 +146,10 @@ const ProductDetails = () => {
             +ADD TO CART
           </button>
         </div>{" "}
-        <div className="flex my-8 items-center gap-3 hover:text-red-600 hover:cursor-pointer duration-100">
+        <div
+          onClick={() => handleWishList(data)}
+          className="btn hover:bg-red-500 text-black bg-white hover:text-white hover:border-red-500"
+        >
           <HiHeart className="text-xl" />
           <p>Add to wishlist</p>
         </div>

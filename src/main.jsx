@@ -19,6 +19,7 @@ import SignUp from "./page/signUp/signUp";
 import AuthProvider from "./provider/AuthProvider";
 import Wishlist from "./page/wishlist/Wishlist";
 import PrivateRoute from "./provider/PrivareRoute";
+import Cart from "./page/cart/Cart";
 
 const queryClient = new QueryClient();
 const router = createBrowserRouter([
@@ -69,6 +70,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <Wishlist />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/cart",
+        element: (
+          <PrivateRoute>
+            <Cart />
           </PrivateRoute>
         ),
       },

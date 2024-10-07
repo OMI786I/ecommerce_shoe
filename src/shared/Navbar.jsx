@@ -320,11 +320,14 @@ const Navbar = () => {
           </div>
           <div className="indicator">
             <span className="indicator-item badge badge-secondary">0</span>
-            <div className="tooltip" data-tip="Cart">
-              <button className="">
-                <PiBag className="text-3xl" />
-              </button>
-            </div>
+            <Link to={"/cart"}>
+              {" "}
+              <div className="tooltip" data-tip="Cart">
+                <button className="">
+                  <PiBag className="text-3xl" />
+                </button>
+              </div>
+            </Link>
           </div>
           <div>
             <p>$0</p>

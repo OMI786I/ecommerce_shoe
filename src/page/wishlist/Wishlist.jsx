@@ -1,5 +1,6 @@
 import React from "react";
 import useWishListFetch from "../../customHook/useWishListFetch";
+import { BiCart } from "react-icons/bi";
 
 const Wishlist = () => {
   const { fetchData, refetch, isPending } = useWishListFetch();
@@ -35,6 +36,9 @@ const Wishlist = () => {
                 <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
                   {res.description}
                 </p>
+                <button className="btn hover:bg-red-500 text-black bg-white hover:text-white hover:border-red-500">
+                  <BiCart /> Add to Cart
+                </button>
               </div>
             </div>
           ))}
