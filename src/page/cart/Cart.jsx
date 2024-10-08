@@ -3,12 +3,12 @@ import useCartFetch from "../../customHook/useCartFetch";
 import { AiFillDelete } from "react-icons/ai";
 
 const Cart = () => {
-  const { data } = useCartFetch();
+  const { data, price } = useCartFetch();
   console.log(data);
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <div className="bg-gray-100 p-6 rounded-lg shadow-lg">
+      <div className="bg-gray-100 p-6 rounded-lg shadow-lg mb-">
         <h1 className="text-2xl font-bold mb-4">
           You have {data.length} items in your cart
         </h1>
@@ -16,7 +16,7 @@ const Cart = () => {
           Sort items or update quantities as needed.
         </p>
       </div>
-      <div className="grid grid-cols-2 ">
+      <div className="grid grid-cols-2 gap-5 ">
         <div>
           {data?.map((res) => (
             <div
@@ -60,7 +60,30 @@ const Cart = () => {
             </div>
           ))}
         </div>
-        <div></div>
+        <div className="bg-white rounded-xl mt-4 shadow-xl">
+          {/**Estimated total heading */}
+          <div className="flex justify-center gap-4   ">
+            <div>
+              <h1 className="text-xl font-bold mt-2">
+                Estimated total: ${price}
+              </h1>
+            </div>
+          </div>
+          {/**Estimated total list */}
+          <div>
+            <div className="flex flex-col my-4 items-center">
+              <label>Add Coupon</label>
+              <input
+                type="text"
+                placeholder="Type here"
+                className="input input-bordered input-sm w-full max-w-xs"
+              />
+              <button className="btn btn-error text-white my-4">
+                Apply Coupon
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div className="mt-8 flex justify-end">
