@@ -3,9 +3,11 @@ import useCartFetch from "../../customHook/useCartFetch";
 import { AiFillDelete } from "react-icons/ai";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
+import useWishlistDelete from "../../customHook/useWishlistDelete";
 
 const Cart = () => {
   const { data, price } = useCartFetch();
+  const handleDelete = useWishlistDelete();
   const [finalPrice, setFinalPrice] = useState(price);
   console.log(finalPrice);
   const {
@@ -14,8 +16,8 @@ const Cart = () => {
     watch,
     formState: { errors },
   } = useForm();
-  const handleDelete = (id) => {
-    console.log(id);
+  const handleDelete2 = (id) => {
+    handleDelete(id);
   };
 
   useEffect(() => {
@@ -82,7 +84,7 @@ const Cart = () => {
 
                   <button
                     className="text-red-500 hover:text-red-700 transition-colors"
-                    onClick={() => handleDelete(res._id)}
+                    onClick={() => handleDelete2(res._id)}
                   >
                     <AiFillDelete className="text-2xl" />
                     <span className="sr-only">Delete</span>
