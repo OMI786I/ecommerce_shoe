@@ -1,11 +1,43 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import useCartFetch from "../../customHook/useCartFetch";
 import { AiFillDelete } from "react-icons/ai";
+import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
 
 const Cart = () => {
   const { data, price } = useCartFetch();
-  console.log(data);
+  const [finalPrice, setFinalPrice] = useState(price);
+  console.log(finalPrice);
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+  const handleDelete = (id) => {
+    console.log(id);
+  };
 
+  useEffect(() => {
+    setFinalPrice(price);
+  }, [price]);
+
+  const onSubmit = (data) => {
+    if (data.coupon === "Junno50") {
+      const halfPrice = price / 2;
+      setFinalPrice(halfPrice);
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Offer is Applied",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
+  };
+  if (!data) {
+    return "loading....";
+  }
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="bg-gray-100 p-6 rounded-lg shadow-lg mb-">
@@ -65,7 +97,7 @@ const Cart = () => {
           <div className="flex justify-center gap-4   ">
             <div>
               <h1 className="text-xl font-bold mt-2">
-                Estimated total: ${price}
+                Estimated total: ${finalPrice}
               </h1>
             </div>
           </div>
@@ -73,14 +105,19 @@ const Cart = () => {
           <div>
             <div className="flex flex-col my-4 items-center">
               <label>Add Coupon</label>
-              <input
-                type="text"
-                placeholder="Type here"
-                className="input input-bordered input-sm w-full max-w-xs"
-              />
-              <button className="btn btn-error text-white my-4">
-                Apply Coupon
-              </button>
+              <form onSubmit={handleSubmit(onSubmit)}>
+                <input
+                  type="text"
+                  {...register("coupon")}
+                  placeholder="Type here"
+                  className="input input-bordered input-sm w-full max-w-xs"
+                />
+                <input
+                  type="submit"
+                  value={"Add Coupon"}
+                  className="btn btn-error text-white my-4"
+                />
+              </form>
             </div>
           </div>
         </div>
