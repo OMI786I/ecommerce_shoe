@@ -11,7 +11,8 @@ const useCartPost = () => {
   const cartPost = (res) => {
     const email = user.email;
     const id = res._id;
-    const finalData = { ...res, email, id };
+    const quantity = 1;
+    const finalData = { ...res, email, id, quantity };
     delete finalData._id;
 
     axios

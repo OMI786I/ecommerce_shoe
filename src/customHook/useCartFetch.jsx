@@ -15,16 +15,18 @@ const useCartFetch = () => {
   });
   useEffect(() => {
     if (data) {
-      const price = data.reduce((a, v) => (a = a + v.price), 0);
-      setPrice(price);
+      const totalPrice = data.reduce(
+        (total, item) => total + item.price * item.quantity,
+        0
+      );
+      setPrice(totalPrice);
       setCount2(data.length);
-      console.log(price);
+      console.log(totalPrice);
     }
     if (!user) {
       setCount2(0);
     }
-  }, [data, user]);
-
+  }, [data, user, price]);
   return { data, error, isPending, refetch, count2, price };
 };
 

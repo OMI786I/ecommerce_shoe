@@ -4,10 +4,13 @@ import { AiFillDelete } from "react-icons/ai";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import useWishlistDelete from "../../customHook/useWishlistDelete";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 const Cart = () => {
-  const { data, price } = useCartFetch();
+  const { data, price, refetch } = useCartFetch();
   const handleDelete = useWishlistDelete();
+
   const [finalPrice, setFinalPrice] = useState(price);
   console.log(finalPrice);
   const {
@@ -37,8 +40,39 @@ const Cart = () => {
       });
     }
   };
+
+  // useEffect(() => {
+  //   if (data) {
+  //     let totalPrice = data.price * data.quantity;
+  //     setTotalPrice(totalPrice);
+  //   }
+  // }, [data.quantity]);
+
+  const handleQuantity = (e, id) => {
+    const newQuantity = parseInt(e.target.value, 10);
+    console.log("New quantity for item with id", id, "is", newQuantity);
+    const quantity = { quantity: newQuantity };
+    axios
+      .patch(`http://localhost:5000/cart/${id}`, quantity, {
+        withCredentials: true,
+      })
+      .then((response) => {
+        if (response.data.modifiedCount > 0) {
+          refetch();
+          console.log("changed count");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   if (!data) {
-    return "loading....";
+    return (
+      <div className="flex justify-center">
+        <span className="loading loading-spinner loading-lg"></span>
+      </div>
+    );
   }
   return (
     <div className="container mx-auto px-4 py-8">
@@ -73,7 +107,8 @@ const Cart = () => {
                       className="input input-bordered w-20 text-center"
                       min={0}
                       max={30}
-                      defaultValue={1}
+                      defaultValue={res.quantity}
+                      onChange={(e) => handleQuantity(e, res._id)}
                     />
                   </div>
 
