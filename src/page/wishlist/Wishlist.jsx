@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import useWishListFetch from "../../customHook/useWishListFetch";
 import { BiCart } from "react-icons/bi";
 import useCartPost from "../../customHook/useCartPost";
@@ -6,8 +6,19 @@ import { AiTwotoneDelete } from "react-icons/ai";
 import useCartDelete from "../../customHook/useCartDelete";
 
 const Wishlist = () => {
-  const { fetchData, refetch, isPending } = useWishListFetch();
+  const {
+    isPending,
+    error,
+    count,
+    fetchData,
+    refetch,
+    setLimit,
+    setPage,
+    limit,
+    page,
+  } = useWishListFetch();
   const cartPost = useCartPost();
+
   const handleDelete = useCartDelete();
   const handleDeleteProduct = (id) => {
     handleDelete(id);
@@ -19,11 +30,31 @@ const Wishlist = () => {
       </div>
     );
   }
+
   const handleAddCart = (res) => {
     cartPost(res);
   };
+  const numberOfPages = Math.ceil(count / limit);
+
+  const pages = [...Array(numberOfPages).keys()];
+
+  const handleItemsPerPage = (e) => {
+    const val = parseInt(e.target.value);
+    console.log(val);
+    setLimit(val);
+  };
   return (
     <div className="">
+      <div>
+        <label>Items per page: </label>
+        <select value={limit} onChange={handleItemsPerPage} name="" id="">
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="50">50</option>
+        </select>
+      </div>
+
       {fetchData && fetchData.length > 0 ? (
         <div className="grid grid-cols-1">
           {fetchData.map((res) => (
@@ -73,6 +104,20 @@ const Wishlist = () => {
           </p>
         </div>
       )}
+      <div className="flex justify-center my-2">
+        {" "}
+        {pages.map((page2) => (
+          <button
+            className={
+              page === page2 + 1 ? "btn bg-orange-700" : "btn bg-orange-500"
+            }
+            onClick={() => setPage(page2 + 1)}
+            key={page2}
+          >
+            {page2 + 1}
+          </button>
+        ))}
+      </div>
     </div>
   );
 };
