@@ -20,6 +20,8 @@ import AuthProvider from "./provider/AuthProvider";
 import Wishlist from "./page/wishlist/Wishlist";
 import PrivateRoute from "./provider/PrivareRoute";
 import Cart from "./page/cart/Cart";
+import Dashboard from "./dashboard/Dashboard";
+import User from "./dashboard/User";
 
 const queryClient = new QueryClient();
 const router = createBrowserRouter([
@@ -80,6 +82,16 @@ const router = createBrowserRouter([
             <Cart />
           </PrivateRoute>
         ),
+      },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: <Dashboard></Dashboard>,
+    children: [
+      {
+        path: "/dashboard/user",
+        element: <User />,
       },
     ],
   },

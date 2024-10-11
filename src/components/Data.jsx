@@ -90,87 +90,89 @@ const Data = () => {
         </button>
       </div>
       <div className="grid grid-cols-1 gap-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-        {data
-          ? data.map((res) => (
-              <div
-                key={res._id}
-                className="group w-full md:w-[230px] lg:w-96 relative"
-              >
-                <div className="inline-block">
-                  {/** card */}
-                  <div className="p-2 w-full transition-shadow duration-300 cursor-pointer hover:shadow-lg hover:shadow-gray-400 rounded-xl border">
-                    <div className="relative">
-                      <img src={res.image} className="w-60 h-60" />
-                      <p className="absolute text-white bg-red-600 p-1 text-sm rounded-lg right-1 top-1">
-                        New
-                      </p>
-                    </div>
+        {data ? (
+          data.result.map((res) => (
+            <div
+              key={res._id}
+              className="group w-full md:w-[230px] lg:w-96 relative"
+            >
+              <div className="inline-block">
+                {/** card */}
+                <div className="p-2 w-full transition-shadow duration-300 cursor-pointer hover:shadow-lg hover:shadow-gray-400 rounded-xl border">
+                  <div className="relative">
+                    <img src={res.image} className="w-60 h-60" />
+                    <p className="absolute text-white bg-red-600 p-1 text-sm rounded-lg right-1 top-1">
+                      New
+                    </p>
+                  </div>
+                  <div>
+                    <h1 className="text-gray-500">{res.title}</h1>
                     <div>
-                      <h1 className="text-gray-500">{res.title}</h1>
-                      <div>
-                        <div className="rating">
-                          <Rating
-                            initialRating={res.rating}
-                            readonly
-                            emptySymbol={["fa fa-star-o fa-2x"]}
-                            fullSymbol={["fa fa-star fa-2x"]}
-                          />
-                        </div>
+                      <div className="rating">
+                        <Rating
+                          initialRating={res.rating}
+                          readonly
+                          emptySymbol={["fa fa-star-o fa-2x"]}
+                          fullSymbol={["fa fa-star fa-2x"]}
+                        />
                       </div>
-                      <div className="flex justify-between">
-                        <h1 className="font-bold">${res.price}</h1>
-                        <div className="flex">
-                          <div className="flex md:hidden gap-1">
-                            <div className="tooltip" data-tip="add to wishlist">
-                              <button
-                                onClick={() => handleWishList(res)}
-                                className="btn btn-xs rounded-full"
-                              >
-                                <HiHeart />
-                              </button>
-                            </div>
-
-                            <Link to={`/products/details/${res._id}`}>
-                              <div className="tooltip" data-tip="Quick View">
-                                <button className="btn btn-xs rounded-full">
-                                  <BiSearch />
-                                </button>
-                              </div>
-                            </Link>
-                          </div>
-                          <div className="tooltip" data-tip="Add to cart">
+                    </div>
+                    <div className="flex justify-between">
+                      <h1 className="font-bold">${res.price}</h1>
+                      <div className="flex">
+                        <div className="flex md:hidden gap-1">
+                          <div className="tooltip" data-tip="add to wishlist">
                             <button
-                              onClick={() => handleAddCart(res)}
+                              onClick={() => handleWishList(res)}
                               className="btn btn-xs rounded-full"
                             >
-                              <IoCartOutline className="text-xl" />
+                              <HiHeart />
                             </button>
                           </div>
+
+                          <Link to={`/products/details/${res._id}`}>
+                            <div className="tooltip" data-tip="Quick View">
+                              <button className="btn btn-xs rounded-full">
+                                <BiSearch />
+                              </button>
+                            </div>
+                          </Link>
+                        </div>
+                        <div className="tooltip" data-tip="Add to cart">
+                          <button
+                            onClick={() => handleAddCart(res)}
+                            className="btn btn-xs rounded-full"
+                          >
+                            <IoCartOutline className="text-xl" />
+                          </button>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div className="hidden bottom-[55%] left-[35%] absolute md:group-hover:block text-red-500 duration-75">
-                  <div className="tooltip" data-tip="add to wishlist">
-                    <button
-                      onClick={() => handleWishList(res)}
-                      className="btn btn-xs rounded-full"
-                    >
-                      <HiHeart />
+              </div>
+              <div className="hidden bottom-[55%] left-[35%] absolute md:group-hover:block text-red-500 duration-75">
+                <div className="tooltip" data-tip="add to wishlist">
+                  <button
+                    onClick={() => handleWishList(res)}
+                    className="btn btn-xs rounded-full"
+                  >
+                    <HiHeart />
+                  </button>
+                </div>
+                <Link to={`/products/details/${res._id}`}>
+                  <div className="tooltip" data-tip="Quick View">
+                    <button className="btn btn-xs rounded-full">
+                      <BiSearch />
                     </button>
                   </div>
-                  <Link to={`/products/details/${res._id}`}>
-                    <div className="tooltip" data-tip="Quick View">
-                      <button className="btn btn-xs rounded-full">
-                        <BiSearch />
-                      </button>
-                    </div>
-                  </Link>
-                </div>
+                </Link>
               </div>
-            ))
-          : "loading..."}
+            </div>
+          ))
+        ) : (
+          <span className="loading loading-spinner loading-lg"></span>
+        )}
       </div>
     </div>
   );
