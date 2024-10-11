@@ -11,8 +11,8 @@ const useUserFetch = () => {
       fetch(`http://localhost:5000/user?email=${user.email}`).then((res) =>
         res.json()
       ),
+    enabled: !!user?.email,
   });
-
   return { isPending, error, data, refetch };
 };
 
