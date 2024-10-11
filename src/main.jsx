@@ -22,6 +22,7 @@ import PrivateRoute from "./provider/PrivareRoute";
 import Cart from "./page/cart/Cart";
 import Dashboard from "./dashboard/Dashboard";
 import User from "./dashboard/user/User";
+import UserEdit from "./dashboard/user/UserEdit";
 
 const queryClient = new QueryClient();
 const router = createBrowserRouter([
@@ -92,6 +93,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/user",
         element: <User />,
+      },
+      {
+        path: "/dashboard//edit/:id",
+        element: <UserEdit />,
       },
     ],
   },

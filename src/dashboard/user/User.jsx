@@ -1,27 +1,11 @@
 import React from "react";
 import useUserFetch from "../../customHook/useUserFetch";
 import { FaEdit } from "react-icons/fa";
+import { Link } from "react-router-dom";
 const User = () => {
   const { isPending, error, data, refetch } = useUserFetch();
-  // email
-  // :
-  // "example@gmail.com"
-  // image
-  // :
-  // "https://i.ibb.co.com/RTMFdz3/trashed-1677439788-PXL-20230127-081151775.jpg"
-  // name
-  // :
-  // "BanglaBazar er Jubok"
-  // password
-  // :
-  // "Ahare147@"
-  // role
-  // :
-  // "user"
-  // _id
-  // :
-  // "67022458f1712a18adb3738f"
-  if (isPending) {
+
+  if (!data) {
     <span className="loading loading-spinner loading-lg"></span>;
   } else
     return (
@@ -51,9 +35,11 @@ const User = () => {
                   user Information
                 </div>
                 <div>
-                  <button className="btn hover:btn-error hover:text-white">
-                    <FaEdit /> Edit{" "}
-                  </button>
+                  <Link to={`/dashboard/edit/${data[0]._id}`}>
+                    <button className="btn hover:btn-error hover:text-white">
+                      <FaEdit /> Edit{" "}
+                    </button>
+                  </Link>
                 </div>
               </div>
 
