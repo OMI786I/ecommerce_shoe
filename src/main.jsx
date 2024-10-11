@@ -23,6 +23,9 @@ import Cart from "./page/cart/Cart";
 import Dashboard from "./dashboard/Dashboard";
 import User from "./dashboard/user/User";
 import UserEdit from "./dashboard/user/UserEdit";
+import History from "./dashboard/history/History";
+import CurrentOrder from "./dashboard/current_order/CurrentOrder";
+import AddReview from "./dashboard/review/AddReview";
 
 const queryClient = new QueryClient();
 const router = createBrowserRouter([
@@ -97,6 +100,18 @@ const router = createBrowserRouter([
       {
         path: "/dashboard//edit/:id",
         element: <UserEdit />,
+      },
+      {
+        path: "/dashboard/order_history",
+        element: <History />,
+      },
+      {
+        path: "/dashboard/current_order",
+        element: <CurrentOrder />,
+      },
+      {
+        path: "/dashboard/addReview",
+        element: <AddReview />,
       },
     ],
   },

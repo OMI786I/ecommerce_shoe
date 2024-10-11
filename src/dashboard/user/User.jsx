@@ -12,11 +12,13 @@ const User = () => {
       <div>
         <section className="w-full overflow-hidden dark:bg-gray-900">
           <div className="flex flex-col">
-            <img
-              src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHw5fHxjb3ZlcnxlbnwwfDB8fHwxNzEwNzQxNzY0fDA&ixlib=rb-4.0.3&q=80&w=1080"
-              alt="User Cover"
-              className="w-full xl:h-[20rem] lg:h-[18rem] md:h-[16rem] sm:h-[14rem] xs:h-[11rem]"
-            />
+            <div className="animated-background h-screen bg-gradient-to-r from-blue-500 via-blue-500 to-indigo-500 w-full xl:h-[20rem] lg:h-[18rem] md:h-[16rem] sm:h-[14rem] xs:h-[11rem]">
+              <h1 className="text-3xl text-center my-10 h-full  text-white">
+                Welcome
+              </h1>
+            </div>
+
+            {/**   className="w-full xl:h-[20rem] lg:h-[18rem] md:h-[16rem] sm:h-[14rem] xs:h-[11rem]" */}
             <div className="sm:w-[80%] xs:w-[90%] mx-auto flex">
               <img
                 src={data[0]?.image}

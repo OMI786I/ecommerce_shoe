@@ -64,19 +64,19 @@ const Dashboard = () => {
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/dashboard/history">
+                <NavLink to="/dashboard/order_history">
                   <FaCalendar />
-                  Not History
+                  Order history
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/dashboard/cart">
+                <NavLink to="/dashboard/current_order">
                   <FaShoppingCart />
-                  My Cart ({cart.length})
+                  Current Order
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/dashboard/review">
+                <NavLink to="/dashboard/addReview">
                   <FaAd />
                   Add a Review
                 </NavLink>
@@ -178,19 +178,19 @@ const Dashboard = () => {
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink to="/dashboard/history">
+                    <NavLink to="/dashboard/order_history">
                       <FaCalendar />
-                      Not History
+                      Order History
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink to="/dashboard/cart">
+                    <NavLink to="/dashboard/current_order">
                       <FaShoppingCart />
-                      My Cart ({cart.length})
+                      Current Order
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink to="/dashboard/review">
+                    <NavLink to="/dashboard/addReview">
                       <FaAd />
                       Add a Review
                     </NavLink>
