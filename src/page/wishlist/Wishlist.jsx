@@ -43,6 +43,18 @@ const Wishlist = () => {
     console.log(val);
     setLimit(val);
   };
+
+  const handlePrevPage = () => {
+    if (page > 1) {
+      setPage(page - 1);
+    }
+  };
+  const handleNextPage = () => {
+    if (page < pages.length) {
+      setPage(page + 1);
+    }
+  };
+
   return (
     <div className="">
       <div>
@@ -106,6 +118,9 @@ const Wishlist = () => {
       )}
       <div className="flex justify-center my-2">
         {" "}
+        <button className="btn" onClick={handlePrevPage}>
+          Prev
+        </button>
         {pages.map((page2) => (
           <button
             className={
@@ -117,6 +132,9 @@ const Wishlist = () => {
             {page2 + 1}
           </button>
         ))}
+        <button className="btn" onClick={handleNextPage}>
+          Next
+        </button>
       </div>
     </div>
   );

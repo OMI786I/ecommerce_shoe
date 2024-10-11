@@ -6,28 +6,44 @@ const useCartFetch = () => {
   const { user } = useContext(AuthContext);
   const [price, setPrice] = useState(0);
   const [count2, setCount2] = useState(0);
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(5);
+  const [fetchData, setFetchData] = useState();
+
   const { isPending, error, data, refetch } = useQuery({
-    queryKey: ["repoData"],
+    queryKey: ["repoData", page, limit],
     queryFn: () =>
-      fetch(`http://localhost:5000/cart?email=${user.email}`, {
-        credentials: "include",
-      }).then((res) => res.json()),
+      fetch(
+        `http://localhost:5000/cart?email=${user.email}&page=${page}&limit=${limit}`,
+        {
+          credentials: "include",
+        }
+      ).then((res) => res.json()),
   });
   useEffect(() => {
     if (data) {
-      const totalPrice = data.reduce(
-        (total, item) => total + item.price * item.quantity,
-        0
-      );
+      const totalPrice = data.totalPrice;
+      setFetchData(data.items);
       setPrice(totalPrice);
-      setCount2(data.length);
+      setCount2(data.totalItems);
       console.log(totalPrice);
     }
     if (!user) {
       setCount2(0);
     }
   }, [data, user, price]);
-  return { data, error, isPending, refetch, count2, price };
+  return {
+    fetchData,
+    setPage,
+    setLimit,
+    error,
+    isPending,
+    refetch,
+    count2,
+    price,
+    limit,
+    page,
+  };
 };
 
 export default useCartFetch;

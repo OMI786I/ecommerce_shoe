@@ -8,9 +8,20 @@ import axios from "axios";
 import toast from "react-hot-toast";
 
 const Cart = () => {
-  const { data, price, refetch } = useCartFetch();
+  const {
+    fetchData,
+    setPage,
+    setLimit,
+    error,
+    isPending,
+    refetch,
+    count2,
+    price,
+    limit,
+    page,
+  } = useCartFetch();
   const handleDelete = useWishlistDelete();
-
+  console.log(limit, page);
   const [finalPrice, setFinalPrice] = useState(price);
   console.log(finalPrice);
   const {
@@ -41,12 +52,8 @@ const Cart = () => {
     }
   };
 
-  // useEffect(() => {
-  //   if (data) {
-  //     let totalPrice = data.price * data.quantity;
-  //     setTotalPrice(totalPrice);
-  //   }
-  // }, [data.quantity]);
+  const numberOfPages = Math.ceil(count2 / limit);
+  const pages = [...Array(numberOfPages).keys()];
 
   const handleQuantity = (e, id) => {
     const newQuantity = parseInt(e.target.value, 10);
@@ -67,7 +74,24 @@ const Cart = () => {
       });
   };
 
-  if (!data) {
+  const handlePrevPage = () => {
+    if (page > 1) {
+      setPage(page - 1);
+    }
+  };
+  const handleNextPage = () => {
+    if (page < pages.length) {
+      setPage(page + 1);
+    }
+  };
+
+  const handleItemsPerPage = (e) => {
+    const val = parseInt(e.target.value);
+    console.log(val);
+    setLimit(val);
+  };
+
+  if (!fetchData) {
     return (
       <div className="flex justify-center">
         <span className="loading loading-spinner loading-lg"></span>
@@ -76,9 +100,19 @@ const Cart = () => {
   }
   return (
     <div className="container mx-auto px-4 py-8">
+      <div>
+        <label>Items per page: </label>
+        <select value={limit} onChange={handleItemsPerPage} name="" id="">
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value="20">15</option>
+          <option value="50">20</option>
+        </select>
+      </div>
+
       <div className="bg-gray-100 p-6 rounded-lg shadow-lg mb-">
         <h1 className="text-2xl font-bold mb-4">
-          You have {data.length} items in your cart
+          You have {count2} items in your cart
         </h1>
         <p className="text-gray-500 mb-6">
           Sort items or update quantities as needed.
@@ -86,7 +120,7 @@ const Cart = () => {
       </div>
       <div className="grid grid-cols-2 gap-5 ">
         <div>
-          {data?.map((res) => (
+          {fetchData?.map((res) => (
             <div
               key={res._id}
               className="p-4 rounded-xl bg-white shadow-lg flex flex-col md:flex-row items-center gap-4 transform hover:scale-105 transition duration-300 my-1"
@@ -128,6 +162,25 @@ const Cart = () => {
               </div>
             </div>
           ))}
+          <div className="flex justify-center my-2">
+            <button className="btn" onClick={handlePrevPage}>
+              Prev
+            </button>
+            {pages.map((page2) => (
+              <button
+                className={
+                  page === page2 + 1 ? "btn bg-orange-700" : "btn bg-orange-500"
+                }
+                onClick={() => setPage(page2 + 1)}
+                key={page2}
+              >
+                {page2 + 1}
+              </button>
+            ))}
+            <button className="btn" onClick={handleNextPage}>
+              Next
+            </button>
+          </div>
         </div>
         <div className="bg-white rounded-xl mt-4 shadow-xl">
           {/**Estimated total heading */}
