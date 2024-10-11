@@ -8,7 +8,21 @@ import { Link } from "react-router-dom";
 import useWishList from "../../customHook/useWishList";
 import useCartPost from "../../customHook/useCartPost";
 
-const RightPart = ({ isPending, error, data, refetch, subCategory2 }) => {
+const RightPart = ({
+  isPending,
+  error,
+  data,
+  refetch,
+  subCategory2,
+  sort,
+  limit,
+  page,
+  min,
+  max,
+  setPage,
+  setLimit,
+  setSort,
+}) => {
   const [active, setActive] = useState(false);
   const [activeCard, setActiveCard] = useState(false);
   const handleClickCard = () => {
@@ -27,6 +41,33 @@ const RightPart = ({ isPending, error, data, refetch, subCategory2 }) => {
   };
 
   console.log(activeCard, active);
+
+  const handleItemsPerPage = (e) => {
+    const val = parseInt(e.target.value);
+    console.log(val);
+    setLimit(val);
+  };
+
+  const handleSort = (e) => {
+    const sort = e.target.value;
+    console.log(sort);
+    setSort(sort);
+  };
+
+  const numberOfPages = Math.ceil(data.totalDocuments / limit);
+
+  const pages = [...Array(numberOfPages).keys()];
+
+  const handlePrevPage = () => {
+    if (page > 1) {
+      setPage(page - 1);
+    }
+  };
+  const handleNextPage = () => {
+    if (page < pages.length) {
+      setPage(page + 1);
+    }
+  };
 
   if (isPending) {
     <div className="flex justify-center items-center">
@@ -47,15 +88,31 @@ const RightPart = ({ isPending, error, data, refetch, subCategory2 }) => {
               {" "}
               <AiOutlineBars className="text-xl hover:text-red-600  " />
             </button>
-            There are products {data.length}
+            There are products {data.totalDocuments}
           </div>
           <div className="navbar-center  lg:flex"></div>
-          <div className="navbar-end">sort by:</div>
+          <div>
+            <label>Sort by: </label>
+            <select value={sort} onChange={handleSort} name="" id="">
+              <option value="">Relevant</option>
+              <option value="asc">Asc by price</option>
+              <option value="desc">Dsc by price</option>
+            </select>
+          </div>
+          <div>
+            <label>Items per page: </label>
+            <select value={limit} onChange={handleItemsPerPage} name="" id="">
+              <option value="5">5</option>
+              <option value="10">10</option>
+              <option value="20">20</option>
+              <option value="50">50</option>
+            </select>
+          </div>
         </div>
         <div>
           <div className="grid grid-cols-1 gap-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {data
-              ? data.map((res) => (
+              ? data.result.map((res) => (
                   <div key={res._id} className="group  relative">
                     <div className="inline-block">
                       {/** card */}
@@ -138,6 +195,26 @@ const RightPart = ({ isPending, error, data, refetch, subCategory2 }) => {
                   </div>
                 ))
               : "loading..."}
+          </div>
+          <div className="flex justify-center my-2">
+            {" "}
+            <button className="btn" onClick={handlePrevPage}>
+              Prev
+            </button>
+            {pages.map((page2) => (
+              <button
+                className={
+                  page === page2 + 1 ? "btn bg-orange-700" : "btn bg-orange-500"
+                }
+                onClick={() => setPage(page2 + 1)}
+                key={page2}
+              >
+                {page2 + 1}
+              </button>
+            ))}
+            <button className="btn" onClick={handleNextPage}>
+              Next
+            </button>
           </div>
         </div>
       </div>

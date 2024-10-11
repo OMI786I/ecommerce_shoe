@@ -10,17 +10,24 @@ const Products = () => {
   const [category, setCategory] = useState("shoes and bags");
   const [product, setProduct] = useState("men");
   const [subCategory2, setSubCategory] = useState("");
+  const [page3, setPage] = useState(1);
+  const [limit2, setLimit] = useState(10);
+  const [sort2, setSort] = useState("");
   let [price, setPrice] = useState({
     min: 0,
     max: 1000,
   });
   console.log(price);
-  const { isPending, error, data, refetch } = usePublicFetch({
-    endPoint: subCategory2,
-    query: product,
-    min: price.min,
-    max: price.max,
-  });
+  const { isPending, error, data, refetch, sort, limit, page, min, max } =
+    usePublicFetch({
+      endPoint: subCategory2,
+      query: product,
+      min: price.min,
+      max: price.max,
+      sort: sort2,
+      page: page3,
+      limit: limit2,
+    });
   console.log(link, product, subCategory2);
 
   useEffect(() => {
@@ -108,6 +115,14 @@ const Products = () => {
             data={data}
             refetch={refetch}
             subCategory2={subCategory2}
+            sort={sort}
+            limit={limit}
+            page={page}
+            min={min}
+            max={max}
+            setPage={setPage}
+            setLimit={setLimit}
+            setSort={setSort}
           />
         </div>
       </div>
