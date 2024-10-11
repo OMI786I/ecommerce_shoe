@@ -276,7 +276,7 @@ const Navbar = () => {
 
                 <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
                   <li>
-                    <Link to={"/dashboard"}>
+                    <Link to={"/dashboard/user"}>
                       <button className="flex items-center gap-2">
                         <RxDashboard />
                         My Account

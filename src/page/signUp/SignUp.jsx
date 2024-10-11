@@ -53,6 +53,7 @@ const SignUp = () => {
       email: data.email,
       password: data.password,
       image: imageSubmit,
+      role: "user",
     };
     console.log(toSendData);
 

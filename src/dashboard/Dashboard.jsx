@@ -14,7 +14,7 @@ import { FiPackage } from "react-icons/fi";
 import { NavLink, Outlet } from "react-router-dom";
 
 const Dashboard = () => {
-  const isAdmin = true; // Change this based on user role
+  const isAdmin = false; // Change this based on user role
   const cart = []; // Assuming cart is fetched somewhere in the actual code
 
   return (
@@ -58,7 +58,7 @@ const Dashboard = () => {
           ) : (
             <>
               <li>
-                <NavLink to="/dashboard/userHome">
+                <NavLink to="/dashboard/user">
                   <FaHome />
                   User Home
                 </NavLink>

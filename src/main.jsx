@@ -21,7 +21,7 @@ import Wishlist from "./page/wishlist/Wishlist";
 import PrivateRoute from "./provider/PrivareRoute";
 import Cart from "./page/cart/Cart";
 import Dashboard from "./dashboard/Dashboard";
-import User from "./dashboard/User";
+import User from "./dashboard/user/User";
 
 const queryClient = new QueryClient();
 const router = createBrowserRouter([
