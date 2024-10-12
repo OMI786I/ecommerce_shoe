@@ -1,8 +1,13 @@
-import React from "react";
+import axios from "axios";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import { AuthContext } from "../../provider/AuthProvider";
+import Swal from "sweetalert2";
 
 const AddReview = () => {
+  const { user } = useContext(AuthContext);
+  const email = user.email;
   const {
     register,
     handleSubmit,
@@ -12,8 +17,34 @@ const AddReview = () => {
 
   const onSubmit = (data) => {
     console.log(data);
-
-    toast.success("Review submitted successfully!");
+    const submitData = {
+      ...data,
+      email,
+    };
+    axios
+      .post("http://localhost:5000/review", submitData)
+      .then((response) => {
+        if (response.data.insertedId) {
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Your review has been saved",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+        console.log(response);
+      })
+      .catch((error) => {
+        Swal.fire({
+          position: "top-end",
+          icon: "error",
+          title: "Your review has not been saved",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        console.log(error);
+      });
 
     reset();
   };
