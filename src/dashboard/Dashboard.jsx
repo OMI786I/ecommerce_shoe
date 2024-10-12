@@ -76,7 +76,7 @@ const Dashboard = () => {
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/dashboard/addReview">
+                <NavLink to="/dashboard/review">
                   <FaAd />
                   Add a Review
                 </NavLink>
@@ -190,7 +190,7 @@ const Dashboard = () => {
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink to="/dashboard/addReview">
+                    <NavLink to="/dashboard/review">
                       <FaAd />
                       Add a Review
                     </NavLink>

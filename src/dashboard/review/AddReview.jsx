@@ -4,9 +4,11 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { AuthContext } from "../../provider/AuthProvider";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const AddReview = () => {
   const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
   const email = user.email;
   const {
     register,
@@ -32,6 +34,7 @@ const AddReview = () => {
             showConfirmButton: false,
             timer: 1500,
           });
+          navigate("/dashboard/review");
         }
         console.log(response);
       })

@@ -26,6 +26,7 @@ import UserEdit from "./dashboard/user/UserEdit";
 import History from "./dashboard/history/History";
 import CurrentOrder from "./dashboard/current_order/CurrentOrder";
 import AddReview from "./dashboard/review/AddReview";
+import Review from "./dashboard/review/Review";
 
 const queryClient = new QueryClient();
 const router = createBrowserRouter([
@@ -108,6 +109,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/current_order",
         element: <CurrentOrder />,
+      },
+      {
+        path: "/dashboard/review",
+        element: <Review />,
       },
       {
         path: "/dashboard/addReview",
