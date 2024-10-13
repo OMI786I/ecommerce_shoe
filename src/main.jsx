@@ -27,6 +27,7 @@ import History from "./dashboard/history/History";
 import CurrentOrder from "./dashboard/current_order/CurrentOrder";
 import AddReview from "./dashboard/review/AddReview";
 import Review from "./dashboard/review/Review";
+import AllUsers from "./dashboard/All_user/AllUsers";
 
 const queryClient = new QueryClient();
 const router = createBrowserRouter([
@@ -117,6 +118,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/addReview",
         element: <AddReview />,
+      },
+      {
+        path: "/dashboard/users",
+        element: <AllUsers />,
       },
     ],
   },

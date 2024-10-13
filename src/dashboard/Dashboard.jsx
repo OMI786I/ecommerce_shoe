@@ -14,8 +14,7 @@ import { FiPackage } from "react-icons/fi";
 import { NavLink, Outlet } from "react-router-dom";
 
 const Dashboard = () => {
-  const isAdmin = false; // Change this based on user role
-  const cart = []; // Assuming cart is fetched somewhere in the actual code
+  const isAdmin = true; // Change this based on user role
 
   return (
     <div className="flex">
