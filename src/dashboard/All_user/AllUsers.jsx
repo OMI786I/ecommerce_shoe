@@ -7,7 +7,9 @@ const AllUsers = () => {
   const { isPending, error, data, refetch } = useQuery({
     queryKey: ["repoData"],
     queryFn: () =>
-      fetch("http://localhost:5000/user").then((res) => res.json()),
+      fetch("http://localhost:5000/user", {
+        credentials: "include",
+      }).then((res) => res.json()),
   });
   console.log(data);
 
@@ -19,37 +21,6 @@ const AllUsers = () => {
     );
 
   if (error) return "An error has occurred: " + error.message;
-
-  const handleStatus = (id, status) => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: `Yes, Make  ${status}`,
-    }).then((result) => {
-      if (result.isConfirmed) {
-        axios
-          .patch(
-            `https://b9a12-server-side-omi-786-i.vercel.app/donor/admin/${id}`,
-            { status: status }
-          )
-          .then((res) => {
-            console.log(res);
-            if (res.data.modifiedCount > 0) {
-              refetch();
-              Swal.fire({
-                title: `Made ${status}!`,
-                text: `User is Successfully made ${status}.`,
-                icon: "success",
-              });
-            } else toast.error("There was an error");
-          });
-      }
-    });
-  };
 
   const handleRole = (id, roleName) => {
     Swal.fire({
@@ -122,7 +93,7 @@ const AllUsers = () => {
                     <br />
                   </td>
                   <td>{res.name}</td>
-                  <th>{res.role ? res.role : "donor"}</th>
+                  <th>{res.role}</th>
                   <th>{res.status}</th>
                   <th>
                     {res.status === "active" ? (

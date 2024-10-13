@@ -12,10 +12,11 @@ import {
 } from "react-icons/fa";
 import { FiPackage } from "react-icons/fi";
 import { NavLink, Outlet } from "react-router-dom";
+import useAdmin from "../customHook/useAdmin";
 
 const Dashboard = () => {
-  const isAdmin = true; // Change this based on user role
-
+  const [isAdmin] = useAdmin(); // Change this based on user role
+  console.log(isAdmin);
   return (
     <div className="flex">
       {/* Sidebar for larger devices */}

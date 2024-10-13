@@ -165,7 +165,9 @@ const Navbar = () => {
   useEffect(() => {
     if (user) {
       axios
-        .get(`http://localhost:5000/user?email=${user.email}`)
+        .get(`http://localhost:5000/user?email=${user.email}`, {
+          withCredentials: true,
+        })
         .then((data) => {
           setUserData(data.data);
         })

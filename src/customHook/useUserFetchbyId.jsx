@@ -8,7 +8,9 @@ const useUserFetchbyId = (id) => {
   const { isPending, error, data, refetch } = useQuery({
     queryKey: ["wishlist", user?.email],
     queryFn: () =>
-      fetch(`http://localhost:5000/user/${id}`).then((res) => res.json()),
+      fetch(`http://localhost:5000/user/${id}`, {
+        credentials: "include",
+      }).then((res) => res.json()),
   });
 
   return { isPending, error, data, refetch };
