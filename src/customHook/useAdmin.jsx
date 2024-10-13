@@ -7,7 +7,7 @@ const useAdmin = () => {
   const { user } = useContext(AuthContext);
   // /user/admin/:email
   const {
-    isPending,
+    isPending: isAdminLoading,
     error,
     data: isAdmin,
   } = useQuery({
@@ -24,7 +24,7 @@ const useAdmin = () => {
   });
   //`http://localhost:5000/user/admin/${user.email}`
   console.log(isAdmin);
-  return [isAdmin];
+  return [isAdmin, isAdminLoading];
 };
 
 export default useAdmin;

@@ -34,7 +34,13 @@ const AllUsers = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .patch(`http://localhost:5000/user/admin/${id}`, { role: roleName })
+          .patch(
+            `http://localhost:5000/user/admin/${id}`,
+            { role: roleName },
+            {
+              withCredentials: true,
+            }
+          )
           .then((res) => {
             console.log(res);
             if (res.data.modifiedCount > 0) {
@@ -64,11 +70,6 @@ const AllUsers = () => {
                 <th>User Email</th>
                 <th>User Name</th>
                 <th>User Role</th>
-                <th>User status</th>
-                <th>{/**block/unblock button */}</th>
-                <th>{/**make volunteer */}</th>
-                <th>{/**make admin */}</th>
-                <th></th>
               </tr>
             </thead>
             <tbody>
@@ -95,40 +96,7 @@ const AllUsers = () => {
                   <td>{res.name}</td>
                   <th>{res.role}</th>
                   <th>{res.status}</th>
-                  <th>
-                    {res.status === "active" ? (
-                      <button
-                        className="btn btn-neutral mx-3"
-                        onClick={() => handleStatus(res._id, "blocked")}
-                      >
-                        Block
-                      </button>
-                    ) : (
-                      <button
-                        className="btn btn-neutral mx-3"
-                        onClick={() => handleStatus(res._id, "active")}
-                      >
-                        Unblock
-                      </button>
-                    )}
-                  </th>
-                  <th>
-                    {res.role === "volunteer" ? (
-                      <button
-                        onClick={() => handleRole(res._id, "")}
-                        className="btn btn-neutral mx-3"
-                      >
-                        Un Volunteer
-                      </button>
-                    ) : (
-                      <button
-                        onClick={() => handleRole(res._id, "volunteer")}
-                        className="btn btn-neutral mx-3"
-                      >
-                        Make volunteer
-                      </button>
-                    )}
-                  </th>
+
                   <th>
                     {res.role === "admin" ? (
                       <button
