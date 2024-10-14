@@ -3,12 +3,37 @@ import { Link } from "react-router-dom";
 import { FaEdit, FaUser } from "react-icons/fa";
 import useUserFetch from "../../customHook/useUserFetch";
 import { MdManageAccounts, MdNoAccounts } from "react-icons/md";
+import axios from "axios";
 const AdminUser = () => {
   const { isPending, error, data, refetch } = useUserFetch();
 
   const [avatClicked, setAvatarClicked] = useState(false);
+  const [totalProduct, setTotalProduct] = useState(0);
+  const [totalUser, setTotalUser] = useState(0);
   console.log(avatClicked);
   console.log(data);
+
+  //const res = axios.get("http://localhost:5000/count");
+
+  axios
+    .get("http://localhost:5000/user", {
+      withCredentials: true,
+    })
+    .then((res) => {
+      setTotalUser(res.data.length);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+
+  axios
+    .get("http://localhost:5000/count")
+    .then(function (response) {
+      setTotalProduct(response.data.totalProducts);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
 
   if (!data) {
     return (
@@ -82,13 +107,13 @@ const AdminUser = () => {
           <div className="card bg-accent text-accent-content">
             <div className="card-body">
               <h2 className="card-title">Customers</h2>
-              <p>102</p>
+              <p>{totalUser}</p>
             </div>
           </div>
           <div className="card bg-neutral text-neutral-content">
             <div className="card-body">
               <h2 className="card-title">Products</h2>
-              <p>84</p>
+              <p>{totalProduct}</p>
             </div>
           </div>
         </div>

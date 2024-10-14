@@ -30,6 +30,7 @@ import Review from "./dashboard/review/Review";
 import AllUsers from "./dashboard/All_user/AllUsers";
 import AdminRoute from "./provider/AdminRoute";
 import AdminUser from "./dashboard/user/AdminUser";
+import ManageItems from "./dashboard/ManageItems/ManageItems";
 
 const queryClient = new QueryClient();
 const router = createBrowserRouter([
@@ -110,6 +111,14 @@ const router = createBrowserRouter([
         element: (
           <AdminRoute>
             <AdminUser />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "/dashboard/manageItems",
+        element: (
+          <AdminRoute>
+            <ManageItems />
           </AdminRoute>
         ),
       },

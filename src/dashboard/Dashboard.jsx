@@ -30,12 +30,7 @@ const Dashboard = () => {
                   Admin Home
                 </NavLink>
               </li>
-              <li>
-                <NavLink to="/dashboard/addItems">
-                  <FaShoePrints />
-                  Add Items
-                </NavLink>
-              </li>
+
               <li>
                 <NavLink to="/dashboard/manageItems">
                   <FaList />
@@ -144,12 +139,7 @@ const Dashboard = () => {
                       Admin Home
                     </NavLink>
                   </li>
-                  <li>
-                    <NavLink to="/dashboard/addItems">
-                      <FaShoePrints />
-                      Add Items
-                    </NavLink>
-                  </li>
+
                   <li>
                     <NavLink to="/dashboard/manageItems">
                       <FaList />
