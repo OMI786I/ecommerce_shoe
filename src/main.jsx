@@ -28,6 +28,8 @@ import CurrentOrder from "./dashboard/current_order/CurrentOrder";
 import AddReview from "./dashboard/review/AddReview";
 import Review from "./dashboard/review/Review";
 import AllUsers from "./dashboard/All_user/AllUsers";
+import AdminRoute from "./provider/AdminRoute";
+import AdminUser from "./dashboard/user/AdminUser";
 
 const queryClient = new QueryClient();
 const router = createBrowserRouter([
@@ -93,11 +95,23 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <Dashboard></Dashboard>,
+    element: (
+      <PrivateRoute>
+        <Dashboard></Dashboard>
+      </PrivateRoute>
+    ),
     children: [
       {
         path: "/dashboard/user",
         element: <User />,
+      },
+      {
+        path: "/dashboard/adminHome",
+        element: (
+          <AdminRoute>
+            <AdminUser />
+          </AdminRoute>
+        ),
       },
       {
         path: "/dashboard//edit/:id",
@@ -121,7 +135,12 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard/users",
-        element: <AllUsers />,
+        element: (
+          <AdminRoute>
+            {" "}
+            <AllUsers />
+          </AdminRoute>
+        ),
       },
     ],
   },

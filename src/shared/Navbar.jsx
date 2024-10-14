@@ -14,11 +14,13 @@ import { useQuery } from "@tanstack/react-query";
 import useWishListFetch from "../customHook/useWishListFetch";
 import axios from "axios";
 import useCartFetch from "../customHook/useCartFetch";
+import useAdmin from "../customHook/useAdmin";
 const Navbar = () => {
   const { user, logout } = useContext(AuthContext);
   const { count, refetch } = useWishListFetch();
   const { count2, price } = useCartFetch();
   const [userData, setUserData] = useState();
+  const [isAdmin] = useAdmin();
   const navLink = (
     <div className="flex-row  md:flex-col gap-6  ">
       <NavLink to="/">
@@ -278,12 +280,22 @@ const Navbar = () => {
 
                 <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
                   <li>
-                    <Link to={"/dashboard/user"}>
-                      <button className="flex items-center gap-2">
-                        <RxDashboard />
-                        My Account
-                      </button>
-                    </Link>
+                    {isAdmin ? (
+                      <Link to={"/dashboard/adminHome"}>
+                        <button className="flex items-center gap-2">
+                          <RxDashboard />
+                          My Account
+                        </button>
+                      </Link>
+                    ) : (
+                      <Link to={"/dashboard/user"}>
+                        <button className="flex items-center gap-2">
+                          <RxDashboard />
+                          My Account
+                        </button>
+                      </Link>
+                    )}
+
                     <Link to={"/checkout"}>
                       <button className="flex items-center gap-2">
                         <MdOutlineShoppingCartCheckout />
