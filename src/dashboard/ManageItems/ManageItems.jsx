@@ -11,9 +11,48 @@ const ManageItems = () => {
   });
   console.log(data);
   return (
-    <div>
+    <div className="flex justify-center gap-5 ">
       {/**products */}
-      <div></div>
+      <div>
+        <h1 className="text-xl font-bold text-center">products</h1>
+        <div className="overflow-x-auto">
+          <table className="table">
+            {/* head */}
+            <thead>
+              <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Type</th>
+                <th>
+                  <button className="btn btn-sm btn-success text-white">
+                    Add Product
+                  </button>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {/* row 1 */}
+
+              {data ? (
+                data.result.map((res, index) => (
+                  <tr key={res._id} className="bg-base-200">
+                    <th>{index + 1}</th>
+                    <td>{res.title}</td>
+                    <td>{res.type}</td>
+                    <td>
+                      <button className="btn btn-sm text-white btn-error">
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <span className="loading loading-spinner loading-lg"></span>
+              )}
+            </tbody>
+          </table>
+        </div>
+      </div>
 
       {/**category */}
       <div>
