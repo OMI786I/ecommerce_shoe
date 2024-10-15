@@ -5,20 +5,28 @@ import { TbShoe } from "react-icons/tb";
 import useAdminViewProducts from "../../customHook/useAdminViewProducts";
 import axios from "axios";
 import ProductForm from "./ProductForm";
+import { Toaster } from "react-hot-toast";
 
 const ManageItems = () => {
   const modalRef = useRef(null); // Create a ref for the modal
   const [category, setCategory] = useState("shoes");
-
+  const [limit, setLimit] = useState(10);
+  const handleItemsPerPage = (e) => {
+    const val = parseInt(e.target.value);
+    console.log(val);
+    setLimit(val);
+  };
   const { data, isPending, error, refetch } = useAdminViewProducts({
     endPoint: category,
+    limit: limit,
   });
-
+  const type = data?.type;
   return (
     <div className="flex justify-center gap-5 ">
-      <dialog id="my_modal_1" ref={modalRef} className="modal">
+      <Toaster />
+      <dialog id="my_modal_1" ref={modalRef} className="modal -z-10">
         <div className="modal-box">
-          <ProductForm />
+          <ProductForm type={type} category={category} refetch={refetch} />
           <div className="modal-action">
             <form method="dialog">
               <button className="btn">Close</button>
@@ -29,12 +37,26 @@ const ManageItems = () => {
 
       <div>
         <h1 className="text-xl font-bold text-center">products</h1>
+
+        <select
+          onChange={handleItemsPerPage}
+          id="countries"
+          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        >
+          <option selected>number of products</option>
+          <option value="5">5</option>
+          <option value="20">20</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+        </select>
+
         <div className="overflow-x-auto">
           <table className="table">
             <thead>
               <tr>
                 <th></th>
                 <th></th>
+
                 <th>Name</th>
                 <th>Type</th>
                 <th>
@@ -42,14 +64,14 @@ const ManageItems = () => {
                     className="btn btn-success text-white"
                     onClick={() => modalRef.current.showModal()} // Open modal using the ref
                   >
-                    open modal
+                    Add product
                   </button>
                 </th>
               </tr>
             </thead>
             <tbody>
               {data ? (
-                data.result.map((res, index) => (
+                data?.result?.map((res, index) => (
                   <tr key={res._id} className="bg-base-200">
                     <th>{index + 1}</th>
                     <td>

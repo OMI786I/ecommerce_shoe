@@ -68,3 +68,6 @@
     background-position: 100% 50%;
   }
 }
+#toast-container {
+  z-index: 9999 !important;
+}
