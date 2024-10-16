@@ -6,6 +6,7 @@ import useAdminViewProducts from "../../customHook/useAdminViewProducts";
 import axios from "axios";
 import ProductForm from "./ProductForm";
 import { Toaster } from "react-hot-toast";
+import Swal from "sweetalert2";
 
 const ManageItems = () => {
   const modalRef = useRef(null); // Create a ref for the modal
@@ -16,11 +17,45 @@ const ManageItems = () => {
     console.log(val);
     setLimit(val);
   };
+
   const { data, isPending, error, refetch } = useAdminViewProducts({
     endPoint: category,
     limit: limit,
   });
   const type = data?.type;
+
+  const handleDelete = (id) => {
+    console.log(id);
+
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .delete(`http://localhost:5000/${category}/${id}`, {
+            withCredentials: true,
+          })
+          .then((res) => {
+            refetch();
+            if (res.data.deletedCount > 0) {
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your file has been deleted.",
+                icon: "success",
+              });
+            }
+          })
+          .catch((err) => console.log(err));
+      }
+    });
+  };
+
   return (
     <div className="flex justify-center gap-5 ">
       <Toaster />
@@ -80,7 +115,10 @@ const ManageItems = () => {
                     <td>{res.title}</td>
                     <td>{res.type}</td>
                     <td>
-                      <button className="btn btn-sm text-white btn-error">
+                      <button
+                        onClick={() => handleDelete(res._id)}
+                        className="btn btn-sm text-white btn-error"
+                      >
                         Delete
                       </button>
                     </td>

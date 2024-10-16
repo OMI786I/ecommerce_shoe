@@ -8,7 +8,7 @@ import toast, { Toaster } from "react-hot-toast";
 const ProductForm = ({ category, type, refetch }) => {
   const [imageValue, setImageValue] = useState();
   const [loading, setLoading] = useState(false);
-
+  console.log(type);
   const {
     register,
     handleSubmit,
@@ -65,7 +65,9 @@ const ProductForm = ({ category, type, refetch }) => {
 
     if (imageSubmit) {
       axios
-        .post(`http://localhost:5000/${category}`, toSendData)
+        .post(`http://localhost:5000/${category}`, toSendData, {
+          withCredentials: true,
+        })
         .then(function (response) {
           setLoading(false);
           console.log(response);
@@ -237,10 +239,13 @@ const ProductForm = ({ category, type, refetch }) => {
         <select
           id="countries"
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          {...register("type")}
         >
-          <option selected>Choose a Category</option>
+          <option selected disabled value={""}>
+            Choose a Category
+          </option>
           {type?.map((res) => (
-            <option {...register("type")} value={res}>
+            <option key={res} value={res}>
               {res}
             </option>
           ))}
