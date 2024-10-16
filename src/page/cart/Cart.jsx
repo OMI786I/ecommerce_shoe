@@ -20,6 +20,17 @@ const Cart = () => {
     limit,
     page,
   } = useCartFetch();
+
+  const handlePayment = () => {
+    axios
+      .post("http://localhost:5000/create-payment", {
+        money: 10000,
+        currency: "USD",
+      })
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  };
+
   const handleDelete = useWishlistDelete();
   console.log(limit, page);
   const [finalPrice, setFinalPrice] = useState(price);
@@ -214,7 +225,10 @@ const Cart = () => {
       </div>
 
       <div className="mt-8 flex justify-end">
-        <button className="bg-blue-600 text-white px-6 py-2 rounded-lg shadow-lg hover:bg-blue-500 transition-colors">
+        <button
+          onClick={handlePayment}
+          className="bg-blue-600 text-white px-6 py-2 rounded-lg shadow-lg hover:bg-blue-500 transition-colors"
+        >
           Proceed to Checkout
         </button>
       </div>
