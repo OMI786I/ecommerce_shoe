@@ -6,8 +6,13 @@ import Swal from "sweetalert2";
 import useWishlistDelete from "../../customHook/useWishlistDelete";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import useUserFetch from "../../customHook/useUserFetch";
 
 const Cart = () => {
+  const navigate = useNavigate();
+  const { data } = useUserFetch();
+  console.log(data);
   const {
     fetchData,
     setPage,
@@ -20,20 +25,26 @@ const Cart = () => {
     limit,
     page,
   } = useCartFetch();
-
+  const [finalPrice, setFinalPrice] = useState(price);
   const handlePayment = () => {
     axios
       .post("http://localhost:5000/create-payment", {
-        money: 10000,
+        name: data[0].name,
+        email: data[0].email,
+        money: finalPrice,
         currency: "USD",
+        products: fetchData,
       })
-      .then((res) => console.log(res))
+      .then((res) => {
+        console.log(res.data.payment_url);
+        window.location.href = res.data.payment_url;
+      })
       .catch((err) => console.log(err));
   };
 
   const handleDelete = useWishlistDelete();
   console.log(limit, page);
-  const [finalPrice, setFinalPrice] = useState(price);
+
   console.log(finalPrice);
   const {
     register,
