@@ -55,7 +55,7 @@ const UserEdit = () => {
         dob: data.dob,
         gender: data.gender,
         phone: data.phone,
-        website: data.website,
+
         location: data.location,
       });
     }
@@ -141,22 +141,6 @@ const UserEdit = () => {
             />
             {errors.phone && (
               <span className="text-red-600">{errors.phone.message}</span>
-            )}
-          </div>
-
-          {/* Website field */}
-          <div className="form-control mb-4">
-            <label className="label">
-              <span className="label-text">Website</span>
-            </label>
-            <input
-              type="text"
-              {...register("website", { required: "Website is required" })}
-              placeholder="https://example.com"
-              className="input input-bordered"
-            />
-            {errors.website && (
-              <span className="text-red-600">{errors.website.message}</span>
             )}
           </div>
 

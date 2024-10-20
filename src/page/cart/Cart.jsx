@@ -10,22 +10,13 @@ import { useNavigate } from "react-router-dom";
 import useUserFetch from "../../customHook/useUserFetch";
 
 const Cart = () => {
-  const navigate = useNavigate();
-  const { data } = useUserFetch();
+  const { data, isPending } = useUserFetch();
   console.log(data);
-  const {
-    fetchData,
-    setPage,
-    setLimit,
-    error,
-    isPending,
-    refetch,
-    count2,
-    price,
-    limit,
-    page,
-  } = useCartFetch();
+  const { fetchData, setPage, setLimit, refetch, count2, price, limit, page } =
+    useCartFetch();
   const [finalPrice, setFinalPrice] = useState(price);
+  const [productQuantity, setProductQuantity] = useState(1);
+  const [loading, setLoading] = useState(true);
   const handlePayment = () => {
     axios
       .post(
@@ -36,6 +27,8 @@ const Cart = () => {
           money: finalPrice,
           currency: "USD",
           products: fetchData,
+          quantity: productQuantity,
+          location: data[0].location,
         },
         {
           withCredentials: true,
@@ -87,6 +80,7 @@ const Cart = () => {
     const newQuantity = parseInt(e.target.value, 10);
     console.log("New quantity for item with id", id, "is", newQuantity);
     const quantity = { quantity: newQuantity };
+    setProductQuantity(quantity);
     axios
       .patch(`http://localhost:5000/cart/${id}`, quantity, {
         withCredentials: true,
@@ -118,6 +112,12 @@ const Cart = () => {
     console.log(val);
     setLimit(val);
   };
+
+  useEffect(() => {
+    if (data && data.length > 0) {
+      setLoading(false); // Set loading to false when data is available
+    }
+  }, [data]);
 
   if (!fetchData) {
     return (
@@ -242,12 +242,23 @@ const Cart = () => {
       </div>
 
       <div className="mt-8 flex justify-end">
-        <button
-          onClick={handlePayment}
-          className="bg-blue-600 text-white px-6 py-2 rounded-lg shadow-lg hover:bg-blue-500 transition-colors"
-        >
-          Proceed to Checkout
-        </button>
+        {loading ? (
+          <div className="flex justify-center">
+            <span className="loading loading-spinner loading-lg"></span>
+          </div>
+        ) : data[0]?.location && fetchData?.length > 0 ? (
+          <button
+            onClick={handlePayment}
+            className="bg-blue-600 text-white px-6 py-2 rounded-lg shadow-lg hover:bg-blue-500 transition-colors"
+          >
+            Proceed to Checkout
+          </button>
+        ) : (
+          <p className="text-red-600">
+            {" "}
+            Add your address and add products in the cart
+          </p>
+        )}
       </div>
     </div>
   );
