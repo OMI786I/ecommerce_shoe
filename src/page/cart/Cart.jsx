@@ -28,13 +28,19 @@ const Cart = () => {
   const [finalPrice, setFinalPrice] = useState(price);
   const handlePayment = () => {
     axios
-      .post("http://localhost:5000/create-payment", {
-        name: data[0].name,
-        email: data[0].email,
-        money: finalPrice,
-        currency: "USD",
-        products: fetchData,
-      })
+      .post(
+        "http://localhost:5000/create-payment",
+        {
+          name: data[0].name,
+          email: data[0].email,
+          money: finalPrice,
+          currency: "USD",
+          products: fetchData,
+        },
+        {
+          withCredentials: true,
+        }
+      )
       .then((res) => {
         console.log(res.data.payment_url);
         window.location.href = res.data.payment_url;

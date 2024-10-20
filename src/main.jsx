@@ -31,6 +31,9 @@ import AllUsers from "./dashboard/All_user/AllUsers";
 import AdminRoute from "./provider/AdminRoute";
 import AdminUser from "./dashboard/user/AdminUser";
 import ManageItems from "./dashboard/ManageItems/ManageItems";
+import Cancel from "./paymentStatus/Cancel";
+import Error from "./paymentStatus/Error";
+import Success from "./paymentStatus/Success";
 
 const queryClient = new QueryClient();
 const router = createBrowserRouter([
@@ -75,6 +78,18 @@ const router = createBrowserRouter([
       {
         path: "/accessories",
         element: <Accessories />,
+      },
+      {
+        path: "/cancel",
+        element: <Cancel />,
+      },
+      {
+        path: "/error",
+        element: <Error />,
+      },
+      {
+        path: "/success/:id",
+        element: <Success />,
       },
       {
         path: "/wishlist",
