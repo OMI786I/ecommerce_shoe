@@ -3,7 +3,7 @@ import useOrderFetch from "../../customHook/useOrderFetch";
 
 const CurrentOrder = () => {
   const { orderData, isPending, error } = useOrderFetch();
-  console.log(orderData);
+  const steps = ["Order Placed", "Pick up Order", "On route", "Received"];
 
   return (
     <div>
@@ -45,7 +45,20 @@ const CurrentOrder = () => {
           {/* Progress Bar for Order Status */}
           <div className="mb-5">
             <h3 className="text-lg font-semibold mb-4">Order Status</h3>
-            <ul className="steps steps-vertical lg:steps-horizontal"></ul>
+            <ul className="steps">
+              {" "}
+              {steps.map((response, num) => (
+                <React.Fragment key={num}>
+                  <li
+                    className={`step ${
+                      num === res.order_stepper ? `step-primary` : ""
+                    } `}
+                  >
+                    {response}
+                  </li>
+                </React.Fragment>
+              ))}
+            </ul>
           </div>
 
           {/* Update status */}
