@@ -38,7 +38,7 @@ const Dashboard = () => {
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/dashboard/bookings">
+                <NavLink to="/dashboard/manageOrders">
                   <FiPackage />
                   Manage Orders
                 </NavLink>
@@ -74,12 +74,6 @@ const Dashboard = () => {
                 <NavLink to="/dashboard/review">
                   <FaAd />
                   Add a Review
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/dashboard/paymentHistory">
-                  <FaList />
-                  Real Payment History
                 </NavLink>
               </li>
             </>
@@ -147,7 +141,7 @@ const Dashboard = () => {
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink to="/dashboard/bookings">
+                    <NavLink to="/dashboard/manageOrders">
                       <FiPackage />
                       Manage Orders
                     </NavLink>
@@ -183,12 +177,6 @@ const Dashboard = () => {
                     <NavLink to="/dashboard/review">
                       <FaAd />
                       Add a Review
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink to="/dashboard/paymentHistory">
-                      <FaList />
-                      Real Payment History
                     </NavLink>
                   </li>
                 </>

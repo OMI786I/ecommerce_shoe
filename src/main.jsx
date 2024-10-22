@@ -34,6 +34,8 @@ import ManageItems from "./dashboard/ManageItems/ManageItems";
 import Cancel from "./paymentStatus/Cancel";
 import Error from "./paymentStatus/Error";
 import Success from "./paymentStatus/Success";
+import ManagerOrders from "./dashboard/ManageOrders/ManagerOrders";
+import ManagerOrderDetails from "./dashboard/ManageOrders/ManagerOrderDetails";
 
 const queryClient = new QueryClient();
 const router = createBrowserRouter([
@@ -163,6 +165,24 @@ const router = createBrowserRouter([
           <AdminRoute>
             {" "}
             <AllUsers />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "/dashboard/manageOrders",
+        element: (
+          <AdminRoute>
+            {" "}
+            <ManagerOrders />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "/dashboard/manageOrders/:id",
+        element: (
+          <AdminRoute>
+            {" "}
+            <ManagerOrderDetails />
           </AdminRoute>
         ),
       },

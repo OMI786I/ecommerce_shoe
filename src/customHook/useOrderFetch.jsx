@@ -1,6 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 import useUserFetch from "./useUserFetch";
-import { useState } from "react";
 
 const useOrderFetch = () => {
   const { data } = useUserFetch();
@@ -11,9 +10,9 @@ const useOrderFetch = () => {
   } = useQuery({
     queryKey: ["repoData", data?.[0]?.email],
     queryFn: () =>
-      fetch(`http://localhost:5000/order?email=${data[0]?.email}`).then((res) =>
-        res.json()
-      ),
+      fetch(`http://localhost:5000/order?email=${data[0]?.email}`, {
+        credentials: "include",
+      }).then((res) => res.json()),
   });
 
   return { orderData, isPending, error };
