@@ -1,30 +1,81 @@
+import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const ManagerOrderDetails = () => {
   let { id } = useParams();
   console.log(id);
-  const [data, setData] = useState();
-  useEffect(() => {
-    axios
-      .get(`http://localhost:5000/order/${id}`, {
-        withCredentials: true,
-      })
-      .then((res) => {
-        setData(res.data);
-      });
-  }, [id]);
+  let [count, setCount] = useState(0);
+
+  // useEffect(() => {
+  //   axios
+  //     .get(`http://localhost:5000/order/${id}`, {
+  //       withCredentials: true,
+  //     })
+  //     .then((res) => {
+  //       setData(res.data);
+  //     });
+  // }, [id]);
+
+  const { isPending, error, data, refetch } = useQuery({
+    queryKey: ["repoData"],
+    queryFn: () =>
+      fetch(`http://localhost:5000/order/${id}`, {
+        credentials: "include",
+      }).then((res) => res.json()),
+  });
+
   console.log(data);
 
+  const handleUpdate = (value) => {
+    setCount((prevCount) => {
+      // Determine the next count value based on the current one
+      let updatedCount = value === "prev" ? prevCount - 1 : prevCount + 1;
+      updatedCount = Math.min(4, Math.max(0, updatedCount)); // Ensure count is within bounds
+
+      // Fire confirmation dialog after setting the count
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, update it!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire({
+            title: "Updated!",
+            text: "Order status has been updated.",
+            icon: "success",
+          });
+
+          // Send the PATCH request with the updated count
+          axios
+            .patch(`http://localhost:5000/order/${id}`, {
+              order_stepper: updatedCount, // Use the updated count
+            })
+            .then((response) => {
+              console.log(response);
+              refetch(); // Refetch data after successful update
+            });
+        }
+      });
+
+      return updatedCount; // Return the updated count
+    });
+  };
+
   const steps = ["Order Placed", "Pick up Order", "On route", "Received"];
-  let [count, setCount] = useState(0);
+
   useEffect(() => {
     if (data) {
       setCount(data.order_stepper);
     }
   }, [data]);
-  count = Math.min(4, Math.max(0, count));
+
   console.log(count);
 
   if (!data) {
@@ -92,6 +143,20 @@ const ManagerOrderDetails = () => {
             <h3 className="text-lg font-semibold mb-4">
               Order Status Progress
             </h3>
+            <ul className="steps">
+              {" "}
+              {steps.map((response, num) => (
+                <React.Fragment key={num}>
+                  <li
+                    className={`step ${
+                      num === data.order_stepper ? `step-primary` : ""
+                    } `}
+                  >
+                    {response}
+                  </li>
+                </React.Fragment>
+              ))}
+            </ul>
           </div>
 
           {/* Update Order Status Buttons */}
@@ -99,18 +164,18 @@ const ManagerOrderDetails = () => {
             <button
               className="btn btn-primary"
               onClick={() => {
-                setCount(count - 1);
+                handleUpdate("prev");
               }}
             >
-              Previous
+              Previous status
             </button>
             <button
               onClick={() => {
-                setCount(count + 1);
+                handleUpdate("forward");
               }}
               className="btn btn-primary"
             >
-              Next
+              Next status
             </button>
           </div>
         </div>

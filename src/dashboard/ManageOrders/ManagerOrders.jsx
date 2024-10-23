@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 const ManagerOrders = () => {
   const [data, setData] = useState([]);
   const steps = ["Order Placed", "Pick up Order", "On route", "Received"];
-  const [count, setCount] = useState(0);
 
   useEffect(() => {
     axios
@@ -19,10 +18,6 @@ const ManagerOrders = () => {
         console.log(err);
       });
   }, []);
-  console.log(count);
-  const increment = () => {
-    setCount(count + 1);
-  };
 
   console.log(data);
   return (
