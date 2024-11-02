@@ -33,7 +33,7 @@ const ManagerOrderDetails = () => {
     setCount((prevCount) => {
       // Determine the next count value based on the current one
       let updatedCount = value === "prev" ? prevCount - 1 : prevCount + 1;
-      updatedCount = Math.min(4, Math.max(0, updatedCount)); // Ensure count is within bounds
+      updatedCount = Math.min(3, Math.max(0, updatedCount)); // Ensure count is within bounds
 
       // Fire confirmation dialog after setting the count
       Swal.fire({
@@ -129,7 +129,7 @@ const ManagerOrderDetails = () => {
           <div className="mb-8">
             <h3 className="text-lg font-semibold mb-4">Products Ordered</h3>
             <ul className="ml-4 list-disc text-gray-600">
-              {data.products.map((product) => (
+              {data?.products.map((product) => (
                 <li key={product._id}>
                   {product.title} - Rating: {product.rating}, Quantity:{" "}
                   {product.quantity} pcs
