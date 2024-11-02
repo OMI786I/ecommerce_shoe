@@ -54,9 +54,15 @@ const ManagerOrderDetails = () => {
 
           // Send the PATCH request with the updated count
           axios
-            .patch(`http://localhost:5000/order/${id}`, {
-              order_stepper: updatedCount, // Use the updated count
-            })
+            .patch(
+              `http://localhost:5000/order/${id}`,
+              {
+                order_stepper: updatedCount, // Use the updated count
+              },
+              {
+                withCredentials: true,
+              }
+            )
             .then((response) => {
               console.log(response);
               refetch(); // Refetch data after successful update

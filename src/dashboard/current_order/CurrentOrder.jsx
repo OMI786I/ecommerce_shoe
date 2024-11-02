@@ -1,9 +1,39 @@
 import React, { useState, useEffect } from "react";
 import useOrderFetch from "../../customHook/useOrderFetch";
+import Swal from "sweetalert2";
+import axios from "axios";
 
 const CurrentOrder = () => {
-  const { orderData, isPending, error } = useOrderFetch();
+  const { orderData, isPending, error, refetch } = useOrderFetch();
   const steps = ["Order Placed", "Pick up Order", "On route", "Received"];
+  console.log(orderData);
+
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, I received it!",
+    }).then((result) => {
+      axios
+        .delete(`http://localhost:5000/order/${id}`, {
+          withCredentials: true,
+        })
+        .then((res) => {
+          if (res.data.deletedCount && result.isConfirmed) {
+            refetch();
+            Swal.fire({
+              title: "Congratulations!",
+              text: "Please leave a review of your product",
+              icon: "success",
+            });
+          }
+        });
+    });
+  };
 
   return (
     <div>
@@ -59,6 +89,23 @@ const CurrentOrder = () => {
                 </React.Fragment>
               ))}
             </ul>
+            {res.order_stepper === 3 ? (
+              <div className="mt-5">
+                <h1>Did your Received your Order?</h1>
+
+                <div className="flex gap-4">
+                  <button
+                    className="btn btn-success"
+                    onClick={() => handleDelete(res._id)}
+                  >
+                    Yes
+                  </button>
+                  <button className="btn btn-error">No</button>
+                </div>
+              </div>
+            ) : (
+              ""
+            )}
           </div>
 
           {/* Update status */}

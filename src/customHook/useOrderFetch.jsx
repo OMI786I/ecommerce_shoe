@@ -7,6 +7,7 @@ const useOrderFetch = () => {
     isPending,
     error,
     data: orderData,
+    refetch,
   } = useQuery({
     queryKey: ["repoData", data?.[0]?.email],
     queryFn: () =>
@@ -15,7 +16,7 @@ const useOrderFetch = () => {
       }).then((res) => res.json()),
   });
 
-  return { orderData, isPending, error };
+  return { orderData, isPending, error, refetch };
 };
 
 export default useOrderFetch;
