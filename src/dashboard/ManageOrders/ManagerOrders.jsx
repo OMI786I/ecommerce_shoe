@@ -19,7 +19,6 @@ const ManagerOrders = () => {
       });
   }, []);
 
-  console.log(data);
   return (
     <div>
       <div className="overflow-x-auto">
@@ -36,14 +35,14 @@ const ManagerOrders = () => {
           </thead>
           <tbody>
             {/* row 1 */}
-            {data.map((res, index) => (
-              <tr key={res._id}>
+            {data?.map((res, index) => (
+              <tr key={res?._id}>
                 <th>{index + 1}</th>
-                <td>{res.customer_name}</td>
-                <td>{res.products.length}</td>
-                <td>{steps[res.order_stepper]}</td>
+                <td>{res?.customer_name}</td>
+
+                <td>{steps[res?.order_stepper]}</td>
                 <td>
-                  <Link to={`/dashboard/manageOrders/${res._id}`}>
+                  <Link to={`/dashboard/manageOrders/${res?._id}`}>
                     {" "}
                     <button className="btn btn-primary">Details</button>
                   </Link>

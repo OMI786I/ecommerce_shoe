@@ -8,7 +8,15 @@ const CurrentOrder = () => {
   const steps = ["Order Placed", "Pick up Order", "On route", "Received"];
   console.log(orderData);
 
-  const handleDelete = (id) => {
+  const handleDelete = (res) => {
+    const toSendData = {
+      amount: res.amount,
+      customer_email: res.customer_email,
+      customer_name: res.customer_name,
+      location: res.location,
+      products: res.products,
+    };
+
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -18,8 +26,21 @@ const CurrentOrder = () => {
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes, I received it!",
     }).then((result) => {
+      console.log(result, res);
       axios
-        .delete(`http://localhost:5000/order/${id}`, {
+        .post("http://localhost:5000/history", toSendData, {
+          withCredentials: true,
+        })
+        .then((response) => {
+          refetch();
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+
+      axios
+        .delete(`http://localhost:5000/order/${res._id}`, {
           withCredentials: true,
         })
         .then((res) => {
@@ -70,6 +91,10 @@ const CurrentOrder = () => {
               <span className="text-lg font-medium">Estimated Delivery:</span>
               <span className="text-lg text-gray-600">Delivery</span>
             </div>
+            <div className="flex justify-between mb-3">
+              <span className="text-lg font-medium">Total Amount:</span>
+              <span className="text-lg text-gray-600">{res.amount}</span>
+            </div>
           </div>
 
           {/* Progress Bar for Order Status */}
@@ -96,7 +121,7 @@ const CurrentOrder = () => {
                 <div className="flex gap-4">
                   <button
                     className="btn btn-success"
-                    onClick={() => handleDelete(res._id)}
+                    onClick={() => handleDelete(res)}
                   >
                     Yes
                   </button>
@@ -112,6 +137,7 @@ const CurrentOrder = () => {
           <div className="mt-6">{}</div>
         </div>
       ))}
+      {orderData?.length === 0 ? <h1>Buy Products to see status here</h1> : ""}
     </div>
   );
 };
