@@ -44,7 +44,7 @@ const Cart = () => {
   const handleDelete = useWishlistDelete();
   console.log(limit, page);
 
-  console.log(finalPrice);
+  console.log(fetchData);
   const {
     register,
     handleSubmit,

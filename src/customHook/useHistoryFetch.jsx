@@ -8,9 +8,9 @@ const useHistoryFetch = () => {
   const { isPending, error, data } = useQuery({
     queryKey: ["repoData"],
     queryFn: () =>
-      fetch(`http://localhost:5000/history?customer_email=${user.email}`).then(
-        (res) => res.json()
-      ),
+      fetch(`http://localhost:5000/history?customer_email=${user.email}`, {
+        credentials: "include",
+      }).then((res) => res.json()),
   });
 
   return { data, error, isPending };

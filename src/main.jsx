@@ -36,6 +36,7 @@ import Error from "./paymentStatus/Error";
 import Success from "./paymentStatus/Success";
 import ManagerOrders from "./dashboard/ManageOrders/ManagerOrders";
 import ManagerOrderDetails from "./dashboard/ManageOrders/ManagerOrderDetails";
+import HistoryDetails from "./dashboard/history/HistoryDetails";
 
 const queryClient = new QueryClient();
 const router = createBrowserRouter([
@@ -148,6 +149,10 @@ const router = createBrowserRouter([
         element: <History />,
       },
       {
+        path: "/dashboard/order_history/:id",
+        element: <HistoryDetails />,
+      },
+      {
         path: "/dashboard/current_order",
         element: <CurrentOrder />,
       },
@@ -181,7 +186,6 @@ const router = createBrowserRouter([
         path: "/dashboard/manageOrders/:id",
         element: (
           <AdminRoute>
-            {" "}
             <ManagerOrderDetails />
           </AdminRoute>
         ),

@@ -1,5 +1,6 @@
 import React from "react";
 import useHistoryFetch from "../../customHook/useHistoryFetch";
+import { Link } from "react-router-dom";
 
 const History = () => {
   const { data, isPending, error } = useHistoryFetch();
@@ -29,12 +30,19 @@ const History = () => {
                 <td>{res.location}</td>
                 <td>
                   {res.products.map((response) => (
-                    <ul key={response._id}>{response.title}</ul>
+                    <ul key={response._id}>
+                      {response.title}{" "}
+                      <Link to={`/dashboard/order_history/${response.id2}`}>
+                        {" "}
+                        <button className="btn btn-success btn-xs">
+                          Details
+                        </button>
+                      </Link>
+                    </ul>
                   ))}
                 </td>
                 <th>
                   <button className="btn btn-error btn-xs">Delete</button>
-                  <button className="btn btn-success btn-xs">Details</button>
                 </th>
               </tr>
             ))}

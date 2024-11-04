@@ -10,9 +10,12 @@ const useCartPost = () => {
   const { refetch } = useCartFetch();
   const cartPost = (res) => {
     const email = user.email;
+    const id2 = res.id;
     const id = res._id;
+
     const quantity = 1;
-    const finalData = { ...res, email, id, quantity };
+    const finalData = { ...res, email, id, id2, quantity };
+    console.log("final Data", finalData);
     delete finalData._id;
 
     axios
