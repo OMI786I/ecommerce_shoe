@@ -29,24 +29,6 @@ const ProductDetails = () => {
     cartPost(res);
   };
 
-  const reviews = [
-    {
-      name: "John Doe",
-      rating: 4,
-      review: "Great product, really enjoyed using it!",
-    },
-    {
-      name: "Jane Smith",
-      rating: 5,
-      review: "Absolutely fantastic! Highly recommend.",
-    },
-    {
-      name: "Alex Johnson",
-      rating: 3,
-      review: "It was okay, could have been better.",
-    },
-  ];
-
   // Function to render stars
   const renderStars = (rating) => {
     return Array.from({ length: 5 }, (_, index) => (
@@ -203,7 +185,7 @@ const ProductDetails = () => {
             Product Reviews
           </h1>
           <div className="space-y-4">
-            {reviews.map((review, index) => (
+            {data?.reviews?.map((review, index) => (
               <div
                 key={index}
                 className="p-4 border rounded-lg bg-gray-50 shadow-sm"
