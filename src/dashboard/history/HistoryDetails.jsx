@@ -1,9 +1,11 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { AuthContext } from "../../provider/AuthProvider";
 
 const HistoryDetails = () => {
   const { id } = useParams();
+  const { user } = useContext(AuthContext);
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [reviews, setReviews] = useState([]); // Store reviews
@@ -22,20 +24,22 @@ const HistoryDetails = () => {
         setLoading(false);
       });
   }, [id]);
-
+  console.log(rating);
   const handleRatingChange = (value) => {
     setRating(value);
   };
 
   const handleSubmitReview = () => {
-    const newReview = {
-      text: reviewText,
-      rating,
-      user: "John Doe", // Replace with dynamic user data if available
+    const review = {
+      user: user.email,
+      review: reviewText,
+      rating: rating,
+      collection: data[0].source,
     };
-    setReviews([...reviews, newReview]);
-    setReviewText("");
-    setRating(0);
+
+    axios
+      .patch(`http://localhost:5000/search/${id}`, review)
+      .then((res) => console.log(res));
   };
 
   if (loading) {
