@@ -180,11 +180,10 @@ const Navbar = () => {
       })
       .then((response) => {
         console.log(response.data.results);
-        if (response.data.results.length) {
-          navigate("/searchResult", {
-            state: { results: response.data.results },
-          });
-        }
+
+        navigate("/searchResult", {
+          state: { results: response.data.results },
+        });
       })
       .catch((error) => {
         console.log(error);

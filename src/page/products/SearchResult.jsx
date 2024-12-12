@@ -42,6 +42,13 @@ const SearchResult = () => {
       {" "}
       <span className="loading loading-spinner loading-lg"></span>;
     </div>;
+  }
+  if (results.length == 0) {
+    return (
+      <p className="text-center font-bold text-3xl my-5">
+        The Product does not exist
+      </p>
+    );
   } else
     return (
       <>
