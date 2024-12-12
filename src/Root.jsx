@@ -6,8 +6,9 @@ import { Toaster } from "react-hot-toast";
 const Root = () => {
   return (
     <div>
-      <Navbar></Navbar>
       <Toaster />
+      <Navbar></Navbar>
+
       <Outlet></Outlet>
       <Footer></Footer>
     </div>

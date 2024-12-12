@@ -4,6 +4,8 @@ import { HiHeart } from "react-icons/hi";
 import { IoCartOutline } from "react-icons/io5";
 import Rating from "react-rating";
 import { Link, useLocation } from "react-router-dom";
+import useWishList from "../../customHook/useWishList";
+import useCartPost from "../../customHook/useCartPost";
 
 const SearchResult = () => {
   const location = useLocation();
@@ -14,6 +16,16 @@ const SearchResult = () => {
     const selectedSortValue = e.target.value;
     setSortValue(selectedSortValue);
   };
+
+  const wishPost = useWishList();
+  const cartPost = useCartPost();
+  const handleWishList = (res) => {
+    wishPost(res);
+  };
+  const handleAddCart = (res) => {
+    cartPost(res);
+  };
+
   const [sortedResults, setSortedResults] = useState(results);
   useEffect(() => {
     let sortedData = [...results];
@@ -70,8 +82,11 @@ const SearchResult = () => {
                       <div className="flex">
                         <div className="flex md:hidden gap-1">
                           <div className="tooltip" data-tip="add to wishlist">
-                            <button className="btn btn-xs rounded-full">
-                              <HiHeart />
+                            <button
+                              onClick={() => handleWishList(res)}
+                              className="btn btn-xs rounded-full"
+                            >
+                              <HiHeart className="text-xl" />
                             </button>
                           </div>
 
@@ -84,8 +99,11 @@ const SearchResult = () => {
                           </Link>
                         </div>
                         <div className="tooltip" data-tip="Add to cart">
-                          <button className="btn btn-xs rounded-full">
-                            <IoCartOutline className="text-xl" />
+                          <button
+                            onClick={() => handleAddCart(res)}
+                            className="btn btn-xs rounded-full"
+                          >
+                            <IoCartOutline className="" />
                           </button>
                         </div>
                       </div>
@@ -95,7 +113,10 @@ const SearchResult = () => {
               </div>
               <div className="hidden bottom-[55%] left-[35%] absolute md:group-hover:block text-red-500 duration-75">
                 <div className="tooltip" data-tip="add to wishlist">
-                  <button className="btn btn-xs rounded-full">
+                  <button
+                    onClick={() => handleWishList(res)}
+                    className="btn btn-xs rounded-full"
+                  >
                     <HiHeart />
                   </button>
                 </div>
