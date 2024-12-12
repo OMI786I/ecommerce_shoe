@@ -1,4 +1,4 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { MdOutlineShoppingCartCheckout, MdWifiCalling } from "react-icons/md";
 import { PiBag, PiHeartStraight } from "react-icons/pi";
 import { RxDashboard } from "react-icons/rx";
@@ -10,11 +10,12 @@ import DrawerContent from "./DrawerContent";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
-
+import { useForm } from "react-hook-form";
 import useWishListFetch from "../customHook/useWishListFetch";
 import axios from "axios";
 import useCartFetch from "../customHook/useCartFetch";
 import useAdmin from "../customHook/useAdmin";
+import SearchResult from "../page/products/SearchResult";
 const Navbar = () => {
   const { user, logout } = useContext(AuthContext);
   const { count, refetch } = useWishListFetch();
@@ -163,6 +164,32 @@ const Navbar = () => {
       </NavLink>
     </div>
   );
+  const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (data) => {
+    console.log(data);
+    axios
+      .post("http://localhost:5000/searchText", data, {
+        withCredentials: true,
+      })
+      .then((response) => {
+        console.log(response.data.results);
+        if (response.data.results.length) {
+          navigate("/searchResult", {
+            state: { results: response.data.results },
+          });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   useEffect(() => {
     if (user) {
@@ -230,28 +257,33 @@ const Navbar = () => {
         </Link>
         <div className="w-full hidden lg:block max-w-sm min-w-[200px] relative mt-4">
           <div className="relative">
-            <input
-              type="text"
-              className="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md pl-3 pr-10 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow"
-              placeholder="Enter your text"
-            />
-            <button
-              className="absolute right-1 top-1 rounded bg-red-600 p-1.5 border border-transparent text-center text-sm text-white transition-all shadow-sm hover:shadow focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-              type="button"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 16 16"
-                fill="currentColor"
-                className="w-4 h-4"
+            <form onClick={handleSubmit(onSubmit)}>
+              {" "}
+              <input
+                type="text"
+                className="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md pl-3 pr-10 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow"
+                placeholder="Enter your text"
+                name="search"
+                {...register("search")}
+              />
+              <button
+                className="btn absolute right-1 top-1 rounded bg-red-600 p-1.5 border border-transparent text-center text-sm text-white transition-all shadow-sm hover:shadow focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                type="submit"
               >
-                <path
-                  fillRule="evenodd"
-                  d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            </button>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 16 16"
+                  fill="currentColor"
+                  className="w-4 h-4"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </button>
+            </form>
           </div>
         </div>
         <div className="hidden  gap-2 lg:flex items-center">

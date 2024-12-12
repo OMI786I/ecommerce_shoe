@@ -37,6 +37,7 @@ import Success from "./paymentStatus/Success";
 import ManagerOrders from "./dashboard/ManageOrders/ManagerOrders";
 import ManagerOrderDetails from "./dashboard/ManageOrders/ManagerOrderDetails";
 import HistoryDetails from "./dashboard/history/HistoryDetails";
+import SearchResult from "./page/products/SearchResult";
 
 const queryClient = new QueryClient();
 const router = createBrowserRouter([
@@ -59,6 +60,10 @@ const router = createBrowserRouter([
       {
         path: "/products",
         element: <Products />,
+      },
+      {
+        path: "/searchResult",
+        element: <SearchResult />,
       },
       {
         path: "/products/details/:id",
