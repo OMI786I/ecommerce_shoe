@@ -79,7 +79,7 @@ const RightPart = ({
     <div>
       <div>
         <div className="navbar bg-base-100">
-          <div className="navbar-start gap-1">
+          <div className=" hidden navbar-start gap-1">
             <button className="" onClick={handleClickCard}>
               {" "}
               <AiFillAppstore className="text-xl hover:text-red-600 " />
@@ -88,10 +88,12 @@ const RightPart = ({
               {" "}
               <AiOutlineBars className="text-xl hover:text-red-600  " />
             </button>
+          </div>
+          <div className="mx-2 navbar-start">
             There are products {data.totalDocuments}
           </div>
-          <div className="navbar-center  lg:flex"></div>
-          <div>
+          <div className="navbar-center  lg:flex">
+            {" "}
             <label>Sort by: </label>
             <select value={sort} onChange={handleSort} name="" id="">
               <option value="">Relevant</option>
@@ -99,7 +101,8 @@ const RightPart = ({
               <option value="desc">Dsc by price</option>
             </select>
           </div>
-          <div>
+
+          <div className="navbar-end">
             <label>Items per page: </label>
             <select value={limit} onChange={handleItemsPerPage} name="" id="">
               <option value="5">5</option>
@@ -110,10 +113,10 @@ const RightPart = ({
           </div>
         </div>
         <div>
-          <div className="grid grid-cols-1 gap-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <div className="grid w-full h-full place-items-center grid-cols-1 gap-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 ">
             {data
               ? data.result.map((res) => (
-                  <div key={res._id} className="group  relative">
+                  <div key={res._id} className="group w-full relative ">
                     <div className="inline-block">
                       {/** card */}
                       <div className="p-2 w-full transition-shadow duration-300 cursor-pointer hover:shadow-lg hover:shadow-gray-400 rounded-xl border">

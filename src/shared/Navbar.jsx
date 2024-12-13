@@ -152,16 +152,6 @@ const Navbar = () => {
           </Link>
         </div>
       </div>
-      <NavLink to="/contact">
-        <button className="hover:border-red-500 border-transparent font-bold  hover:text-red-500  p-2  focus:border-red-500 ">
-          Contact Us
-        </button>
-      </NavLink>
-      <NavLink to="/about">
-        <button className="hover:border-red-500 border-transparent font-bold  hover:text-red-500  p-2  focus:border-red-500 ">
-          About Us
-        </button>
-      </NavLink>
     </div>
   );
   const navigate = useNavigate();
@@ -252,7 +242,9 @@ const Navbar = () => {
           </div>
         </div>
         <Link to={"/"}>
-          <span className="text-5xl text-center font-bold">KenaKata</span>
+          <span className="text-3xl md:text-5xl text-center font-bold">
+            KenaKata
+          </span>
         </Link>
         <div className="w-full hidden lg:block max-w-sm min-w-[200px] relative mt-4">
           <div className="relative">
@@ -378,7 +370,7 @@ const Navbar = () => {
               </div>
             </Link>
           </div>
-          <div>
+          <div className="hidden md:flex">
             <p>${price}</p>
           </div>
         </div>
