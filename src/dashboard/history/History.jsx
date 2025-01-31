@@ -1,9 +1,8 @@
-import React from "react";
 import useHistoryFetch from "../../customHook/useHistoryFetch";
 import { Link } from "react-router-dom";
 
 const History = () => {
-  const { data, isPending, error } = useHistoryFetch();
+  const { data } = useHistoryFetch();
   console.log(data);
   return (
     <div>

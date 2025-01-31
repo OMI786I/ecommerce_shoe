@@ -1,14 +1,9 @@
-import React from "react";
 import {
-  FaEnvelope,
   FaHome,
   FaList,
   FaUsers,
-  FaShoePrints,
   FaCalendar,
   FaShoppingCart,
-  FaAd,
-  FaSearch,
 } from "react-icons/fa";
 import { FiPackage } from "react-icons/fi";
 import { NavLink, Outlet } from "react-router-dom";

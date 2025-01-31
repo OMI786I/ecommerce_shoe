@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { AuthContext } from "../../provider/AuthProvider";
 import toast, { Toaster } from "react-hot-toast";
@@ -9,7 +9,6 @@ const HistoryDetails = () => {
   const { user } = useContext(AuthContext);
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [reviews, setReviews] = useState([]); // Store reviews
   const [reviewText, setReviewText] = useState(""); // For user input
   const [rating, setRating] = useState(0); // Store rating
   const [currentReviewPage, setReviewPage] = useState(1);

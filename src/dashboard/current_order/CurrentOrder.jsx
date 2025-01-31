@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import useOrderFetch from "../../customHook/useOrderFetch";
 import Swal from "sweetalert2";
 import axios from "axios";
 
 const CurrentOrder = () => {
-  const { orderData, isPending, error, refetch } = useOrderFetch();
+  const { orderData, refetch } = useOrderFetch();
   const steps = ["Order Placed", "Pick up Order", "On route", "Received"];
   console.log(orderData);
 

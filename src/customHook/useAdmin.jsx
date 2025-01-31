@@ -1,14 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { useContext } from "react";
+
 import { AuthContext } from "../provider/AuthProvider";
 import axios from "axios";
+import { useContext } from "react";
 
 const useAdmin = () => {
   const { user } = useContext(AuthContext);
   // /user/admin/:email
   const {
     isPending: isAdminLoading,
-    error,
+
     data: isAdmin,
   } = useQuery({
     queryKey: ["isAdmin"],

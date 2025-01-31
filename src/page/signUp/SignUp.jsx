@@ -1,11 +1,11 @@
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { FaRegEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
 
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import ImagePicker from "../../components/ImagePicker";
 import { AuthContext } from "../../provider/AuthProvider";
 import axios from "axios";

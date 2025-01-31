@@ -1,5 +1,4 @@
 import axios from "axios";
-import React from "react";
 import Swal from "sweetalert2";
 
 const useOrderUpdate = (id, stepper) => {

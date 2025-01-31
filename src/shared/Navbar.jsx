@@ -9,13 +9,13 @@ import "../styles/styles.css";
 import DrawerContent from "./DrawerContent";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../provider/AuthProvider";
-import { useQuery } from "@tanstack/react-query";
+
 import { useForm } from "react-hook-form";
 import useWishListFetch from "../customHook/useWishListFetch";
 import axios from "axios";
 import useCartFetch from "../customHook/useCartFetch";
 import useAdmin from "../customHook/useAdmin";
-import SearchResult from "../page/products/SearchResult";
+
 const Navbar = () => {
   const { user, logout } = useContext(AuthContext);
   const { count, refetch } = useWishListFetch();
@@ -155,12 +155,7 @@ const Navbar = () => {
     </div>
   );
   const navigate = useNavigate();
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm();
+  const { register, handleSubmit } = useForm();
 
   const onSubmit = (data) => {
     console.log(data);

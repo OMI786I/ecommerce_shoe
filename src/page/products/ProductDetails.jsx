@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 import Rating from "react-rating";
 import "font-awesome/css/font-awesome.min.css";
@@ -7,10 +7,10 @@ import { FaFacebook, FaGoogle, FaTwitter } from "react-icons/fa";
 import useDetailsFetch from "../../customHook/useDetailsFetch";
 import useWishList from "../../customHook/useWishList";
 import useCartPost from "../../customHook/useCartPost";
-import ReviewComponents from "../../components/products/ReviewComponents";
+
 const ProductDetails = () => {
   let { id } = useParams();
-  const { isPending, error, data, refetch } = useDetailsFetch(id);
+  const { isPending, data } = useDetailsFetch(id);
   console.log(data);
   const [isOpen, setIsOpen] = useState(false);
   const [value, setValue] = useState("S");
