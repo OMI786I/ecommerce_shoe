@@ -190,7 +190,7 @@ const Navbar = () => {
     }
     refetch();
   }, [user, count, refetch]);
-
+  console.log(userData);
   return (
     <div>
       {/**cupon */}
@@ -290,9 +290,18 @@ const Navbar = () => {
                     tabIndex={0}
                     className="btn btn-ghost btn-circle avatar"
                   >
-                    <div className="w-16 rounded-full">
-                      <img src={userData?.[0]?.image} alt="User Avatar" />
-                    </div>
+                    {userData[0].image ? (
+                      <div className="w-16 rounded-full">
+                        <img src={userData?.[0]?.image} alt="User Avatar" />
+                      </div>
+                    ) : (
+                      <div className="w-16 rounded-full">
+                        <img
+                          src="https://i.ibb.co.com/nqpJrWtt/avatar.jpg"
+                          alt="Default Avatar"
+                        />
+                      </div>
+                    )}
                   </label>
                 </div>
               </Link>

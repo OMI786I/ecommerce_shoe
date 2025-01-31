@@ -32,27 +32,31 @@ const SignUp = () => {
 
   const onSubmit = async (data) => {
     setUploadImage(false);
-    const imgData = new FormData();
-    imgData.append("key", import.meta.env.VITE_IMGBB_APIKEY);
-    imgData.append("image", imageValue);
+    let imageSubmit = null;
 
-    // Upload image to ImgBB
-    const response = await fetch("https://api.imgbb.com/1/upload", {
-      method: "POST",
-      body: imgData,
-    });
+    // If there's an image, upload it
+    if (imageValue) {
+      const imgData = new FormData();
+      imgData.append("key", import.meta.env.VITE_IMGBB_APIKEY);
+      imgData.append("image", imageValue);
 
-    const result = await response.json();
-    const imageSubmit = result.data.display_url;
-    console.log(result.data.display_url);
+      // Upload image to ImgBB
+      const response = await fetch("https://api.imgbb.com/1/upload", {
+        method: "POST",
+        body: imgData,
+      });
 
-    console.log(data);
+      const result = await response.json();
+      imageSubmit = result.data.display_url;
+      console.log(result.data.display_url);
+    }
 
+    // Prepare the data to send, including image if available
     const toSendData = {
       name: data.name,
       email: data.email,
       password: data.password,
-      image: imageSubmit,
+      image: imageSubmit, // If no image, it'll be null
       role: "user",
     };
     console.log(toSendData);
@@ -60,7 +64,7 @@ const SignUp = () => {
     createUser(data.email, data.password)
       .then((res) => {
         console.log(res);
-        toast.success("successfully Registered");
+        toast.success("Successfully Registered");
 
         axios
           .post("https://ecommerce1-server.vercel.app/user", {

@@ -20,26 +20,35 @@ const UserEdit = () => {
 
   const onSubmit = async (data) => {
     setUploadImage(true);
-    const imgData = new FormData();
-    imgData.append("key", import.meta.env.VITE_IMGBB_APIKEY);
-    imgData.append("image", imageValue);
+    let imageSubmit = data.image || data?.imageURL || null;
 
-    // Upload image to ImgBB
-    const response = await fetch("https://api.imgbb.com/1/upload", {
-      method: "POST",
-      body: imgData,
-    });
+    if (imageValue) {
+      const imgData = new FormData();
+      imgData.append("key", import.meta.env.VITE_IMGBB_APIKEY);
+      imgData.append("image", imageValue);
 
-    const result = await response.json();
-    const imageSubmit = result.data.display_url;
-    const submitData = { ...data, image: result.data.display_url };
+      // Upload image to ImgBB
+      const response = await fetch("https://api.imgbb.com/1/upload", {
+        method: "POST",
+        body: imgData,
+      });
 
-    if (imageSubmit) {
-      update(params.id, submitData);
-      setUploadImage(false);
-    } else {
-      toast.error("Submit image");
+      const result = await response.json();
+      imageSubmit = result.data.display_url;
     }
+
+    const submitData = { ...data, image: imageSubmit };
+
+    update(params.id, submitData)
+      .then(() => {
+        setUploadImage(false);
+        toast.success("Profile updated successfully!");
+      })
+      .catch((err) => {
+        setUploadImage(false);
+        toast.error("Failed to update profile.");
+        console.error(err);
+      });
 
     console.log(submitData);
   };
