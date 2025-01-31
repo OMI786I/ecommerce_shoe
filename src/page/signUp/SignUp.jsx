@@ -63,7 +63,7 @@ const SignUp = () => {
         toast.success("successfully Registered");
 
         axios
-          .post("http://localhost:5000/user", {
+          .post("https://ecommerce1-server.vercel.app/user", {
             ...toSendData,
           })
           .then(function (response) {
