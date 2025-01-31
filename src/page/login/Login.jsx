@@ -117,7 +117,7 @@ const Login = () => {
         <div className="text-center lg:text-left ">
           <img
             className="md:w-[500px] mx-auto lg:mx-0 rounded-3xl"
-            src="/src/assets/images/Mobile-login.jpg"
+            src="https://i.ibb.co.com/wZXLBgdb/Mobile-login.jpg"
           />
         </div>
 

@@ -1,8 +1,8 @@
 import React from "react";
-import img1 from "../assets/images/4_1.jpg";
-import img2 from "../assets/images/5_1.jpg";
-import img3 from "../assets/images/6_1.jpg";
-import img4 from "../assets/images/7_1.jpg";
+import img1 from "/images/4_1.jpg";
+import img2 from "/images/5_1.jpg";
+import img3 from "/images/6_1.jpg";
+import img4 from "/images/7_1.jpg";
 
 const Category = () => {
   return (

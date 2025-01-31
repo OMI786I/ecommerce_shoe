@@ -281,66 +281,27 @@ const Navbar = () => {
         </div>
 
         <div className="flex gap-2 items-center">
-          {/** Avatar */}
-          <div className="dropdown dropdown-end dropdown-hover hidden lg:flex ">
+          {/** Mobile View for Avatar Dropdown */}
+          <div className="flex">
             {user && userData ? (
-              <div className="hidden lg:flex">
-                <label
-                  tabIndex={0}
-                  className=" btn btn-ghost btn-circle avatar"
-                >
-                  <div className="w-16 rounded-full">
-                    <img
-                      src={
-                        userData?.[0]?.image || "/src/assets/images/avatar.jpg"
-                      }
-                      alt="User Avatar"
-                    />
-                  </div>
-                </label>
-                <ul
-                  tabIndex={0}
-                  className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
-                >
-                  <li>
-                    {isAdmin ? (
-                      <Link to={"/dashboard/adminHome"}>
-                        <button className="flex items-center gap-2">
-                          <RxDashboard />
-                          My Account
-                        </button>
-                      </Link>
-                    ) : (
-                      <Link to={"/dashboard/user"}>
-                        <button className="flex items-center gap-2">
-                          <RxDashboard />
-                          My Account
-                        </button>
-                      </Link>
-                    )}
-                  </li>
-                  <li>
-                    <Link to={"/checkout"}>
-                      <button className="flex items-center gap-2">
-                        <MdOutlineShoppingCartCheckout />
-                        Checkout
-                      </button>
-                    </Link>
-                  </li>
-                  <li>
-                    <button onClick={logout}>
-                      <HiLogout />
-                      Logout
-                    </button>
-                  </li>
-                </ul>
-              </div>
+              <Link to={isAdmin ? "/dashboard/adminHome" : "/dashboard/user"}>
+                <div className="">
+                  <label
+                    tabIndex={0}
+                    className="btn btn-ghost btn-circle avatar"
+                  >
+                    <div className="w-16 rounded-full">
+                      <img src={userData?.[0]?.image} alt="User Avatar" />
+                    </div>
+                  </label>
+                </div>
+              </Link>
             ) : (
               <Link to={"/login"}>
                 <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                   <div className="w-16 rounded-full">
                     <img
-                      src="/src/assets/images/avatar.jpg"
+                      src="https://i.ibb.co.com/nqpJrWtt/avatar.jpg"
                       alt="Default Avatar"
                     />
                   </div>
@@ -348,22 +309,8 @@ const Navbar = () => {
               </Link>
             )}
           </div>
-          <div className="flex lg:hidden ">
-            <Link to="/dashboard/user">
-              {" "}
-              <label tabIndex={0} className=" btn btn-ghost btn-circle avatar">
-                <div className="w-16 rounded-full">
-                  <img
-                    src={
-                      userData?.[0]?.image || "/src/assets/images/avatar.jpg"
-                    }
-                    alt="User Avatar"
-                  />
-                </div>
-              </label>
-            </Link>
-          </div>
 
+          {/** Wishlist Indicator */}
           <div className="indicator">
             <span className="indicator-item badge badge-secondary">
               {count}
@@ -377,6 +324,7 @@ const Navbar = () => {
             </Link>
           </div>
 
+          {/** Cart Indicator */}
           <div className="indicator">
             <span className="indicator-item badge badge-secondary">
               {count2}
@@ -390,38 +338,14 @@ const Navbar = () => {
             </Link>
           </div>
 
+          {/** Price Display */}
           <div className="hidden md:flex">
             <p>${price}</p>
           </div>
         </div>
       </div>
       {/**navlink lower */}
-      <div className="w-full mx-auto lg:hidden block max-w-sm min-w-[200px] relative mt-4">
-        <div className="relative">
-          <input
-            type="text"
-            className="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md pl-3 pr-10 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow"
-            placeholder="Enter your text"
-          />
-          <button
-            className="absolute right-1 top-1 rounded bg-red-600 p-1.5 border border-transparent text-center text-sm text-white transition-all shadow-sm hover:shadow focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-            type="button"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 16 16"
-              fill="currentColor"
-              className="w-4 h-4"
-            >
-              <path
-                fillRule="evenodd"
-                d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
-                clipRule="evenodd"
-              />
-            </svg>
-          </button>
-        </div>
-      </div>
+
       <div className="hidden lg:flex md:justify-center w-full my-4">
         {navLink}
       </div>

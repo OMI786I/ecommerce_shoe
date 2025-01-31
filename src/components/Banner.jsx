@@ -59,7 +59,7 @@ const Banner = () => {
       <div className="w-full relative">
         {" "}
         <img
-          src="../../src/assets/images/banner_1.jpg"
+          src="/images/banner_1.jpg"
           alt="Banner 1"
           className="w-full object-cover"
         />
@@ -96,7 +96,7 @@ const Banner = () => {
       </div>
       <div className="w-full relative">
         <img
-          src="../../src/assets/images/sample-2.jpg"
+          src="/images/sample-2.jpg"
           alt="Banner 2"
           className="w-full object-cover"
         />

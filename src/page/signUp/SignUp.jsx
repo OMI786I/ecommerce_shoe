@@ -97,7 +97,10 @@ const SignUp = () => {
     <div>
       <div className="hero-content flex-col lg:flex-row-reverse">
         <div className="text-center lg:text-left md:w-1/2">
-          <img src="/src/assets/images/SignUp.jpg" alt="Registration" />
+          <img
+            src="https://i.ibb.co.com/MxcjG38z/signUp.jpg"
+            alt="Registration"
+          />
         </div>
 
         <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl md:w-1/2">
