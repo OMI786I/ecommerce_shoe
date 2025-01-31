@@ -15,7 +15,9 @@ const ProductDetails = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [value, setValue] = useState("S");
   const [colorValue, setColorValue] = useState("black");
+  const [currentReviewPage, setReviewPage] = useState(1);
   console.log(colorValue);
+  console.log(currentReviewPage);
   // Toggle dropdown state
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -41,6 +43,23 @@ const ProductDetails = () => {
     ));
   };
 
+  function GFG(array, currentPage, pageSize) {
+    const startIndex = (currentPage - 1) * pageSize;
+    const endIndex = startIndex + pageSize;
+    return array?.slice(startIndex, endIndex);
+  }
+
+  const reviewData = data?.reviews;
+  const currentPage = currentReviewPage;
+  const pageSize = 4;
+  const currentPageData = GFG(reviewData, currentPage, pageSize);
+  console.log(currentPageData);
+
+  console.log(data);
+
+  const totalReviews = reviewData?.length || 0;
+  const maxPages = Math.ceil(totalReviews / pageSize);
+
   if (isPending) {
     return (
       <div className="flex items-center justify-center max-w-full max-h-screen">
@@ -54,22 +73,22 @@ const ProductDetails = () => {
       {" "}
       <div className="flex justify-around gap-10 p-5">
         <div>
-          <img className="w-96 rounded-xl" src={data.image} />
+          <img className="w-96 rounded-xl" src={data?.image} />
         </div>
         <div>
-          <h1 className="text-2xl text-gray-500 my-8">{data.title}</h1>
+          <h1 className="text-2xl text-gray-500 my-8">{data?.title}</h1>
           <div>
             <div className="rating">
               <Rating
-                initialRating={data.rating}
+                initialRating={data?.rating}
                 readonly
                 emptySymbol={["fa fa-star-o fa-2x"]}
                 fullSymbol={["fa fa-star fa-2x"]}
               />
             </div>
           </div>
-          <h1 className="text-xl font-bold">${data.price}</h1>
-          <p className="text-gray-500 my-5">{data.description}</p>
+          <h1 className="text-xl font-bold">${data?.price}</h1>
+          <p className="text-gray-500 my-5">{data?.description}</p>
           <div className="flex gap-5">
             {/**drop down */}
             <div className="relative inline-block text-left">
@@ -184,8 +203,35 @@ const ProductDetails = () => {
           <h1 className="text-2xl font-bold mb-4 text-center">
             Product Reviews
           </h1>
+          <div className="flex my-2 gap-2 items-center">
+            <button
+              className="btn btn-sm"
+              onClick={() => {
+                if (currentReviewPage > 1) {
+                  setReviewPage(currentReviewPage - 1);
+                }
+              }}
+              disabled={currentReviewPage <= 1}
+            >
+              Previous
+            </button>
+            <span>
+              Page {currentReviewPage} of {maxPages}
+            </span>
+            <button
+              className="btn btn-sm"
+              onClick={() => {
+                if (currentReviewPage < maxPages) {
+                  setReviewPage(currentReviewPage + 1);
+                }
+              }}
+              disabled={currentReviewPage >= maxPages}
+            >
+              Next
+            </button>
+          </div>
           <div className="space-y-4">
-            {data?.reviews?.map((review, index) => (
+            {currentPageData?.map((review, index) => (
               <div
                 key={index}
                 className="p-4 border rounded-lg bg-gray-50 shadow-sm"
