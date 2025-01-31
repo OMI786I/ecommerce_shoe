@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { AuthContext } from "../../provider/AuthProvider";
+import toast, { Toaster } from "react-hot-toast";
 
 const HistoryDetails = () => {
   const { id } = useParams();
@@ -11,7 +12,7 @@ const HistoryDetails = () => {
   const [reviews, setReviews] = useState([]); // Store reviews
   const [reviewText, setReviewText] = useState(""); // For user input
   const [rating, setRating] = useState(0); // Store rating
-
+  const [currentReviewPage, setReviewPage] = useState(1);
   useEffect(() => {
     axios
       .get(`http://localhost:5000/search/${id}`)
@@ -24,6 +25,7 @@ const HistoryDetails = () => {
         setLoading(false);
       });
   }, [id]);
+
   console.log(rating);
   const handleRatingChange = (value) => {
     setRating(value);
@@ -37,10 +39,30 @@ const HistoryDetails = () => {
       collection: data[0].source,
     };
 
-    axios
-      .patch(`http://localhost:5000/search/${id}`, review)
-      .then((res) => console.log(res));
+    axios.patch(`http://localhost:5000/search/${id}`, review).then((res) => {
+      if (res.data.modifiedCount === 1) {
+        toast.success("Successfully added review!");
+      }
+      console.log(res);
+    });
   };
+
+  function GFG(array, currentPage, pageSize) {
+    const startIndex = (currentPage - 1) * pageSize;
+    const endIndex = startIndex + pageSize;
+    return array?.slice(startIndex, endIndex);
+  }
+
+  const reviewData = data[0]?.reviews;
+  const currentPage = currentReviewPage;
+  const pageSize = 4;
+  const currentPageData = GFG(reviewData, currentPage, pageSize);
+  console.log(currentPageData);
+
+  console.log(data);
+
+  const totalReviews = reviewData?.length || 0;
+  const maxPages = Math.ceil(totalReviews / pageSize);
 
   if (loading) {
     return <div className="text-center py-8">Loading...</div>;
@@ -52,6 +74,7 @@ const HistoryDetails = () => {
 
   return (
     <div className="container mx-auto p-4">
+      <Toaster />
       {/* Product Card */}
       <div className="card lg:card-side bg-base-100 shadow-xl">
         <figure className="w-full lg:w-1/2">
@@ -107,16 +130,43 @@ const HistoryDetails = () => {
       <div className="mt-8">
         <h3 className="text-2xl font-semibold">Customer Reviews</h3>
         <div className="divider"></div>
-
+        <div className="flex my-2 gap-2 items-center">
+          <button
+            className="btn btn-sm"
+            onClick={() => {
+              if (currentReviewPage > 1) {
+                setReviewPage(currentReviewPage - 1);
+              }
+            }}
+            disabled={currentReviewPage <= 1}
+          >
+            Previous
+          </button>
+          <span>
+            Page {currentReviewPage} of {maxPages}
+          </span>
+          <button
+            className="btn btn-sm"
+            onClick={() => {
+              if (currentReviewPage < maxPages) {
+                setReviewPage(currentReviewPage + 1);
+              }
+            }}
+            disabled={currentReviewPage >= maxPages}
+          >
+            Next
+          </button>
+        </div>
         {/* Display Existing Reviews */}
-        {reviews.length ? (
-          reviews.map((review, index) => (
+        {data[0]?.reviews?.length ? (
+          currentPageData.map((review, index) => (
             <div
               key={index}
               className="p-4 bg-gray-100 rounded-lg shadow-sm mb-4"
             >
               <div className="flex items-center space-x-2">
-                <span className="text-lg font-bold">{review.user}</span>
+                <span className="text-lg font-bold">{review.user}:</span>
+                <span className="text-lg ">{review.review}</span>
                 <div className="rating">
                   {[...Array(5)].map((_, i) => (
                     <span
