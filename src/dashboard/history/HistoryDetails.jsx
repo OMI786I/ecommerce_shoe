@@ -164,7 +164,7 @@ const HistoryDetails = () => {
               key={index}
               className="p-4 bg-gray-100 rounded-lg shadow-sm mb-4"
             >
-              <div className="flex items-center space-x-2">
+              <div className="flex flex-col md:flex-row items-center space-x-2">
                 <span className="text-lg font-bold">{review.user}:</span>
                 <span className="text-lg ">{review.review}</span>
                 <div className="rating">
