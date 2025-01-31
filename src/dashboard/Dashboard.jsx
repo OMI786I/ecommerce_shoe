@@ -70,12 +70,6 @@ const Dashboard = () => {
                   Current Order
                 </NavLink>
               </li>
-              <li>
-                <NavLink to="/dashboard/review">
-                  <FaAd />
-                  Add a Review
-                </NavLink>
-              </li>
             </>
           )}
           {/* Shared nav links */}
@@ -84,18 +78,6 @@ const Dashboard = () => {
             <NavLink to="/">
               <FaHome />
               Home
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/order/salad">
-              <FaSearch />
-              Menu
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/order/contact">
-              <FaEnvelope />
-              Contact
             </NavLink>
           </li>
         </ul>
@@ -173,12 +155,6 @@ const Dashboard = () => {
                       Current Order
                     </NavLink>
                   </li>
-                  <li>
-                    <NavLink to="/dashboard/review">
-                      <FaAd />
-                      Add a Review
-                    </NavLink>
-                  </li>
                 </>
               )}
               {/* Shared nav links */}
@@ -187,18 +163,6 @@ const Dashboard = () => {
                 <NavLink to="/">
                   <FaHome />
                   Home
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/order/salad">
-                  <FaSearch />
-                  Menu
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/order/contact">
-                  <FaEnvelope />
-                  Contact
                 </NavLink>
               </li>
             </ul>

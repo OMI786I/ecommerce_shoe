@@ -133,16 +133,6 @@ const StickyNavbar = () => {
           </Link>
         </div>
       </div>
-      <NavLink to="/contact">
-        <button className="hover:border-red-500 border-transparent font-bold  hover:text-red-500  p-2  focus:border-red-500 ">
-          Contact Us
-        </button>
-      </NavLink>
-      <NavLink to="/about">
-        <button className="hover:border-red-500 border-transparent font-bold  hover:text-red-500  p-2  focus:border-red-500 ">
-          About Us
-        </button>
-      </NavLink>
     </div>
   );
 

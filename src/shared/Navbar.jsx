@@ -286,22 +286,27 @@ const Navbar = () => {
         </div>
 
         <div className="flex gap-2 items-center">
-          {/**avatar */}
-          <div>
-            {" "}
+          {/** Avatar */}
+          <div className="dropdown dropdown-end dropdown-hover hidden lg:flex ">
             {user && userData ? (
-              <div className="dropdown dropdown-end  ">
-                <label tabIndex="0" className="btn btn-ghost btn-circle avatar">
+              <div className="hidden lg:flex">
+                <label
+                  tabIndex={0}
+                  className=" btn btn-ghost btn-circle avatar"
+                >
                   <div className="w-16 rounded-full">
                     <img
                       src={
                         userData?.[0]?.image || "/src/assets/images/avatar.jpg"
                       }
-                    ></img>
+                      alt="User Avatar"
+                    />
                   </div>
                 </label>
-
-                <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+                <ul
+                  tabIndex={0}
+                  className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
+                >
                   <li>
                     {isAdmin ? (
                       <Link to={"/dashboard/adminHome"}>
@@ -318,7 +323,8 @@ const Navbar = () => {
                         </button>
                       </Link>
                     )}
-
+                  </li>
+                  <li>
                     <Link to={"/checkout"}>
                       <button className="flex items-center gap-2">
                         <MdOutlineShoppingCartCheckout />
@@ -336,40 +342,59 @@ const Navbar = () => {
               </div>
             ) : (
               <Link to={"/login"}>
-                {" "}
-                <label tabIndex="0" className="btn btn-ghost btn-circle avatar">
+                <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                   <div className="w-16 rounded-full">
-                    <img src="/src/assets/images/avatar.jpg"></img>
+                    <img
+                      src="/src/assets/images/avatar.jpg"
+                      alt="Default Avatar"
+                    />
                   </div>
                 </label>
               </Link>
             )}
           </div>
+          <div className="flex lg:hidden ">
+            <Link to="/dashboard/user">
+              {" "}
+              <label tabIndex={0} className=" btn btn-ghost btn-circle avatar">
+                <div className="w-16 rounded-full">
+                  <img
+                    src={
+                      userData?.[0]?.image || "/src/assets/images/avatar.jpg"
+                    }
+                    alt="User Avatar"
+                  />
+                </div>
+              </label>
+            </Link>
+          </div>
+
           <div className="indicator">
             <span className="indicator-item badge badge-secondary">
               {count}
             </span>
             <Link to={"/wishlist"}>
               <div className="tooltip" data-tip="Wishlist">
-                <button className="">
+                <button>
                   <PiHeartStraight className="text-3xl" />
                 </button>
               </div>
             </Link>
           </div>
+
           <div className="indicator">
             <span className="indicator-item badge badge-secondary">
               {count2}
             </span>
             <Link to={"/cart"}>
-              {" "}
               <div className="tooltip" data-tip="Cart">
-                <button className="">
+                <button>
                   <PiBag className="text-3xl" />
                 </button>
               </div>
             </Link>
           </div>
+
           <div className="hidden md:flex">
             <p>${price}</p>
           </div>

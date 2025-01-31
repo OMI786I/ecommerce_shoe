@@ -97,7 +97,7 @@ const Products = () => {
       </div>
       <div></div>
 
-      <div className="grid grid-cols-4">
+      <div className="md:grid grid-cols-4">
         <div className=" hidden md:flex  col-span-1">
           <LeftPart
             link={link}

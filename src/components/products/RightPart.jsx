@@ -89,12 +89,12 @@ const RightPart = ({
               <AiOutlineBars className="text-xl hover:text-red-600  " />
             </button>
           </div>
-          <div className="mx-2 navbar-start">
-            There are products {data.totalDocuments}
+          <div className="mx-2 hidden md:flex navbar-start">
+            There are products: <b> {data.totalDocuments}</b>
           </div>
           <div className="navbar-center  lg:flex">
             {" "}
-            <label>Sort by: </label>
+            <label className="font-bold">Sort by: </label>
             <select value={sort} onChange={handleSort} name="" id="">
               <option value="">Relevant</option>
               <option value="asc">Asc by price</option>
@@ -103,7 +103,7 @@ const RightPart = ({
           </div>
 
           <div className="navbar-end">
-            <label>Items per page: </label>
+            <label className="font-bold">Items per page: </label>
             <select value={limit} onChange={handleItemsPerPage} name="" id="">
               <option value="5">5</option>
               <option value="10">10</option>

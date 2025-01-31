@@ -114,17 +114,6 @@ const DrawerContent = () => {
           </AccordionItem>
         ))}
       </Accordion>
-
-      <Link to="/contact">
-        <li className="p-1 border-b hover:text-red-600 transition ease-in-out delay-150 duration-300">
-          Contact Us
-        </li>
-      </Link>
-      <Link to="/about">
-        <li className="p-1 border-b hover:text-red-600 transition ease-in-out delay-150 duration-300">
-          About Us
-        </li>
-      </Link>
     </div>
   );
 };
