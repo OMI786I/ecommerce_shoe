@@ -65,7 +65,7 @@ const ProductForm = ({ category, type, refetch }) => {
 
     if (imageSubmit) {
       axios
-        .post(`http://localhost:5000/${category}`, toSendData, {
+        .post(`https://ecommerce1-server.vercel.app/${category}`, toSendData, {
           withCredentials: true,
         })
         .then(function (response) {

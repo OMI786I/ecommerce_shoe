@@ -20,7 +20,7 @@ const useCartPost = () => {
 
     axios
       .post(
-        `http://localhost:5000/cart/check`,
+        `https://ecommerce1-server.vercel.app/cart/check`,
         {
           email: finalData.email,
           id: finalData.id,
@@ -38,7 +38,7 @@ const useCartPost = () => {
           });
         } else {
           axios
-            .post(`http://localhost:5000/cart`, finalData, {
+            .post(`https://ecommerce1-server.vercel.app/cart`, finalData, {
               withCredentials: true,
             })
             .then((res) => {

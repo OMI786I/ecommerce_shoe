@@ -8,7 +8,7 @@ const useUserUpdate = () => {
   const [updateData, setUpdateData] = useState(false);
   const update = (id, submitData) => {
     axios
-      .patch(`http://localhost:5000/user/${id}`, submitData)
+      .patch(`https://ecommerce1-server.vercel.app/user/${id}`, submitData)
       .then((response) => {
         if (response.data.modifiedCount > 0) {
           toast.success("You have successfully updated");

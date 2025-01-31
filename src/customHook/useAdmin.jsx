@@ -14,7 +14,7 @@ const useAdmin = () => {
     queryKey: ["isAdmin"],
     queryFn: async () => {
       const res = await axios.get(
-        `http://localhost:5000/user/admin/${user.email}`,
+        `https://ecommerce1-server.vercel.app/user/admin/${user.email}`,
         {
           withCredentials: true,
         }
@@ -22,7 +22,7 @@ const useAdmin = () => {
       return res.data?.admin;
     },
   });
-  //`http://localhost:5000/user/admin/${user.email}`
+  //`https://ecommerce1-server.vercel.app/user/admin/${user.email}`
   console.log(isAdmin);
   return [isAdmin, isAdminLoading];
 };

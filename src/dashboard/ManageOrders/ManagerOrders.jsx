@@ -8,7 +8,7 @@ const ManagerOrders = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/order", {
+      .get("https://ecommerce1-server.vercel.app/order", {
         withCredentials: true,
       })
       .then((res) => {

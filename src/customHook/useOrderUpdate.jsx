@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 
 const useOrderUpdate = (id, stepper) => {
   axios
-    .patch(`http://localhost:5000/order/${id}`, {
+    .patch(`https://ecommerce1-server.vercel.app/order/${id}`, {
       order_stepper: stepper,
     })
     .then((res) => {

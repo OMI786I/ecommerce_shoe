@@ -7,8 +7,8 @@ const useDetailsFetch = (id) => {
   const { isPending, error, data, refetch } = useQuery({
     queryKey: ["repoData", id],
     queryFn: () =>
-      fetch(`http://localhost:5000/${endPoint}/${id}`).then((res) =>
-        res.json()
+      fetch(`https://ecommerce1-server.vercel.app/${endPoint}/${id}`).then(
+        (res) => res.json()
       ),
   });
   useEffect(() => {

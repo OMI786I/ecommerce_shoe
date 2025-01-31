@@ -13,7 +13,7 @@ const useWishList = () => {
     const finalData = { ...res, email, id };
     delete finalData._id;
     // axios
-    //   .post("http://localhost:5000/wishlist", finalData)
+    //   .post("https://ecommerce1-server.vercel.app/wishlist", finalData)
     //   .then((response) => {
     //     if (response.data.insertedId) {
     //       toast.success("Successfully added to wishlist");
@@ -26,7 +26,7 @@ const useWishList = () => {
     //   });
 
     axios
-      .post("http://localhost:5000/wishlist/check", {
+      .post("https://ecommerce1-server.vercel.app/wishlist/check", {
         email: finalData.email,
         id: finalData.id,
       })
@@ -35,7 +35,7 @@ const useWishList = () => {
           toast.error("Already in wishlist!");
         } else {
           axios
-            .post("http://localhost:5000/wishlist", finalData, {
+            .post("https://ecommerce1-server.vercel.app/wishlist", finalData, {
               credentials: "include",
             })
             .then((response) => {

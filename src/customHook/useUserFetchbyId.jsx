@@ -8,7 +8,7 @@ const useUserFetchbyId = (id) => {
   const { isPending, error, data, refetch } = useQuery({
     queryKey: ["wishlist", user?.email],
     queryFn: () =>
-      fetch(`http://localhost:5000/user/${id}`, {
+      fetch(`https://ecommerce1-server.vercel.app/user/${id}`, {
         credentials: "include",
       }).then((res) => res.json()),
   });

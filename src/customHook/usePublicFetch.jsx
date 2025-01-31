@@ -5,7 +5,7 @@ const usePublicFetch = ({ endPoint, query, min, max, sort, page, limit }) => {
     queryKey: ["repoData", query, min, max, sort, page, limit],
     queryFn: () =>
       fetch(
-        `http://localhost:5000/${endPoint}?type=${query}&minPrice=${min}&maxPrice=${max}&sortOrder=${sort}&page=${page}&limit=${limit}`
+        `https://ecommerce1-server.vercel.app/${endPoint}?type=${query}&minPrice=${min}&maxPrice=${max}&sortOrder=${sort}&page=${page}&limit=${limit}`
       ).then((res) => res.json()),
   });
 

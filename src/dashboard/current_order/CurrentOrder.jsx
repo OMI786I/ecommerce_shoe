@@ -28,7 +28,7 @@ const CurrentOrder = () => {
     }).then((result) => {
       console.log(result, res);
       axios
-        .post("http://localhost:5000/history", toSendData, {
+        .post("https://ecommerce1-server.vercel.app/history", toSendData, {
           withCredentials: true,
         })
         .then((response) => {
@@ -40,7 +40,7 @@ const CurrentOrder = () => {
         });
 
       axios
-        .delete(`http://localhost:5000/order/${res._id}`, {
+        .delete(`https://ecommerce1-server.vercel.app/order/${res._id}`, {
           withCredentials: true,
         })
         .then((res) => {

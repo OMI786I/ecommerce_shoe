@@ -14,7 +14,7 @@ const useCartFetch = () => {
     queryKey: ["repoData", page, limit],
     queryFn: () =>
       fetch(
-        `http://localhost:5000/cart?email=${user.email}&page=${page}&limit=${limit}`,
+        `https://ecommerce1-server.vercel.app/cart?email=${user.email}&page=${page}&limit=${limit}`,
         {
           credentials: "include",
         }

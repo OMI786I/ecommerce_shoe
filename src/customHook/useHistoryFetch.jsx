@@ -8,9 +8,12 @@ const useHistoryFetch = () => {
   const { isPending, error, data } = useQuery({
     queryKey: ["repoData"],
     queryFn: () =>
-      fetch(`http://localhost:5000/history?customer_email=${user.email}`, {
-        credentials: "include",
-      }).then((res) => res.json()),
+      fetch(
+        `https://ecommerce1-server.vercel.app/history?customer_email=${user.email}`,
+        {
+          credentials: "include",
+        }
+      ).then((res) => res.json()),
   });
 
   return { data, error, isPending };

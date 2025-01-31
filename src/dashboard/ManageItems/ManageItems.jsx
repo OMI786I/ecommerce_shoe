@@ -38,7 +38,7 @@ const ManageItems = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(`http://localhost:5000/${category}/${id}`, {
+          .delete(`https://ecommerce1-server.vercel.app/${category}/${id}`, {
             withCredentials: true,
           })
           .then((res) => {

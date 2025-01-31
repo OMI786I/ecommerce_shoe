@@ -34,7 +34,7 @@ const Login = () => {
         navigate(location?.state ? location.state : "/");
         console.log(user);
         // axios
-        //   .post("http://localhost:5000/jwt", user, { withCredentials: true })
+        //   .post("https://ecommerce1-server.vercel.app/jwt", user, { withCredentials: true })
         //   .then((res) => {
         //     console.log(res.data);
         //   });
@@ -64,7 +64,7 @@ const Login = () => {
           image: result.user.photoURL,
         };
         axios
-          .post("http://localhost:5000/user/check", {
+          .post("https://ecommerce1-server.vercel.app/user/check", {
             email: result.user.email,
           })
           .then((response) => {
@@ -75,7 +75,9 @@ const Login = () => {
             } else {
               // User doesn't exist, insert new user into the database
               axios
-                .post("http://localhost:5000/user", { ...toSendData })
+                .post("https://ecommerce1-server.vercel.app/user", {
+                  ...toSendData,
+                })
                 .then((response) => {
                   if (response.data.insertedId) {
                     toast.success("You have successfully been added");

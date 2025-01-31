@@ -20,7 +20,7 @@ const Cart = () => {
   const handlePayment = () => {
     axios
       .post(
-        "http://localhost:5000/create-payment",
+        "https://ecommerce1-server.vercel.app/create-payment",
         {
           name: data[0].name,
           email: data[0].email,
@@ -82,7 +82,7 @@ const Cart = () => {
     const quantity = { quantity: newQuantity };
     setProductQuantity(quantity);
     axios
-      .patch(`http://localhost:5000/cart/${id}`, quantity, {
+      .patch(`https://ecommerce1-server.vercel.app/cart/${id}`, quantity, {
         withCredentials: true,
       })
       .then((response) => {

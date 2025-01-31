@@ -24,7 +24,7 @@ const AddReview = () => {
       email,
     };
     axios
-      .post("http://localhost:5000/review", submitData)
+      .post("https://ecommerce1-server.vercel.app/review", submitData)
       .then((response) => {
         if (response.data.insertedId) {
           Swal.fire({

@@ -11,9 +11,12 @@ const useOrderFetch = () => {
   } = useQuery({
     queryKey: ["repoData", data?.[0]?.email],
     queryFn: () =>
-      fetch(`http://localhost:5000/order?email=${data[0]?.email}`, {
-        credentials: "include",
-      }).then((res) => res.json()),
+      fetch(
+        `https://ecommerce1-server.vercel.app/order?email=${data[0]?.email}`,
+        {
+          credentials: "include",
+        }
+      ).then((res) => res.json()),
   });
 
   return { orderData, isPending, error, refetch };

@@ -165,7 +165,7 @@ const Navbar = () => {
   const onSubmit = (data) => {
     console.log(data);
     axios
-      .post("http://localhost:5000/searchText", data, {
+      .post("https://ecommerce1-server.vercel.app/searchText", data, {
         withCredentials: true,
       })
       .then((response) => {
@@ -183,7 +183,7 @@ const Navbar = () => {
   useEffect(() => {
     if (user) {
       axios
-        .get(`http://localhost:5000/user?email=${user.email}`, {
+        .get(`https://ecommerce1-server.vercel.app/user?email=${user.email}`, {
           withCredentials: true,
         })
         .then((data) => {

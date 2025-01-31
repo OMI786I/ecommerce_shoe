@@ -8,9 +8,9 @@ const useReviewFetch = () => {
   const { isPending, error, data } = useQuery({
     queryKey: ["repoData", user],
     queryFn: () =>
-      fetch(`http://localhost:5000/review?email=${user.email}`).then((res) =>
-        res.json()
-      ),
+      fetch(
+        `https://ecommerce1-server.vercel.app/review?email=${user.email}`
+      ).then((res) => res.json()),
   });
 
   return { isPending, error, data };

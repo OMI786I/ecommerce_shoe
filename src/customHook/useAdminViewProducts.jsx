@@ -4,9 +4,9 @@ const useAdminViewProducts = ({ endPoint, limit }) => {
   const { isPending, error, data, refetch } = useQuery({
     queryKey: ["repoData", endPoint, limit],
     queryFn: () =>
-      fetch(`http://localhost:5000/${endPoint}?limit=${limit}`).then((res) =>
-        res.json()
-      ),
+      fetch(
+        `https://ecommerce1-server.vercel.app/${endPoint}?limit=${limit}`
+      ).then((res) => res.json()),
   });
 
   return { isPending, error, data, refetch };

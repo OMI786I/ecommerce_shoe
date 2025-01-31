@@ -7,7 +7,7 @@ const AllUsers = () => {
   const { isPending, error, data, refetch } = useQuery({
     queryKey: ["repoData"],
     queryFn: () =>
-      fetch("http://localhost:5000/user", {
+      fetch("https://ecommerce1-server.vercel.app/user", {
         credentials: "include",
       }).then((res) => res.json()),
   });
@@ -35,7 +35,7 @@ const AllUsers = () => {
       if (result.isConfirmed) {
         axios
           .patch(
-            `http://localhost:5000/user/admin/${id}`,
+            `https://ecommerce1-server.vercel.app/user/admin/${id}`,
             { role: roleName },
             {
               withCredentials: true,

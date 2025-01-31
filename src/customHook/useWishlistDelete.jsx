@@ -18,7 +18,7 @@ const useWishlistDelete = () => {
       .then((result) => {
         if (result.isConfirmed) {
           axios
-            .delete(`http://localhost:5000/cart/${id}`, {
+            .delete(`https://ecommerce1-server.vercel.app/cart/${id}`, {
               withCredentials: true,
             })
             .then((res) => {

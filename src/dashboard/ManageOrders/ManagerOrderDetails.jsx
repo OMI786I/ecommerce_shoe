@@ -11,7 +11,7 @@ const ManagerOrderDetails = () => {
 
   // useEffect(() => {
   //   axios
-  //     .get(`http://localhost:5000/order/${id}`, {
+  //     .get(`https://ecommerce1-server.vercel.app/order/${id}`, {
   //       withCredentials: true,
   //     })
   //     .then((res) => {
@@ -22,7 +22,7 @@ const ManagerOrderDetails = () => {
   const { isPending, error, data, refetch } = useQuery({
     queryKey: ["repoData"],
     queryFn: () =>
-      fetch(`http://localhost:5000/order/${id}`, {
+      fetch(`https://ecommerce1-server.vercel.app/order/${id}`, {
         credentials: "include",
       }).then((res) => res.json()),
   });
@@ -55,7 +55,7 @@ const ManagerOrderDetails = () => {
           // Send the PATCH request with the updated count
           axios
             .patch(
-              `http://localhost:5000/order/${id}`,
+              `https://ecommerce1-server.vercel.app/order/${id}`,
               {
                 order_stepper: updatedCount, // Use the updated count
               },

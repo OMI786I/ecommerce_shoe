@@ -13,10 +13,10 @@ const AdminUser = () => {
   console.log(avatClicked);
   console.log(data);
 
-  //const res = axios.get("http://localhost:5000/count");
+  //const res = axios.get("https://ecommerce1-server.vercel.app/count");
 
   axios
-    .get("http://localhost:5000/user", {
+    .get("https://ecommerce1-server.vercel.app/user", {
       withCredentials: true,
     })
     .then((res) => {
@@ -27,7 +27,7 @@ const AdminUser = () => {
     });
 
   axios
-    .get("http://localhost:5000/count")
+    .get("https://ecommerce1-server.vercel.app/count")
     .then(function (response) {
       setTotalProduct(response.data.totalProducts);
     })

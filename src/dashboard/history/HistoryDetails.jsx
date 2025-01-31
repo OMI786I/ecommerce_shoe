@@ -15,7 +15,7 @@ const HistoryDetails = () => {
   const [currentReviewPage, setReviewPage] = useState(1);
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/search/${id}`)
+      .get(`https://ecommerce1-server.vercel.app/search/${id}`)
       .then((response) => {
         setData(response.data);
         setLoading(false);
@@ -39,12 +39,14 @@ const HistoryDetails = () => {
       collection: data[0].source,
     };
 
-    axios.patch(`http://localhost:5000/search/${id}`, review).then((res) => {
-      if (res.data.modifiedCount === 1) {
-        toast.success("Successfully added review!");
-      }
-      console.log(res);
-    });
+    axios
+      .patch(`https://ecommerce1-server.vercel.app/search/${id}`, review)
+      .then((res) => {
+        if (res.data.modifiedCount === 1) {
+          toast.success("Successfully added review!");
+        }
+        console.log(res);
+      });
   };
 
   function GFG(array, currentPage, pageSize) {
