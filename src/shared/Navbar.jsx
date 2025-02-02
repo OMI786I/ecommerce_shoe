@@ -283,16 +283,16 @@ const Navbar = () => {
         <div className="flex gap-2 items-center">
           {/** Mobile View for Avatar Dropdown */}
           <div className="flex">
-            {user && userData ? (
+            {user && userData && userData.length > 0 ? (
               <Link to={isAdmin ? "/dashboard/adminHome" : "/dashboard/user"}>
-                <div className="">
+                <div>
                   <label
                     tabIndex={0}
                     className="btn btn-ghost btn-circle avatar"
                   >
-                    {userData[0].image ? (
+                    {userData[0]?.image ? (
                       <div className="w-16 rounded-full">
-                        <img src={userData?.[0]?.image} alt="User Avatar" />
+                        <img src={userData[0].image} alt="User Avatar" />
                       </div>
                     ) : (
                       <div className="w-16 rounded-full">
